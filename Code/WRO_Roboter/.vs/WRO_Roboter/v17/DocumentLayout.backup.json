@@ -1,0 +1,41 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\RQP1FE\\WRO_Roboter\\UsersRQP1FEWRO_Roboter\\Code\\WRO_Roboter\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{DAF55672-6EF0-4A11-9A0A-1EBC251CE406}|WRO_Roboter.pyproj|C:\\Users\\RQP1FE\\WRO_Roboter\\UsersRQP1FEWRO_Roboter\\Code\\WRO_Roboter\\WRO_Roboter.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{DAF55672-6EF0-4A11-9A0A-1EBC251CE406}|WRO_Roboter.pyproj|solutionrelative:WRO_Roboter.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "WRO_Roboter.py",
+              "DocumentMoniker": "C:\\Users\\RQP1FE\\WRO_Roboter\\UsersRQP1FEWRO_Roboter\\Code\\WRO_Roboter\\WRO_Roboter.py",
+              "RelativeDocumentMoniker": "WRO_Roboter.py",
+              "ToolTip": "C:\\Users\\RQP1FE\\WRO_Roboter\\UsersRQP1FEWRO_Roboter\\Code\\WRO_Roboter\\WRO_Roboter.py",
+              "RelativeToolTip": "WRO_Roboter.py",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2025-03-03T07:14:53.639Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

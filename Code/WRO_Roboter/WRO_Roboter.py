@@ -1,0 +1,1 @@
+print("Grья Gott")
