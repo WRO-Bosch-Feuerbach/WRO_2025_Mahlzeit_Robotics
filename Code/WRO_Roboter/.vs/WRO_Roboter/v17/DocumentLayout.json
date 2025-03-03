@@ -5,6 +5,10 @@
     {
       "AbsoluteMoniker": "D:0:0:{DAF55672-6EF0-4A11-9A0A-1EBC251CE406}|WRO_Roboter.pyproj|C:\\Users\\RQP1FE\\WRO_Roboter\\UsersRQP1FEWRO_Roboter\\Code\\WRO_Roboter\\WRO_Roboter.py||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{DAF55672-6EF0-4A11-9A0A-1EBC251CE406}|WRO_Roboter.pyproj|solutionrelative:WRO_Roboter.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DAF55672-6EF0-4A11-9A0A-1EBC251CE406}|WRO_Roboter.pyproj|C:\\Users\\RQP1FE\\WRO_Roboter\\UsersRQP1FEWRO_Roboter\\Code\\WRO_Roboter\\Examples\\07_ultra.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{DAF55672-6EF0-4A11-9A0A-1EBC251CE406}|WRO_Roboter.pyproj|solutionrelative:Examples\\07_ultra.py||{8B382828-6202-11D1-8870-0000F87579D2}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,8 +18,21 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "07_ultra.py",
+              "DocumentMoniker": "C:\\Users\\RQP1FE\\WRO_Roboter\\UsersRQP1FEWRO_Roboter\\Code\\WRO_Roboter\\Examples\\07_ultra.py",
+              "RelativeDocumentMoniker": "Examples\\07_ultra.py",
+              "ToolTip": "C:\\Users\\RQP1FE\\WRO_Roboter\\UsersRQP1FEWRO_Roboter\\Code\\WRO_Roboter\\Examples\\07_ultra.py",
+              "RelativeToolTip": "Examples\\07_ultra.py",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2025-03-03T09:53:30.523Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -24,7 +41,7 @@
               "RelativeDocumentMoniker": "WRO_Roboter.py",
               "ToolTip": "C:\\Users\\RQP1FE\\WRO_Roboter\\UsersRQP1FEWRO_Roboter\\Code\\WRO_Roboter\\WRO_Roboter.py",
               "RelativeToolTip": "WRO_Roboter.py",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAASAAAAAAAAAA==",
+              "ViewState": "AgIAACcAAAAAAAAAAAAAADsAAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
               "WhenOpened": "2025-03-03T07:14:53.639Z",
               "EditorCaption": ""
