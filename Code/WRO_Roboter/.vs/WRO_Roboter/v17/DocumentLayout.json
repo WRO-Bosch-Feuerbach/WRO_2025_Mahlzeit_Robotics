@@ -3,12 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\RQP1FE\\WRO_Roboter\\UsersRQP1FEWRO_Roboter\\Code\\WRO_Roboter\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{DAF55672-6EF0-4A11-9A0A-1EBC251CE406}|WRO_Roboter.pyproj|C:\\Users\\RQP1FE\\WRO_Roboter\\UsersRQP1FEWRO_Roboter\\Code\\WRO_Roboter\\LineTracking.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{DAF55672-6EF0-4A11-9A0A-1EBC251CE406}|WRO_Roboter.pyproj|solutionrelative:LineTracking.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{DAF55672-6EF0-4A11-9A0A-1EBC251CE406}|WRO_Roboter.pyproj|C:\\Users\\RQP1FE\\WRO_Roboter\\UsersRQP1FEWRO_Roboter\\Code\\WRO_Roboter\\MotorAnsteuerung.py||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{DAF55672-6EF0-4A11-9A0A-1EBC251CE406}|WRO_Roboter.pyproj|solutionrelative:MotorAnsteuerung.py||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{DAF55672-6EF0-4A11-9A0A-1EBC251CE406}|WRO_Roboter.pyproj|C:\\Users\\RQP1FE\\WRO_Roboter\\UsersRQP1FEWRO_Roboter\\Code\\WRO_Roboter\\WRO_Roboter.py||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{DAF55672-6EF0-4A11-9A0A-1EBC251CE406}|WRO_Roboter.pyproj|solutionrelative:WRO_Roboter.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DAF55672-6EF0-4A11-9A0A-1EBC251CE406}|WRO_Roboter.pyproj|C:\\Users\\RQP1FE\\WRO_Roboter\\UsersRQP1FEWRO_Roboter\\Code\\WRO_Roboter\\Examples\\08_lineTracking.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{DAF55672-6EF0-4A11-9A0A-1EBC251CE406}|WRO_Roboter.pyproj|solutionrelative:Examples\\08_lineTracking.py||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\RQP1FE\\WRO_Roboter\\UsersRQP1FEWRO_Roboter\\Code\\WRO_Roboter\\Examples\\07_ultra.py||{8B382828-6202-11D1-8870-0000F87579D2}",
@@ -22,24 +30,50 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "08_lineTracking.py",
+              "DocumentMoniker": "C:\\Users\\RQP1FE\\WRO_Roboter\\UsersRQP1FEWRO_Roboter\\Code\\WRO_Roboter\\Examples\\08_lineTracking.py",
+              "RelativeDocumentMoniker": "Examples\\08_lineTracking.py",
+              "ToolTip": "C:\\Users\\RQP1FE\\WRO_Roboter\\UsersRQP1FEWRO_Roboter\\Code\\WRO_Roboter\\Examples\\08_lineTracking.py",
+              "RelativeToolTip": "Examples\\08_lineTracking.py",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2025-03-04T08:32:19.002Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "LineTracking.py",
+              "DocumentMoniker": "C:\\Users\\RQP1FE\\WRO_Roboter\\UsersRQP1FEWRO_Roboter\\Code\\WRO_Roboter\\LineTracking.py",
+              "RelativeDocumentMoniker": "LineTracking.py",
+              "ToolTip": "C:\\Users\\RQP1FE\\WRO_Roboter\\UsersRQP1FEWRO_Roboter\\Code\\WRO_Roboter\\LineTracking.py",
+              "RelativeToolTip": "LineTracking.py",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2025-03-04T08:32:11.837Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "MotorAnsteuerung.py",
               "DocumentMoniker": "C:\\Users\\RQP1FE\\WRO_Roboter\\UsersRQP1FEWRO_Roboter\\Code\\WRO_Roboter\\MotorAnsteuerung.py",
               "RelativeDocumentMoniker": "MotorAnsteuerung.py",
               "ToolTip": "C:\\Users\\RQP1FE\\WRO_Roboter\\UsersRQP1FEWRO_Roboter\\Code\\WRO_Roboter\\MotorAnsteuerung.py",
               "RelativeToolTip": "MotorAnsteuerung.py",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAB4AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
               "WhenOpened": "2025-03-04T06:34:13.439Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "07_ultra.py",
               "DocumentMoniker": "C:\\Users\\RQP1FE\\WRO_Roboter\\UsersRQP1FEWRO_Roboter\\Code\\WRO_Roboter\\Examples\\07_ultra.py",
               "RelativeDocumentMoniker": "Examples\\07_ultra.py",
@@ -51,15 +85,16 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "WRO_Roboter.py",
               "DocumentMoniker": "C:\\Users\\RQP1FE\\WRO_Roboter\\UsersRQP1FEWRO_Roboter\\Code\\WRO_Roboter\\WRO_Roboter.py",
               "RelativeDocumentMoniker": "WRO_Roboter.py",
               "ToolTip": "C:\\Users\\RQP1FE\\WRO_Roboter\\UsersRQP1FEWRO_Roboter\\Code\\WRO_Roboter\\WRO_Roboter.py",
               "RelativeToolTip": "WRO_Roboter.py",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACIAAAAMAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
-              "WhenOpened": "2025-03-03T07:14:53.639Z"
+              "WhenOpened": "2025-03-03T07:14:53.639Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Bookmark",

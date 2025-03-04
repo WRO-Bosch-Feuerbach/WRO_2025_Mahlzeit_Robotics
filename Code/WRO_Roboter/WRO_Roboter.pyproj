@@ -21,6 +21,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="LineTracking.py" />
     <Compile Include="MotorAnsteuerung.py" />
     <Compile Include="WRO_Roboter.py" />
   </ItemGroup>
