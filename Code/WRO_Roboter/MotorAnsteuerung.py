@@ -9,7 +9,6 @@ from board import SCL, SDA
 DCMotor_IN1 = 15 #positiver Pol
 DCMotor_IN2 = 14 #negativer Pol
 
-
 #Einrichtung der I2C Adresse
 i2c = busio.I2C(SCL, SDA)
 
@@ -21,8 +20,12 @@ pwm_motor.frequency = 1000
 DC_Motor = motor.DCMotor(pwm_motor.channels[DCMotor_IN1], pwm_motor.channels[DCMotor_IN2])
 DC_Motor.decay_mode = (motor.SLOW_DECAY)
 
-#Fahren
+def Motor_Fahren(Geschwindigkeit):
+    DC_Motor.throttle = Geschwindigkeit
 
+
+#Fahren
+'''
 DC_Motor.throttle = 4000
 time.sleep(5)
 
@@ -30,3 +33,4 @@ DC_Motor.throttle = 1000
 time.sleep(5)
 
 DC_Motor.throttle = 0
+'''
