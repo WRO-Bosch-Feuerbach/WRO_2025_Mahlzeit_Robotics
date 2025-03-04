@@ -9,11 +9,12 @@ sensor = DistanceSensor(echo=Ec, trigger=Tr, max_distance=2)
 
 
 def checkdist():
-    return sensor.distance * 100  
+    return (sensor.distance) * 100  
 
 
 
-#distance = checkdist()  --> werte in distance speichern 
+
+#distance = checkdist()  #-> werte in distance speichern 
 
 
 
