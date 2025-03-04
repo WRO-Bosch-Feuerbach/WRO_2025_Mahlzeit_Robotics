@@ -11,16 +11,7 @@ pca.frequency = 50
 
 
 def set_angle(ID, angle):
+    duty_cycle = max(0, min(duty_cycle, 65535))
     servo_angle = servo.Servo(pca.channels[ID], min_pulse=500, max_pulse=2400, actuation_range=180)
     servo_angle.angle = angle
 
-def lenken_links():
-    set_angle(0, 180)
-
-
-def lenken_rechts():
-    set_angle(0, 0)
-
-    
-def lenken_gerade():
-    set_angle(0, 90)

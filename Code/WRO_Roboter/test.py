@@ -7,22 +7,31 @@ import Ultraschallsensor
 import lenkung_funktion
 import MotorAnsteuerung
 
-try:
+'''
+distance = Ultraschallsensor.checkdist()
+print(distance)
+'''
 
-  while True: 
-    distance = Ultraschallsensor.checkdist()
-    if distance <= 30:
-      print('Distance ist ' + distance)
-      MotorAnsteuerung.Motor_Fahren(0.35)
-      lenkung_funktion.lenken_links() 
-    elif distance <= 50:
-      print('Distance ist ' + distance)
-      MotorAnsteuerung.Motor_Fahren(0.5)
-      lenkung_funktion.lenken_gerade()
-    else:
-      MotorAnsteuerung.Motor_Fahren(1)
-      lenkung_funktion.lenken_gerade()
-      print('Distance ist ' + distance)
+if __name__ == "__main__":
+  try:
 
-except KeyboardInterrupt:
-  MotorAnsteuerung.Motor_Fahren(0)
+    while True: 
+      distance = Ultraschallsensor.checkdist()
+      if distance <= 30:
+        print('Distance ist ' + distance)
+        lenkung_funktion.set_angle(0, 180) 
+        MotorAnsteuerung.Motor_Fahren(0.35)
+      
+      elif distance <= 50:
+        print('Distance ist ' + distance)
+        lenkung_funktion.set_angle(0, 0)
+        MotorAnsteuerung.Motor_Fahren(0.5)
+      else:
+        print('Distance ist ' + distance)
+        lenkung_funktion.set_angle(0, 0)
+        MotorAnsteuerung.Motor_Fahren(1)
+      
+
+
+  except KeyboardInterrupt:
+    MotorAnsteuerung.Motor_Fahren(0)
