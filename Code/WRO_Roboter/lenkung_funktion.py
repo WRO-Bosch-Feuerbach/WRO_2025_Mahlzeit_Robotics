@@ -12,6 +12,6 @@ pca.frequency = 50
 
 def set_angle(ID, angle):
     angle = max(0,min(angle,180))
-    servo_angle = servo.Servo(pca.channels[ID], min_pulse=500, max_pulse=2400, actuation_range=180)
+    servo_angle = servo.Servo(pca.channels[ID], min_pulse=1500, max_pulse=2400, actuation_range=180)
     servo_angle.angle = angle
 
