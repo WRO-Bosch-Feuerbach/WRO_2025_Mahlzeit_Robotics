@@ -15,3 +15,9 @@ def set_angle(ID, angle):
     servo_angle = servo.Servo(pca.channels[ID], min_pulse=1500, max_pulse=2400, actuation_range=180)
     servo_angle.angle = angle
 
+if __name__ == "__main__":
+  while True:
+    set_angle(3,180)
+    time.sleep(0.5)
+    set_angle(3,0)
+    time.sleep(0.5)

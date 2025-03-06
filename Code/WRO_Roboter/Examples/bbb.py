@@ -1,8 +1,9 @@
-from gpiozero import DistanceSensor
+import dis
+from gpiozero import DistanceSensor, Servo
 from time import sleep
 
-Tr = 15
-Ec = 14
+Tr = 2
+Ec = 3
 
 sensor = DistanceSensor(echo=Ec, trigger=Tr,max_distance=2) # Maximum detection distance 2m.
 
@@ -12,6 +13,6 @@ def checkdist():
 
 if __name__ == "__main__":
     while True:
-        distance = checkdist() 
+        distance = checkdist()
         print("%.2f cm" %distance)
         sleep(0.05)
