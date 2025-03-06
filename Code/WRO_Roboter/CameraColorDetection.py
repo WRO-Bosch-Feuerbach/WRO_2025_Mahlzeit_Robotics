@@ -1,7 +1,7 @@
 from turtle import width
 import cv2
 
-cap = cv2.VideoCapture(1)
+cap = cv2.VideoCapture(0)
 cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
 cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
 
@@ -32,6 +32,16 @@ while True:
 	else:
 		color = "RED"
 
+	pixel_center_bgr = frame[cy, cx]
 	print(pixel_center)
-	print(frame, color, (10, 50), 0, 1, (255, 0, 0), 2)
+	cv2.putText(frame, color, (10, 50), 0, 1, (255, 0, 0), 2)
 	cv2.circle(frame, (cx, cy), 5, (255, 0, 0), 3)
+
+	cv2.imshow("Frame", frame)
+	key = cv2.waitKey(1)
+	if key == 27:
+		break
+
+cap.release()
+cv2.destroyAllWindows()
+
