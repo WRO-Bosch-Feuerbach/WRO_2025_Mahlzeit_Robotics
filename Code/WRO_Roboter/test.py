@@ -52,8 +52,12 @@ if __name__ == "__main__":
 
       if OrangeLine == True and BlueLine == True:
           CrossedSection = CrossedSection + 1
+          OrangeLine = False
+          BlueLine = False
 
-      if CrossedSection == 4:
+      if CrossedSection == 12:
+          OrangeLine = False
+          BlueLine = False
           break
      
       test2.set_angle(1,90)
