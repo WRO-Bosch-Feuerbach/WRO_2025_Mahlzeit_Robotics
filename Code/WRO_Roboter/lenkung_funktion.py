@@ -17,7 +17,7 @@ def set_angle(ID, angle):
 
 if __name__ == "__main__":
   while True:
-    set_angle(3,180)
-    time.sleep(0.5)
-    set_angle(3,0)
-    time.sleep(0.5)
+    set_angle(1,180)
+  #  time.sleep(1)
+ #   set_angle(1, 180)
+#    time.sleep(1)

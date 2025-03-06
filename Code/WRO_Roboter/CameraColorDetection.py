@@ -2,12 +2,11 @@ import time
 from turtle import width
 import cv2
 
-cap = cv2.VideoCapture(0)
-cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
-cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
-
 def ColorDetection():
 
+	cap = cv2.VideoCapture(0)
+	cap.set(cv2.CAP_PROP_FRAME_WIDTH, 256)
+	cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 144)
 	while True:
 		_, frame = cap.read()
 		hsv_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
@@ -24,7 +23,7 @@ def ColorDetection():
 		if 15 < hue_value < 35:
 			color = "ORANGE"
 			return color
-		elif 210 < hue_value < 235:
+		elif 205 < hue_value < 245:
 			color = "BLUE"
 			return color
 		else:
@@ -36,7 +35,7 @@ def ColorDetection():
 		cv2.circle(frame, (cx, cy), 5, (255, 0, 0), 3)
 	 
 		cv2.imshow("Frame", frame)
-		time.sleep()
+		time.sleep(0.5)
 		#key = cv2.waitKey(1)
 		#if key == 27:
 		#break

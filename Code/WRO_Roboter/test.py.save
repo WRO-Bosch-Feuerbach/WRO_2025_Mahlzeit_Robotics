@@ -23,10 +23,10 @@ if __name__ == "__main__":
   try:
     while True:
       distance = Ultraschallsensor.checkdist()
-      print(distance)
+      DetectedColor = CameraColorDetection.ColorDetection()
       winkel = 90 + ((200 - distance) / (200 - 5)) * 90
-      winkel_gerundet = round(winkel) + 10
-      time.sleep(0.1)
+      winkel_gerundet = round(winkel) - 50
+
       if distance <= 100:
         print(winkel_gerundet)
         test2.set_angle(1, winkel_gerundet)
@@ -34,38 +34,45 @@ if __name__ == "__main__":
         print('fertig')
 
       else:
-        test2.set_angle(1,130)
+        test2.set_angle(1,35)
         MotorAnsteuerung.Motor_Fahren(0.7)
 
-      #DetectedColor = CameraColorDetection.ColorDetection()
-#
- #     if DetectedColor == "ORANGE":
-  #      print("Orange erkannt")
-   #     OrangeLine = True
-   #     BlueLine = False
-#
- #     elif DetectedColor == "BLUE":
-  #      print("Blau erkannt")
-   #     BlueLine = True
-    #    OrangeLine = False
 
-     # if OrangeLine == True:
-      #  Line1 = True
+      if DetectedColor == "ORANGE":
+        OrangeLine = True
+        BlueLine = False
 
-      #elif BlueLine == True:
-       # Line2 = True
 
-     # if Line1 == True and Line2 == True:
-      #  CrossedSection = CrossedSection + 1
-       # Line1 = False
-        #Line2 = False
 
-     # if CrossedSection == 12:
-      #  break
+      if OrangeLine == True:
+	Line1 = True
+
+      elif BlueLine = True:
+	Line2 = True
+
+      elif DetectedColor == "BLUE":
+        BlueLine = True
+        OrangeLine = False
+	Line2 = True
+
+
+
+      if OrangeLine == True and BlueLine == True:
+        CrossedSection = CrossedSection + 1
+        OrangeLine = False
+        BlueLine = False
+
+      if CrossedSection == 12:
+        OrangeLine = False
+        BlueLine = False
+        break
+     
+      test2.set_angle(1,90)
+      MotorAnsteuerung.Motor_Fahren(0.8)
 
   except KeyboardInterrupt:
     MotorAnsteuerung.Motor_Fahren(0)
     test2.set_angle(1,90)
 
 
-
+ 
