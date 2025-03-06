@@ -46,6 +46,7 @@ def measure_distance():
 if __name__ == "__main__":
     try:
         while True:
+            print('Anfang')
             dist = measure_distance()
             print(f"Entfernung: {dist:.2f} cm")
             time.sleep(1)
