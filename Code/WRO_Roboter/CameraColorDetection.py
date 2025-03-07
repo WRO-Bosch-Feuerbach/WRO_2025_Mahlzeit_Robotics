@@ -1,6 +1,7 @@
 import time
 from turtle import width
 import cv2
+import numpy as np
 
 cap = cv2.VideoCapture(1)
 cap.set(cv2.CAP_PROP_FRAME_WIDTH, 256)
@@ -11,21 +12,31 @@ cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 144)
 while True:
 	_, frame = cap.read()
 	hsv_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+	print(hsv_frame.shape)
 	height, width, _ = frame.shape
 
 	#cx = int(width / 2)
 	#cy = int(height / 2)
 
-	AreaStartPixelX = int(width/2) -5
-	AreaStartPixelY = int(height/2) - 5
+	AreaStartPixelX = int(width/2)
+	AreaStartPixelY = int(height/2)
 
-	roi = image[y:AreaStartPixelY, x:AreaStartPixelX]
+	if 55 <= hsv_frame.shape[1] and 55 <= hsv_frame.shape[0]:
+		roi_hsv = hsv_frame[55, 55]
+		print("Dimensionen der extrahierten Region (ROI):", roi_hsv.shape)
 
-	#pixel_Area = hsv_frame[roi]
-	
-	hue_value = roi[:, :, 0]
-
-	print(hue_value)
+		#pixel_Area = hsv_frame[roi]
+		if len(roi_hsv.shape) == 3 and roi_hsv.shape[2] == 3:
+			hue_values = roi_hsv[:, :, 0]
+			print("Dimensionen des Hue-Arrays:", hue_values.shape)
+			print(hue_values)
+		else:
+			print("Fehler")
+			print(roi_hsv.shape)
+	else:
+		print("Die Region überschreitet die Bildgrenzen")
+		print(hsv_frame.shape[1])
+		print(hsv_frame.shape[0])
 
 
 	'''
