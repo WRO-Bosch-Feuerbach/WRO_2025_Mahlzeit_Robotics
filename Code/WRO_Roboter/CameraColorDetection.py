@@ -10,7 +10,15 @@ cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 144)
 
 while True:
 	_, frame = cap.read()
+
+	if frame is None:
+		print("Das Bild konnte nicht geladne werden")
+		exit()
+
 	hsv_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+
+	print (hsv_frame.shape)
+
 	height, width, _ = frame.shape
 
 	#cx = int(width / 2)
