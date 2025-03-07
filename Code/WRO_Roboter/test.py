@@ -8,16 +8,16 @@ from adafruit_motor import motor
 import Ultraschallsensor
 import MotorAnsteuerung
 import test2
-import CameraColorDetection
+#import CameraColorDetection
 
 
-OrangeLine = False
-BlueLine = False
-Line1 = False
-Line2 = False
-CrossedOrangeLines = 0
-CrossedSection = 0
-RoundCounter = 0
+#OrangeLine = False
+#BlueLine = False
+#Line1 = False
+#Line2 = False
+#CrossedOrangeLines = 0
+#CrossedSection = 0
+#RoundCounter = 0
 
 if __name__ == "__main__":
   try:
@@ -28,10 +28,27 @@ if __name__ == "__main__":
       winkel_gerundet = round(winkel) + 10
       time.sleep(0.1)
       if distance <= 100:
-        print(winkel_gerundet)
-        test2.set_angle(1, winkel_gerundet)
-        MotorAnsteuerung.Motor_Fahren(0.5)
-        print('fertig')
+        MotorAnsteuerung.Motor_Fahren(0)
+        angle = 0
+        test2.set_angle(3, angle)
+        distance = Ultraschallsensor.checkdist()
+        time.sleep(3)
+        if angle == 180 and distance > 100:
+          test2.set_angle(3, 90)
+          winkel = 90 + ((200 - distance) / (200 - 5)) * 90
+          winkel_gerundet = round(winkel) + 10
+          print(winkel_gerundet)
+          test2.set_angle(1, winkel_gerundet)
+          MotorAnsteuerung.Motor_Fahren(0.5)
+          print('fertig')
+        elif angle == 180 and distance < 100:
+          test2.set_angle(3, 90)
+          winkel = 90 - ((200 - distance) / (200 - 5)) *90
+          winkel_gerundet = round(winkel) + 10
+          print(winkel_gerundet)
+          test2.set_angle(1, winkel_gerundet)
+          MotorAnsteuerung.Motor_Fahren(0.5)
+          print('fertig2')
 
       else:
         test2.set_angle(1,130)

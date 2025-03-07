@@ -26,3 +26,6 @@ def set_angle(ID, angle):
 
 # Hier wird der Servo ganz nach rechts gelenkt (180 Grad)
 #set_angle(0, 180)  # Kanal 0, 180 Grad für ganz rechts
+if __name__ == "__main__":
+  while True:
+    set_angle(2,50)
