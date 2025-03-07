@@ -17,14 +17,26 @@ while True:
 
 	hsv_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
+	print (hsv_frame.shape)
+
 	height, width, _ = frame.shape
 
-	cx = int(width/2) -5
-	cy = int(height/2) - 5
+	#cx = int(width / 2)
+	#cy = int(height / 2)
 
-	pixel_center = hsv_frame[cy, cx]
-	hue_value = pixel_center[0]
+	AreaStartPixelX = int(width/2) -5
+	AreaStartPixelY = int(height/2) - 5
 
+	roi = hsv_frame[AreaStartPixelY, AreaStartPixelX]
+
+	#pixel_Area = hsv_frame[roi]
+	
+	hue_value = roi[:, :, 0]
+
+	print(hue_value)
+
+
+	'''
 	color = "Undefined"
 
 	if 9 < hue_value < 13:
@@ -49,3 +61,5 @@ while True:
 
 #cap.release()
 #cv2.destroyAllWindows()
+
+'''
