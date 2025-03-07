@@ -29,10 +29,10 @@ def fahren():
       distanceLinks = Ultraschallsensor.checkdistLinks()
       distanceRechts = Ultraschallsensor.checkdistRechts()
 
-      if distanceGerade > 100 :  # Wenn kein Objekt innerhalb von 100 cm ist
+      if distanceGerade > 100:  # Wenn kein Objekt innerhalb von 100 cm ist
         test2.set_angle(1, 90)  # Servo 1 in Richtung 130 drehen
         MotorAnsteuerung.Motor_Fahren(0.7)  # Motor fahren lassen
-      elif distanceGerade <= 100 and distanceLinks < 10:  # Wenn ein Objekt erkannt wird
+      elif distanceGerade <= 100 and distanceLinks < 50:  # Wenn ein Objekt erkannt wird
         MotorAnsteuerung.Motor_Fahren(0)  # Motor stoppen
         winkel = 90 + ((200 - distanceGerade) / (200 - 5)) * 90
         winkel_gerundet = round(winkel) + 10
@@ -41,9 +41,9 @@ def fahren():
         time.sleep(1)
         MotorAnsteuerung.Motor_Fahren(0.5)
         print('fertig')
-      elif distanceGerade <= 100 and distanceRechts < 10:
+      elif distanceGerade <= 100 and distanceRechts < 50:
         MotorAnsteuerung.Motor_Fahren(0)
-        winkel = ((200 - distanceGerade) / (200 - 5)) * 90
+        winkel = 90 - ((200 - distanceGerade) / (200 - 5)) * 90
         winkel_gerundet = round(winkel) - 10
         print(winkel_gerundet)
         test2.set_angle(1, winkel_gerundet)

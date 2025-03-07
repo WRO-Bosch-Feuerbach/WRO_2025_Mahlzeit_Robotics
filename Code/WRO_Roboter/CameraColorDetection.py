@@ -11,6 +11,7 @@ cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 144)
 
 while True:
 	_, frame = cap.read()
+<<<<<<< HEAD
 	hsv_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 	print(hsv_frame.shape)
 	height, width, _ = frame.shape
@@ -37,9 +38,23 @@ while True:
 		print("Die Region überschreitet die Bildgrenzen")
 		print(hsv_frame.shape[1])
 		print(hsv_frame.shape[0])
+=======
 
+	if frame is None:
+		print("Das Bild konnte nicht geladne werden")
+		exit()
 
-	'''
+	hsv_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+
+	height, width, _ = frame.shape
+
+	cx = int(width/2) -5
+	cy = int(height/2) - 5
+>>>>>>> ba263b278a5b49c59cac4c639faa6c16e29b1262
+
+	pixel_center = hsv_frame[cy, cx]
+	hue_value = pixel_center[0]
+
 	color = "Undefined"
 
 	if 9 < hue_value < 13:
@@ -63,6 +78,10 @@ while True:
 	#break
 
 #cap.release()
+<<<<<<< HEAD
 #cv2.destroyAllWindows()
 
 '''
+=======
+#cv2.destroyAllWindows()
+>>>>>>> ba263b278a5b49c59cac4c639faa6c16e29b1262
