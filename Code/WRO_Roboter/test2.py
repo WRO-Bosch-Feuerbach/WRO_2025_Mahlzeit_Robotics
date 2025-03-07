@@ -21,11 +21,12 @@ def set_angle(ID, angle):
     angle = max(0, min(angle, 180))
 
     # Erstelle eine Servo-Instanz und steuere den Servo auf dem angegebenen Kanal
-    servo_angle = servo.Servo(pca.channels[ID], min_pulse=500, max_pulse=2400, actuation_range=180)
+    servo_angle = servo.Servo(pca.channels[ID], min_pulse=1500, max_pulse=2400, actuation_range=180)
     servo_angle.angle = angle  # Setze den gewünschten Winkel
 
 # Hier wird der Servo ganz nach rechts gelenkt (180 Grad)
 #set_angle(0, 180)  # Kanal 0, 180 Grad für ganz rechts
+
 if __name__ == "__main__":
   while True:
-    set_angle(2,50)
+    set_angle(2, 0)
