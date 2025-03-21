@@ -42,10 +42,10 @@ while True:
 		elif 105 < hue_value < 115:
 			HueValueIsBlue = HueValueIsBlue + 1
 
-	if HueValueIsOrange >= 20:
+	if HueValueIsOrange >= 25:
 		color = "ORANGE"
 		print(color)
-	elif HueValueIsBlue >= 20:
+	elif HueValueIsBlue >= 25:
 		color = "BLUE"
 		print(color)
 	else:
