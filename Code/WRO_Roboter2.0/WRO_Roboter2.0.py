@@ -7,8 +7,7 @@ from adafruit_pca9685  import PCA9685
 from adafruit_motor import motor
 import Ultraschallsensor
 import MotorAnsteuerung
-import test2
-#import CameraColorDetection
+import LenkungGPT
 
 
 def fahren():
@@ -83,9 +82,6 @@ def fahren():
   except KeyboardInterrupt:
     MotorAnsteuerung.Motor_Fahren(0)
     test2.set_angle(1,90)
-
-
-
 
 
 def stoppen():

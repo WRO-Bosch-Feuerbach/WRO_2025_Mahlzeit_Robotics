@@ -3,8 +3,6 @@ from adafruit_pca9685 import PCA9685
 from adafruit_motor import motor
 import busio
 from board import SCL, SDA
-import dis
-from gpiozero import DistanceSensor, Servo
 
 #Bestimmung der Pole die an den Motor angeschlossen sind
 DCMotor_IN1 = 15 #positiver Pol
@@ -24,22 +22,14 @@ DC_Motor.decay_mode = (motor.SLOW_DECAY)
 def Motor_Fahren(Geschwindigkeit):
     DC_Motor.throttle = Geschwindigkeit
 
-Tr = 23
-Ec = 24
-sensor = DistanceSensor(echo=Ec, trigger=Tr, max_distance=2)
-def checkdist():
-    return sensor.distance * 100 
 
+#Fahren
+'''
+DC_Motor.throttle = 4000
+time.sleep(5)
 
-if __name__ == '__main__':
-    try:
-        while True:
-            distance = checkdist()
-            DC_Motor.throttle = 1
-            while distance < 40:
-                DC_Motor.throttle = 0.5
-            if distance == 10:
-                DC_Motor.throttle = 0
-    except KeyboardInterrupt:
-        DC_Motor.throttle = 0
-   
+DC_Motor.throttle = 1000
+time.sleep(5)
+
+DC_Motor.throttle = 0
+'''
