@@ -34,24 +34,28 @@ while True:
 
 	#pixel_Area = hsv_frame[roi]
 	
-	hue_value = roi[:, :, 0]
+	picked_hue_value = roi[:, :, 0]
 
-	for hue_value in roi:
-		if 9 < hue_value < 13:
+	print(picked_hue_value)
+	
+	for hue_value in picked_hue_value:
+		if 9 < (hue_value).all() < 13:
 			HueValueIsOrange = HueValueIsOrange + 1
-		elif 105 < hue_value < 115:
+		elif 105 < (hue_value).all() < 115:
 			HueValueIsBlue = HueValueIsBlue + 1
 
 	if HueValueIsOrange >= 25:
 		color = "ORANGE"
+		HueValueIsOrange = 0
 		print(color)
 	elif HueValueIsBlue >= 25:
 		color = "BLUE"
+		HueValueIsBlue = 0
 		print(color)
 	else:
 		color = "WHITE"
 		print(color)
-
+	
 	#highlightedArea = frame.copy()
 
 	#highlightedArea[hue_mask] = [0, 0, 255]
