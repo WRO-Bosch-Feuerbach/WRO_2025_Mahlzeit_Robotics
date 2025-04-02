@@ -2,7 +2,7 @@ import time
 from turtle import width
 import cv2
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(1)
 cap.set(cv2.CAP_PROP_FRAME_WIDTH, 256)
 cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 144)
 
@@ -15,7 +15,7 @@ def ColorDetection():
 	_, frame = cap.read()
 
 	if frame is None:
-		print("Das Bild konnte nicht geladne werden")
+		print("Das Bild konnte nicht geladen werden")
 		exit()
 
 	hsv_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
