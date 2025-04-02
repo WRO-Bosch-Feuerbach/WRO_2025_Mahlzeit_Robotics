@@ -8,7 +8,7 @@ from adafruit_motor import motor
 import Ultraschallsensor
 import MotorAnsteuerung
 import test2
-#import CameraColorDetection
+import CameraColorDetection2
 
 
 def fahren():
@@ -56,12 +56,31 @@ def fahren():
       winkel_gerundet = round(winkel) - 10
       print(winkel_gerundet)
       test2.set_angle(1, winkel_gerundet)
-      MotorAnsteuerung.Motor_Fahren(0.5)
-      if distanceLinks < 20:
-        test2.set_angle(1,60)
-      if distanceRechts < 20:
-        test2.set_angle(1,130)
+      MotorAnsteuerung.Motor_Fahren(0.35)
+      if distanceLinks < 30:
+        test2.set_angle(1,30)
+      if distanceRechts < 30:
+        test2.set_angle(1,180)
       time.sleep(0.2)
+
+      DetectedColor = CameraColorDetection2.ColorDetection()
+
+      if DetectedColor == "ORANGE":
+        print("Orange erkannt")
+        OrangeLine = True
+      elif DetectedColor == "BLUE":
+        print("Blau erkannt")
+        BlueLine = True
+
+      if BlueLine == True and OrangeLine == True:
+        CrossedSection = CrossedSection + 1
+        print(f"Section crossed: {CrossedSection}")
+        OrangeLine = False
+        BlueLine = False
+
+      if CrossedSection == 12:
+        break
+
 
     while FahrenRechts == True:
       distanceGerade = Ultraschallsensor.checkdistGerade()
@@ -71,40 +90,37 @@ def fahren():
       winkel_gerundet = round(winkel) - 10
       print(winkel_gerundet)
       test2.set_angle(1, winkel_gerundet)
-      MotorAnsteuerung.Motor_Fahren(0.5)
-      if distanceLinks < 20:
-        test2.set_angle(1,60)
-      if distanceRechts < 20:
-        test2.set_angle(1,130)
+      MotorAnsteuerung.Motor_Fahren(0.3)
+      if distanceLinks < 30:
+        test2.set_angle(1,30)
+      if distanceRechts < 30:
+        test2.set_angle(1,180)
       time.sleep(0.2)
 
-      #DetectedColor = CameraColorDetection.ColorDetection()
+      DetectedColor = CameraColorDetection2.ColorDetection()
 
-#      if DetectedColor == "ORANGE":
-#        time.sleep(0.25)
-#        if DetectedColor == "ORANGE":
-#          print("Orange erkannt")
-#          OrangeLine = True
+      if DetectedColor == "ORANGE":
+        print("Orange erkannt")
+        OrangeLine = True
+      elif DetectedColor == "BLUE":
+        print("Blau erkannt")
+        BlueLine = True
 
-#      elif DetectedColor == "BLUE":
-#        time.sleep(0.25)
-#        if DetectedColor == "BLUE":
-#          print("Blau erkannt")
-#          BlueLine = True
+      if OrangeLine == True:
+        Line1 = True
+      elif BlueLine == True:
+        Line2 = True
 
-#      if OrangeLine == True:
-#        Line1 = True
+      if Line1 == True and Line2 == True:
+        CrossedSection = CrossedSection + 1
+        Line1 = False
+        Line2 = False
 
-#      elif BlueLine == True:
-#        Line2 = True
+      if CrossedSection == 12:
+        break
 
-#      if Line1 == True and Line2 == True:
-#        CrossedSection = CrossedSection + 1
-#        Line1 = False
-#        Line2 = False
+    MotorAnsteuerung.Motor_Fahren(0)
 
-#      if CrossedSection == 12:
-#        break
 
   except KeyboardInterrupt:
     MotorAnsteuerung.Motor_Fahren(0)
