@@ -34,7 +34,7 @@ def fahren():
       MotorAnsteuerung.Motor_Fahren(0.5)
 
 
-      if distanceGerade < 90:
+      if distanceGerade < 80:
         MotorAnsteuerung.Motor_Fahren(0)
         time.sleep(2)
         if distanceLinks > distanceRechts:
