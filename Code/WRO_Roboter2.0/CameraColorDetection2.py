@@ -41,19 +41,19 @@ def ColorDetection():
 	
 	for hue_value in picked_hue_value.flatten():
 #		print(hue_value)
-		if 9 < hue_value < 13:
+		if 8 < hue_value < 14:
 			HueValueIsOrange = HueValueIsOrange + 1
 #			print(HueValueIsOrange)
 		elif 105 < hue_value < 115:
 			HueValueIsBlue = HueValueIsBlue + 1
 #			print(HueValueIsBlue)
 
-	if HueValueIsOrange >= 10:
+	if HueValueIsOrange >= 15:
 		color = "ORANGE"
 		HueValueIsOrange = 0
 		print(color)
 		return color
-	elif HueValueIsBlue >= 10:
+	elif HueValueIsBlue >= 15:
 		color = "BLUE"
 		HueValueIsBlue = 0
 		print(color)
