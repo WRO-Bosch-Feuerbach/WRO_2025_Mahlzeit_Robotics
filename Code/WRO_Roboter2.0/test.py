@@ -51,7 +51,7 @@ def fahren():
       distanceLinks = Ultraschallsensor.checkdistLinks()
       distanceRechts = Ultraschallsensor.checkdistRechts()
       winkel = 90 + ((200 - distanceGerade) / (200 - 5)) * 90
-      winkel_gerundet = round(winkel) - 5
+      winkel_gerundet = round(winkel) + 25
       print(winkel_gerundet)
       test2.set_angle(1, winkel_gerundet)
       MotorAnsteuerung.Motor_Fahren(0.35)
@@ -85,7 +85,7 @@ def fahren():
       distanceLinks = Ultraschallsensor.checkdistLinks()
       distanceRechts = Ultraschallsensor.checkdistRechts()
       winkel = 90 - ((200 - distanceGerade) / (200 - 5)) * 90
-      winkel_gerundet = round(winkel) -10
+      winkel_gerundet = round(winkel) + 30
       print(winkel_gerundet)
       test2.set_angle(1, winkel_gerundet)
       MotorAnsteuerung.Motor_Fahren(0.3)
@@ -104,15 +104,11 @@ def fahren():
         print("Blau erkannt")
         BlueLine = True
 
-      if OrangeLine == True:
-        Line1 = True
-      elif BlueLine == True:
-        Line2 = True
-
-      if Line1 == True and Line2 == True:
+      if BlueLine == True and OrangeLine == True:
         CrossedSection = CrossedSection + 1
-        Line1 = False
-        Line2 = False
+        print(f"Section crossed: {CrossedSection}")
+        OrangeLine = False
+        BlueLine = False
 
       if CrossedSection == 12:
         break
