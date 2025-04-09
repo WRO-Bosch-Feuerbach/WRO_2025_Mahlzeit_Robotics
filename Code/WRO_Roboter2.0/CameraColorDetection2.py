@@ -26,10 +26,10 @@ def ColorDetection():
 	#cx = int(width / 2)
 	#cy = int(height / 2)
 
-	AreaStartPixelX = int(width/2) -5
-	AreaStartPixelY = int(height/2) - 5
-	AreaEndPixelX = int(width/2) +5
-	AreaEndPixelY = int(height/2) +5
+	AreaStartPixelX = int(width/2) -3
+	AreaStartPixelY = int(height/2) - 3
+	AreaEndPixelX = int(width/2) +3
+	AreaEndPixelY = int(height/2) +3
 
 	roi = hsv_frame[AreaStartPixelY:AreaEndPixelY, AreaStartPixelX:AreaEndPixelX]
 
@@ -48,12 +48,12 @@ def ColorDetection():
 			HueValueIsBlue = HueValueIsBlue + 1
 #			print(HueValueIsBlue)
 
-	if HueValueIsOrange >= 15:
+	if HueValueIsOrange >= 28:
 		color = "ORANGE"
 		HueValueIsOrange = 0
 		print(color)
 		return color
-	elif HueValueIsBlue >= 15:
+	elif HueValueIsBlue >= 28:
 		color = "BLUE"
 		HueValueIsBlue = 0
 		print(color)
