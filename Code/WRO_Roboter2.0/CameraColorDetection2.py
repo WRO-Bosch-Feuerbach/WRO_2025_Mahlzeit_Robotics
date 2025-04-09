@@ -1,3 +1,4 @@
+from curses import can_change_color
 import time
 from turtle import width
 import cv2
@@ -26,10 +27,10 @@ def ColorDetection():
 	#cx = int(width / 2)
 	#cy = int(height / 2)
 
-	AreaStartPixelX = int(width/2) -5
-	AreaStartPixelY = int(height/2) - 5
-	AreaEndPixelX = int(width/2) +5
-	AreaEndPixelY = int(height/2) +5
+	AreaStartPixelX = int(width/2) -3
+	AreaStartPixelY = int(height/2) - 3
+	AreaEndPixelX = int(width/2) +3
+	AreaEndPixelY = int(height/2) +3
 
 	roi = hsv_frame[AreaStartPixelY:AreaEndPixelY, AreaStartPixelX:AreaEndPixelX]
 
@@ -48,12 +49,12 @@ def ColorDetection():
 			HueValueIsBlue = HueValueIsBlue + 1
 #			print(HueValueIsBlue)
 
-	if HueValueIsOrange >= 15:
+	if HueValueIsOrange >= 28:
 		color = "ORANGE"
 		HueValueIsOrange = 0
 		print(color)
 		return color
-	elif HueValueIsBlue >= 15:
+	elif HueValueIsBlue >= 28:
 		color = "BLUE"
 		HueValueIsBlue = 0
 		print(color)
@@ -80,5 +81,41 @@ def ColorDetection():
 		#if key == 27:
 			#break
 
-#cap.release()
-#cv2.destroyAllWindows()
+def BlackWhiteDetection():
+
+	threshold = 127
+	max_value = 255
+
+	#while True:
+	_, frame = cap.read()
+
+	if frame is None:
+		print("Das Bild konnte nicht geladen werden")
+		exit()
+
+	grayFrame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+	
+	ret, BlackWhiteFrame = cv2.threshold(grayFrame, threshold, max_value, cv2.THRESH_BINARY)
+
+	height, width = BlackWhiteFrame.shape
+	cx = int(width//2)
+	cy = int(height//2)
+
+	white_pixel = cv2.findNonZero(BlackWhiteFrame)
+
+	pixel_center = BlackWhiteFrame[cy, cx]
+
+	if pixel_center == 255:
+		color = "WHITE"
+		return color
+	elif pixel_center == 0:
+		color = "BLACK"
+		return color
+	else:
+		color = "WHITE"
+		return color
+
+	white_pixel_amount = len(white_pixel)
+
+	#return white_pixel_amount
+	
