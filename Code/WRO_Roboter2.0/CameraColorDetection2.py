@@ -80,5 +80,25 @@ def ColorDetection():
 		#if key == 27:
 			#break
 
-#cap.release()
-#cv2.destroyAllWindows()
+def BlackWhiteDetection():
+
+	threshold = 127
+	max_value = 255
+
+	#while True:
+	_, frame = cap.read()
+
+	if frame is None:
+		print("Das Bild konnte nicht geladne werden")
+		exit()
+
+	grayFrame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+	
+	ret, BlackWhiteFrame = cv2.threshold(grayFrame, threshold, max_value, cv2.THRESH_BINARY)
+
+	white_pixel = cv2.findNonZero(BlackWhiteFrame)
+
+	white_pixel_amount = len(white_pixel)
+
+	return white_pixel_amount
+	
