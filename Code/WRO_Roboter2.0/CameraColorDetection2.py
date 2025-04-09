@@ -83,6 +83,9 @@ def ColorDetection():
 
 def BlackWhiteDetection():
 
+	IsWhite = 0
+	IsBlack = 0
+
 	threshold = 127
 	max_value = 255
 
@@ -98,24 +101,32 @@ def BlackWhiteDetection():
 	ret, BlackWhiteFrame = cv2.threshold(grayFrame, threshold, max_value, cv2.THRESH_BINARY)
 
 	height, width = BlackWhiteFrame.shape
-	cx = int(width//2)
-	cy = int(height//2)
 
 	white_pixel = cv2.findNonZero(BlackWhiteFrame)
+	
+	AreaStartPixelX = int(width/2) -3
+	AreaStartPixelY = int(height/2) - 3
+	AreaEndPixelX = int(width/2) +3
+	AreaEndPixelY = int(height/2) +3
 
-	pixel_center = BlackWhiteFrame[cy, cx]
+	roi = BlackWhiteFrame[AreaStartPixelY:AreaEndPixelY, AreaStartPixelX:AreaEndPixelX]
 
-	if pixel_center == 255:
+	#pixel_Area = hsv_frame[roi]
+	
+	picked_color = roi[:, :, 0]
+
+#	print(picked_hue_value)
+	
+	for Color in picked_color.flatten():
+		if Color == 255:
+			IsWhite = IsWhite + 1
+		elif Color == 0:
+			IsBlack = IsBlack + 1
+
+	if IsWhite >= 28:
 		color = "WHITE"
-		return color
-	elif pixel_center == 0:
-		color = "BLACK"
 		return color
 	else:
-		color = "WHITE"
+		color = "BLACK"
 		return color
-
-	white_pixel_amount = len(white_pixel)
-
-	#return white_pixel_amount
 	
