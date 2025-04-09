@@ -1,3 +1,4 @@
+from curses import can_change_color
 import time
 from turtle import width
 import cv2
@@ -89,16 +90,32 @@ def BlackWhiteDetection():
 	_, frame = cap.read()
 
 	if frame is None:
-		print("Das Bild konnte nicht geladne werden")
+		print("Das Bild konnte nicht geladen werden")
 		exit()
 
 	grayFrame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 	
 	ret, BlackWhiteFrame = cv2.threshold(grayFrame, threshold, max_value, cv2.THRESH_BINARY)
 
+	height, width = BlackWhiteFrame.shape
+	cx = int(width//2)
+	cy = int(height//2)
+
 	white_pixel = cv2.findNonZero(BlackWhiteFrame)
+
+	pixel_center = BlackWhiteFrame[cy, cx]
+
+	if pixel_center == 255:
+		color = "WHITE"
+		return color
+	elif pixel_center == 0:
+		color = "BLACK"
+		return color
+	else:
+		color = "WHITE"
+		return color
 
 	white_pixel_amount = len(white_pixel)
 
-	return white_pixel_amount
+	#return white_pixel_amount
 	

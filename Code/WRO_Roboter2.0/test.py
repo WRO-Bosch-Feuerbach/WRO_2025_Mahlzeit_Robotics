@@ -17,6 +17,13 @@ def fahren():
   Line1 = False
   Line2 = False
   CrossedOrangeLines = 0
+  CrossedLines = 0
+  LineDetected = False
+  LineBegin = False
+  BackgroundColor = False
+
+  #------------------------------------
+
   CrossedSection = 0
   RoundCounter = 0
 
@@ -63,23 +70,48 @@ def fahren():
         test2.set_angle(1,180)
       time.sleep(0.2)
 
-      DetectedColor = CameraColorDetection2.ColorDetection()
+      #DetectedColor = CameraColorDetection2.ColorDetection()
+      DetectedColor = CameraColorDetection2.BlackWhiteDetection()
 
-      if DetectedColor == "ORANGE":
-        print("Orange erkannt")
-        OrangeLine = True
-      elif DetectedColor == "BLUE":
-        print("Blau erkannt")
-        BlueLine = True
+      if DetectedColor == "BLACK":
+        LineDetected = True
+        if LineDetected == True: 
+          LineDetected = False
+          LineBegin = True
+      elif DetectedColor == "WHITE":
+        BackgroundColor = True
 
-      if BlueLine == True and OrangeLine == True:
+      if LineBegin == True and BackgroundColor == True: 
+        CrossedLines = CrossedLines + 1
+        LineBegin = False
+
+      if CrossedLines == 2:
         CrossedSection = CrossedSection + 1
-        print(f"Section crossed: {CrossedSection}")
-        OrangeLine = False
-        BlueLine = False
+        CrossedLines = 0
 
       if CrossedSection == 12:
         break
+
+      #if DetectedColor == "ORANGE":
+        #print("Orange erkannt")
+        #OrangeLine = True
+      #elif DetectedColor == "BLUE":
+        #print("Blau erkannt")
+        #BlueLine = True
+
+      #if BlueLine == True and OrangeLine == True:
+        #CrossedSection = CrossedSection + 1
+        #print(f"Section crossed: {CrossedSection}")
+        #OrangeLine = False
+        #BlueLine = False
+
+      #if Line1 == True and Line2 == True:
+        #CrossedSection = CrossedSection + 1
+        #Line1 = False
+        #Line2 = False
+
+      #if CrossedSection == 12:
+        #break
 
 
     while FahrenRechts == True:
@@ -97,27 +129,47 @@ def fahren():
         test2.set_angle(1,180)
       time.sleep(0.2)
 
-      DetectedColor = CameraColorDetection2.ColorDetection()
+      #DetectedColor = CameraColorDetection2.ColorDetection()
+      DetectedColor = CameraColorDetection2.BlackWhiteDetection()
 
-      if DetectedColor == "ORANGE":
-        print("Orange erkannt")
-        OrangeLine = True
-      elif DetectedColor == "BLUE":
-        print("Blau erkannt")
-        BlueLine = True
+      if DetectedColor == "BLACK":
+        LineDetected = True
+        if LineDetected == True: 
+          LineDetected = False
+          LineBegin = True
+      elif DetectedColor == "WHITE":
+        BackgroundColor = True
 
-      if OrangeLine == True:
-        Line1 = True
-      elif BlueLine == True:
-        Line2 = True
+      if LineBegin == True and BackgroundColor == True: 
+        CrossedLines = CrossedLines + 1
+        LineBegin = False
 
-      if Line1 == True and Line2 == True:
+      if CrossedLines == 2:
         CrossedSection = CrossedSection + 1
-        Line1 = False
-        Line2 = False
+        CrossedLines = 0
 
       if CrossedSection == 12:
         break
+
+      #if DetectedColor == "ORANGE":
+        #print("Orange erkannt")
+        #OrangeLine = True
+      #elif DetectedColor == "BLUE":
+        #print("Blau erkannt")
+        #BlueLine = True
+
+      #if OrangeLine == True:
+        #Line1 = True
+      #elif BlueLine == True:
+        #Line2 = True
+
+      #if Line1 == True and Line2 == True:
+        #CrossedSection = CrossedSection + 1
+        #Line1 = False
+        #Line2 = False
+
+      #if CrossedSection == 12:
+        #break
 
     MotorAnsteuerung.Motor_Fahren(0)
 
