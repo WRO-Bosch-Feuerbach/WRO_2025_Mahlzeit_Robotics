@@ -2,7 +2,7 @@ import time
 from turtle import width
 import cv2
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(1)
 cap.set(cv2.CAP_PROP_FRAME_WIDTH, 256)
 cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 144)
 
@@ -63,7 +63,7 @@ def ColorDetection():
 		print(color)
 		return color
 
-
+	cv2.imshow("kamerabild", frame)
 	
 
 
