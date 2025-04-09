@@ -28,8 +28,6 @@ def fahren():
   RoundCounter = 0
 
   try:
-    FahrenLinks = True
-    FahrenRechts = True
 
     while True:
       distanceGerade = Ultraschallsensor.checkdistGerade()
@@ -43,9 +41,9 @@ def fahren():
       MotorAnsteuerung.Motor_Fahren(0.5)
 
 
-      if distanceGerade < 90:
+      if distanceGerade < 80:
         MotorAnsteuerung.Motor_Fahren(0)
-        time.sleep(1)
+        time.sleep(2)
         if distanceLinks > distanceRechts:
           FahrenLinks = True
           FahrenRechts = False
@@ -53,14 +51,14 @@ def fahren():
           FahrenRechts = True
           FahrenLinks = False
 
-      break
+        break
 
     while FahrenLinks == True:
       distanceGerade = Ultraschallsensor.checkdistGerade()
       distanceLinks = Ultraschallsensor.checkdistLinks()
       distanceRechts = Ultraschallsensor.checkdistRechts()
       winkel = 90 + ((200 - distanceGerade) / (200 - 5)) * 90
-      winkel_gerundet = round(winkel) - 10
+      winkel_gerundet = round(winkel) + 25
       print(winkel_gerundet)
       test2.set_angle(1, winkel_gerundet)
       MotorAnsteuerung.Motor_Fahren(0.35)
@@ -119,7 +117,7 @@ def fahren():
       distanceLinks = Ultraschallsensor.checkdistLinks()
       distanceRechts = Ultraschallsensor.checkdistRechts()
       winkel = 90 - ((200 - distanceGerade) / (200 - 5)) * 90
-      winkel_gerundet = round(winkel) - 10
+      winkel_gerundet = round(winkel) + 30
       print(winkel_gerundet)
       test2.set_angle(1, winkel_gerundet)
       MotorAnsteuerung.Motor_Fahren(0.3)
@@ -147,6 +145,13 @@ def fahren():
       if CrossedLines == 2:
         CrossedSection = CrossedSection + 1
         CrossedLines = 0
+        
+      #if BlueLine == True and OrangeLine == True:
+        #CrossedSection = CrossedSection + 1
+        #print(f"Section crossed: {CrossedSection}")
+        #OrangeLine = False
+        #BlueLine = False
+
 
       if CrossedSection == 12:
         break
@@ -180,16 +185,13 @@ def fahren():
 
 
 
-
-
 def stoppen():
   MotorAnsteuerung.Motor_Fahren(0)
   test2.set_angle(1, 90)
-  test2.set_angle(2, 20)
-  test2.set_angle(3, 0)
+
 
 if __name__ == "__main__":
   try:
       fahren()
   except KeyboardInterrupt:
-    MotorAnsteuerung.Motor_Fahren(0)
+      stoppen()
