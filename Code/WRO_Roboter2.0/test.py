@@ -145,16 +145,15 @@ def fahren():
       if CrossedLines == 2:
         CrossedSection = CrossedSection + 1
         CrossedLines = 0
+
+      if CrossedSection == 12:
+        break
         
       #if BlueLine == True and OrangeLine == True:
         #CrossedSection = CrossedSection + 1
         #print(f"Section crossed: {CrossedSection}")
         #OrangeLine = False
         #BlueLine = False
-
-
-      if CrossedSection == 12:
-        break
 
       #if DetectedColor == "ORANGE":
         #print("Orange erkannt")
