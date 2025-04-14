@@ -61,7 +61,7 @@ def fahren():
       winkel_gerundet = round(winkel) + 25
       print(winkel_gerundet)
       test2.set_angle(1, winkel_gerundet)
-      MotorAnsteuerung.Motor_Fahren(0.35)
+      MotorAnsteuerung.Motor_Fahren(0.4)
       if distanceLinks < 30:
         test2.set_angle(1,30)
       if distanceRechts < 30:
@@ -73,19 +73,26 @@ def fahren():
 
       if DetectedColor == "BLACK":
         LineDetected = True
+        print("If schleife geht")
         if LineDetected == True: 
           LineDetected = False
           LineBegin = True
+          BackgroundColor = False
+          print("Line detected")
       elif DetectedColor == "WHITE":
         BackgroundColor = True
+        LineDetected = False
 
       if LineBegin == True and BackgroundColor == True: 
         CrossedLines = CrossedLines + 1
         LineBegin = False
+        print("Line crossed")
 
       if CrossedLines == 2:
         CrossedSection = CrossedSection + 1
         CrossedLines = 0
+        print("Section crossed")
+        print(CrossedSection)
 
       if CrossedSection == 12:
         break
@@ -120,7 +127,7 @@ def fahren():
       winkel_gerundet = round(winkel) + 30
       print(winkel_gerundet)
       test2.set_angle(1, winkel_gerundet)
-      MotorAnsteuerung.Motor_Fahren(0.3)
+      MotorAnsteuerung.Motor_Fahren(0.4)
       if distanceLinks < 30:
         test2.set_angle(1,30)
       if distanceRechts < 30:
@@ -135,8 +142,11 @@ def fahren():
         if LineDetected == True: 
           LineDetected = False
           LineBegin = True
+          BackgroundColor = False
+          print("Line crossed")
       elif DetectedColor == "WHITE":
         BackgroundColor = True
+        LineDetected = False
 
       if LineBegin == True and BackgroundColor == True: 
         CrossedLines = CrossedLines + 1
@@ -145,6 +155,8 @@ def fahren():
       if CrossedLines == 2:
         CrossedSection = CrossedSection + 1
         CrossedLines = 0
+        print("Section crossed")
+        print(CrossedSection)
 
       if CrossedSection == 12:
         break

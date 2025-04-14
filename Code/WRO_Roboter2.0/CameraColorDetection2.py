@@ -3,7 +3,7 @@ import time
 from turtle import width
 import cv2
 
-cap = cv2.VideoCapture(1)
+cap = cv2.VideoCapture(0)
 cap.set(cv2.CAP_PROP_FRAME_WIDTH, 256)
 cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 144)
 
@@ -86,7 +86,7 @@ def BlackWhiteDetection():
 	IsWhite = 0
 	IsBlack = 0
 
-	threshold = 127
+	threshold = 158
 	max_value = 255
 
 	#while True:
@@ -104,29 +104,32 @@ def BlackWhiteDetection():
 
 	white_pixel = cv2.findNonZero(BlackWhiteFrame)
 	
-	AreaStartPixelX = int(width/2) -3
-	AreaStartPixelY = int(height/2) - 3
-	AreaEndPixelX = int(width/2) +3
-	AreaEndPixelY = int(height/2) +3
+	AreaStartPixelX = int(width/2) -8
+	AreaStartPixelY = int(height/2) - 8
+	AreaEndPixelX = int(width/2) +8
+	AreaEndPixelY = int(height/2) +8
 
 	roi = BlackWhiteFrame[AreaStartPixelY:AreaEndPixelY, AreaStartPixelX:AreaEndPixelX]
 
 	#pixel_Area = hsv_frame[roi]
 	
-	picked_color = roi[:, :, 0]
+	picked_color = roi[:, 0]
+	print(picked_color)
 
 #	print(picked_hue_value)
 	
 	for Color in picked_color.flatten():
 		if Color == 255:
 			IsWhite = IsWhite + 1
+			#print("Weiß erkannt")
 		elif Color == 0:
 			IsBlack = IsBlack + 1
-
-	if IsWhite >= 28:
-		color = "WHITE"
+			#print("Schwarz erkannt")
+	if IsBlack >= 4:
+		color = "BLACK"
+		print("Schwarz wird übergeben")
 		return color
 	else:
-		color = "BLACK"
+		color = "WHITE"
 		return color
 	
