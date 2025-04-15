@@ -2,6 +2,7 @@ from curses import can_change_color
 import time
 from turtle import width
 import cv2
+import numpy as np
 
 cap = cv2.VideoCapture(0)
 cap.set(cv2.CAP_PROP_FRAME_WIDTH, 256)
@@ -137,11 +138,11 @@ def ColorDetection2_0():
 
 	#-----------------------Varialbles-------------------------
  
-	Orange_Max = np.array([60, 255, 255])
-	Orange_Min = np.array([30, 100, 100])
+	Orange_Max = np.array([15, 150, 255])
+	Orange_Min = np.array([0, 25, 100])
 
-	Blue_Max = np.array([60, 255, 255])
-	Blue_Min = np.array([30, 100, 100])
+	Blue_Max = np.array([115, 255, 255])
+	Blue_Min = np.array([100, 100, 100])
  
 	pixel_threshold = 100
 
