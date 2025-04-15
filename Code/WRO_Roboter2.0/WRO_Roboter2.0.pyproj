@@ -21,6 +21,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Buzzer.py" />
     <Compile Include="CameraColorDetection2.py" />
     <Compile Include="MotorAnsteuerung.py" />
     <Compile Include="startknopf.py" />
