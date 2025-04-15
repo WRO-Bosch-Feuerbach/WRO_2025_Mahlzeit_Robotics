@@ -106,7 +106,6 @@ def fahren():
           LineBegin = True
           BackgroundColor = False
           print("Line crossed")
-          print("Line crossed")
       else:
         BackgroundColor = True
         LineDetected = False

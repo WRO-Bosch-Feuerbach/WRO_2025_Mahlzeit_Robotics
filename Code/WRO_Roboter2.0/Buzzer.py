@@ -1,9 +1,14 @@
-from gpiozero import Buzzer
+from gpiozero import TonalBuzzer
 from time import sleep
+import RPi.GPIO as GPIO
 
-buzzer = Buzzer(18)
+Buzzer = TonalBuzzer(18)
+#Buzzer.play("A4")
+#sleep(2)
+#Buzzer.stop()
 
 def DebugSound(duration):
-    buzzer.on()
+    Buzzer.play("A4")
     sleep(duration)
-    buzzer.off()
+    Buzzer.stop()
+
