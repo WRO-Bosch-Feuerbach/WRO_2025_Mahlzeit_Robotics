@@ -10,7 +10,7 @@ import Ultraschallsensor
 import MotorAnsteuerung
 import test2
 import CameraColorDetection2
-
+import BlockColorDetection
 
 def fahren():
   OrangeLine = False
@@ -63,11 +63,7 @@ def fahren():
       print(winkel_gerundet)
       test2.set_angle(1, winkel_gerundet)
       MotorAnsteuerung.Motor_Fahren(0.4)
-      if distanceLinks < 30:
-        test2.set_angle(1,30)
-      if distanceRechts < 30:
-        test2.set_angle(1,180)
-      time.sleep(0.2)
+      
 
       DetectedColor = CameraColorDetection2.ColorDetection2_0()
       #DetectedColor = CameraColorDetection2.BlackWhiteDetection()
@@ -89,6 +85,41 @@ def fahren():
       if CrossedSection == 12:
         break
       '''
+
+      
+
+      if BlockColorDetection.Blockfarbe() == 'ROT':
+        print('Rot')
+        Buzzer.DebugSound(0.1)
+        MotorAnsteuerung.Motor_Fahren(0.2)
+        test2.set_angle(1,20)
+        print('gelenkt')
+        if distanceLinks < 15:
+          test2.set_angle(1,20)
+        if distanceRechts < 15:
+          test2.set_angle(1,170)
+        time.sleep(0.5)
+
+      elif BlockColorDetection.Blockfarbe() == 'GRUEN':
+        print('Grün')
+        Buzzer.DebugSound(0.1)
+        MotorAnsteuerung.Motor_Fahren(0.2)
+        test2.set_angle(1,170)
+        print('gelenkt')
+        if distanceLinks < 15:
+          test2.set_angle(1,20)
+        if distanceRechts < 15:
+          test2.set_angle(1,170)
+        time.sleep(0.5)
+
+      else:
+        if distanceLinks < 15:
+          test2.set_angle(1,20)
+        if distanceRechts < 15:
+          test2.set_angle(1,170)
+        time.sleep(0.5)
+
+
 
       if DetectedColor == "ORANGE":
         print("Orange erkannt")
@@ -135,14 +166,44 @@ def fahren():
       print(winkel_gerundet)
       test2.set_angle(1, winkel_gerundet)
       MotorAnsteuerung.Motor_Fahren(0.4)
-      if distanceLinks < 30:
-        test2.set_angle(1,30)
-      if distanceRechts < 30:
-        test2.set_angle(1,180)
-      time.sleep(0.2)
 
       DetectedColor = CameraColorDetection2.ColorDetection2_0()
       #DetectedColor = CameraColorDetection2.BlackWhiteDetection()
+
+      if BlockColorDetection.Blockfarbe() == 'ROT':
+        print('Rot')
+        Buzzer.DebugSound(0.1)
+        MotorAnsteuerung.Motor_Fahren(0.2)
+        test2.set_angle(1,20)
+        print('gelenkt')
+        if distanceLinks < 15:
+          test2.set_angle(1,20)
+        if distanceRechts < 15:
+          test2.set_angle(1,170)
+        time.sleep(0.5)
+
+      elif BlockColorDetection.Blockfarbe() == 'GRUEN':
+        print('Grün')
+        Buzzer.DebugSound(0.1)
+        MotorAnsteuerung.Motor_Fahren(0.2)
+        test2.set_angle(1,170)
+        print('gelenkt')
+        if distanceLinks < 15:
+          test2.set_angle(1,20)
+        if distanceRechts < 15:
+          test2.set_angle(1,170)
+        time.sleep(0.5)
+
+      else:
+        if distanceLinks < 15:
+          test2.set_angle(1,20)
+        if distanceRechts < 15:
+          test2.set_angle(1,170)
+        time.sleep(0.5)
+
+
+
+
 
       if DetectedColor == "ORANGE":
         print("Orange erkannt")
