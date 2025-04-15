@@ -1,6 +1,7 @@
 from encodings.punycode import T
 import math
 import time
+import Buzzer
 from board import SCL, SDA
 import busio
 from adafruit_pca9685  import PCA9685
@@ -105,6 +106,7 @@ def fahren():
           LineBegin = True
           BackgroundColor = False
           print("Line crossed")
+          print("Line crossed")
       else:
         BackgroundColor = True
         LineDetected = False
@@ -112,12 +114,14 @@ def fahren():
       if LineBegin == True and BackgroundColor == True: 
         CrossedLines = CrossedLines + 1
         LineBegin = False
+        Buzzer.DebugSound(0.5)
 
       if CrossedLines == 2:
         CrossedSection = CrossedSection + 1
         CrossedLines = 0
         print("Section crossed")
         print(CrossedSection)
+        Buzzer.DebugSound(1)
 
       if CrossedSection == 12:
         break
@@ -164,12 +168,14 @@ def fahren():
       if LineBegin == True and BackgroundColor == True: 
         CrossedLines = CrossedLines + 1
         LineBegin = False
+        Buzzer.DebugSound(0.5)
 
       if CrossedLines == 2:
         CrossedSection = CrossedSection + 1
         CrossedLines = 0
         print("Section crossed")
         print(CrossedSection)
+        Buzzer.DebugSound(1)
 
       if CrossedSection == 12:
         break
