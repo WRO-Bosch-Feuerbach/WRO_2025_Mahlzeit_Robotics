@@ -70,34 +70,8 @@ def fahren():
 
       DetectedColor = CameraColorDetection2.ColorDetection2_0()
       #DetectedColor = CameraColorDetection2.BlackWhiteDetection()
+      
       '''
-      if DetectedColor == "BLACK":
-        LineDetected = True
-        print("If schleife geht")
-        if LineDetected == True: 
-          LineDetected = False
-          LineBegin = True
-          BackgroundColor = False
-          print("Line detected")
-      elif DetectedColor == "WHITE":
-        BackgroundColor = True
-        LineDetected = False
-
-      if LineBegin == True and BackgroundColor == True: 
-        CrossedLines = CrossedLines + 1
-        LineBegin = False
-        print("Line crossed")
-
-      if CrossedLines == 2:
-        CrossedSection = CrossedSection + 1
-        CrossedLines = 0
-        print("Section crossed")
-        print(CrossedSection)
-
-      if CrossedSection == 12:
-        break
-      '''
-
       if DetectedColor == "ORANGE":
         print("Orange erkannt")
         OrangeLine = True
@@ -110,6 +84,40 @@ def fahren():
         print(f"Section crossed: {CrossedSection}")
         OrangeLine = False
         BlueLine = False
+
+      if CrossedSection == 12:
+        break
+      '''
+
+      if DetectedColor == "ORANGE":
+        print("Orange erkannt")
+        LineDetected = True
+        if LineDetected == True: 
+          LineDetected = False
+          LineBegin = True
+          BackgroundColor = False
+          print("Line crossed")
+      elif DetectedColor == "BLUE":
+        print("Blau erkannt")
+        LineDetected = True
+        if LineDetected == True: 
+          LineDetected = False
+          LineBegin = True
+          BackgroundColor = False
+          print("Line crossed")
+      else:
+        BackgroundColor = True
+        LineDetected = False
+
+      if LineBegin == True and BackgroundColor == True: 
+        CrossedLines = CrossedLines + 1
+        LineBegin = False
+
+      if CrossedLines == 2:
+        CrossedSection = CrossedSection + 1
+        CrossedLines = 0
+        print("Section crossed")
+        print(CrossedSection)
 
       if CrossedSection == 12:
         break
@@ -133,15 +141,23 @@ def fahren():
       DetectedColor = CameraColorDetection2.ColorDetection2_0()
       #DetectedColor = CameraColorDetection2.BlackWhiteDetection()
 
-      '''
-      if DetectedColor == "BLACK":
+      if DetectedColor == "ORANGE":
+        print("Orange erkannt")
         LineDetected = True
         if LineDetected == True: 
           LineDetected = False
           LineBegin = True
           BackgroundColor = False
           print("Line crossed")
-      elif DetectedColor == "WHITE":
+      elif DetectedColor == "BLUE":
+        print("Blau erkannt")
+        LineDetected = True
+        if LineDetected == True: 
+          LineDetected = False
+          LineBegin = True
+          BackgroundColor = False
+          print("Line crossed")
+      else:
         BackgroundColor = True
         LineDetected = False
 
@@ -154,23 +170,6 @@ def fahren():
         CrossedLines = 0
         print("Section crossed")
         print(CrossedSection)
-
-      if CrossedSection == 12:
-        break
-      '''
-
-      if DetectedColor == "ORANGE":
-        print("Orange erkannt")
-        OrangeLine = True
-      elif DetectedColor == "BLUE":
-        print("Blau erkannt")
-        BlueLine = True
-
-      if BlueLine == True and OrangeLine == True:
-        CrossedSection = CrossedSection + 1
-        print(f"Section crossed: {CrossedSection}")
-        OrangeLine = False
-        BlueLine = False
 
       if CrossedSection == 12:
         break
