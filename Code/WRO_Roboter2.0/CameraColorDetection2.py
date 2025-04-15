@@ -144,7 +144,7 @@ def ColorDetection2_0():
 	Blue_Max = np.array([115, 255, 255])
 	Blue_Min = np.array([100, 100, 100])
  
-	pixel_threshold = 100
+	pixel_threshold = 75
 
 	#while True:
 	_, frame = cap.read()
@@ -160,8 +160,8 @@ def ColorDetection2_0():
 
 	#------------------HSV Value testing---------------------
 
-	hsv_frame_pixel = hsv_frame[0,0]
-	print('HSV vom Pixel:', hsv_frame_pixel)
+	#hsv_frame_pixel = hsv_frame[0,0]
+	#print('HSV vom Pixel:', hsv_frame_pixel)
 
 	#------------------------Masks---------------------------
 
