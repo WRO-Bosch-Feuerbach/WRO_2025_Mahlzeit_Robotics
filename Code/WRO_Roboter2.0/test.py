@@ -220,15 +220,15 @@ def fahren():
             MotorAnsteuerung.Motor_Fahren(0)
             RouteCorrection = False
           if distanceHinten < 20 and distanceHinten > 15 and distanceRechts > 5:
-            test2.set_angle(90)
+            test2.set_angle(1, 90)
           if distanceHinten > 20 and distanceHinten < 25 and distanceRechts > 5:
-            test2.set_angle(60)
+            test2.set_angle(1, 60)
           if distanceHinten > 25 and distanceRechts > 5:
-            test2.set_angle(30)
+            test2.set_angle(1, 30)
             MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
           #--------- Rückwärts wenn links nicht genug Platz ist ---------#
           while distanceHinten > 15 and distanceRechts < 5:
-            test2.set_angle(90)
+            test2.set_angle(1, 90)
             MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
 
     #-----------------------------------------------------------------------------------------------------------------------------------------------------------------------#
@@ -344,15 +344,15 @@ def fahren():
             MotorAnsteuerung.Motor_Fahren(0)
             RouteCorrection = False
           if distanceHinten < 20 and distanceHinten > 15 and distanceLinks > 5:
-            test2.set_angle(90)
+            test2.set_angle(1, 90)
           if distanceHinten > 20 and distanceHinten < 25 and distanceLinks > 5:
-            test2.set_angle(120)
+            test2.set_angle(1, 120)
           if distanceHinten > 25 and distanceLinks > 5:
-            test2.set_angle(150)
+            test2.set_angle(1, 150)
             MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
           #--------- Rückwärts wenn links nicht genug Platz ist ---------#
           while distanceHinten > 15 and distanceLinks < 5:
-            test2.set_angle(90)
+            test2.set_angle(1, 90)
             MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
 
     MotorAnsteuerung.Motor_Fahren(0)
