@@ -86,7 +86,8 @@ def fahren():
         CrossedLinesOrange = CrossedLinesOrange + 1             # Liniencounter wirdhochgezählt
         if CrossedLinesOrange == 2:
             CrossedLinesOrange = 1
-        LineBeginOrange = False                                       # LineBegin wieder auf False für die nächste Linie
+        LineBeginOrange = False                                 # LineBegin wieder auf False für die nächste Linie
+        RouteCorrection = True
         Buzzer.DebugSound(0.5)
       
       if LineBeginBlue == True and BackgroundColor == True:     # Wenn vorher eine Linie erkannt wurde und der Boden wieder weiß ist -> Linie komplett überfahren
@@ -94,6 +95,7 @@ def fahren():
         if CrossedLinesBlue == 2:
             CrossedLinesBlue = 1
         LineBeginBlue = False                                   # LineBegin wieder auf False für die nächste Linie
+        RouteCorrection = True
         Buzzer.DebugSound(0.5)
 
       if CrossedLinesOrange + CrossedLinesBlue == 2:            # 2 Linien sind eine Ecke bzw. 1/4
@@ -186,7 +188,7 @@ def fahren():
         CrossedLinesOrange = CrossedLinesOrange + 1             # Liniencounter wirdhochgezählt
         if CrossedLinesOrange == 2:
             CrossedLinesOrange = 1
-        LineBeginOrange = False                                       # LineBegin wieder auf False für die nächste Linie
+        LineBeginOrange = False                                 # LineBegin wieder auf False für die nächste Linie
         Buzzer.DebugSound(0.5)
       
       if LineBeginBlue == True and BackgroundColor == True:     # Wenn vorher eine Linie erkannt wurde und der Boden wieder weiß ist -> Linie komplett überfahren
@@ -194,6 +196,7 @@ def fahren():
         if CrossedLinesBlue == 2:
             CrossedLinesBlue = 1
         LineBeginBlue = False                                   # LineBegin wieder auf False für die nächste Linie
+        RouteCorrection = True
         Buzzer.DebugSound(0.5)
 
       if CrossedLinesOrange + CrossedLinesBlue == 2:            # 2 Linien sind eine Ecke bzw. 1/4
@@ -212,18 +215,18 @@ def fahren():
         if CrossedLinesBlue == 1:
             distanceHinten = Ultraschallsensor.checkdistHinten()
             MotorAnsteuerung.Motor_Fahren(0)
-            #--------- Rückwärts wenn rechts genug Platz ist ---------#
-            while distanceHinten > 15 and distanceRechts > 5:
+            #--------- Rückwärts wenn links genug Platz ist ---------#
+            if distanceHinten == 15:
+              MotorAnsteuerung.Motor_Fahren(0)
+              RouteCorrection = False
+            if distanceHinten < 20 and distanceHinten > 15 and distanceRechts > 5:
+              test2.set_angle(90)
+            if distanceHinten > 20 and distanceHinten < 25 and distanceRechts > 5:
+              test2.set_angle(60)
+            if distanceHinten > 25 and distanceRechts > 5:
               test2.set_angle(30)
               MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
-              if distanceHinten > 20 and distanceHinten < 25:
-                test2.set_angle(60)
-              if distanceHinten < 20 and distanceHinten > 15:
-                test2.set_angle(90)
-              if distanceHinten == 15:
-                MotorAnsteuerung.Motor_Fahren(0)
-                RouteCorrection = False
-            #--------- Rückwärts wenn rechts nicht genug Platz ist ---------#
+            #--------- Rückwärts wenn links nicht genug Platz ist ---------#
             while distanceHinten > 15 and distanceRechts < 5:
               test2.set_angle(90)
               MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
@@ -309,7 +312,8 @@ def fahren():
         CrossedLinesOrange = CrossedLinesOrange + 1             # Liniencounter wirdhochgezählt
         if CrossedLinesOrange == 2:
             CrossedLinesOrange = 1
-        LineBeginOrange = False                                       # LineBegin wieder auf False für die nächste Linie
+        LineBeginOrange = False                                 # LineBegin wieder auf False für die nächste Linie
+        RouteCorrection = True
         Buzzer.DebugSound(0.5)
       
       if LineBeginBlue == True and BackgroundColor == True:     # Wenn vorher eine Linie erkannt wurde und der Boden wieder weiß ist -> Linie komplett überfahren
@@ -336,16 +340,16 @@ def fahren():
             distanceHinten = Ultraschallsensor.checkdistHinten()
             MotorAnsteuerung.Motor_Fahren(0)
             #--------- Rückwärts wenn links genug Platz ist ---------#
-            while distanceHinten > 15 and distanceLinks > 5:
+            if distanceHinten == 15:
+              MotorAnsteuerung.Motor_Fahren(0)
+              RouteCorrection = False
+            if distanceHinten < 20 and distanceHinten > 15 and distanceLinks > 5:
+              test2.set_angle(90)
+            if distanceHinten > 20 and distanceHinten < 25 and distanceLinks > 5:
+              test2.set_angle(120)
+            if distanceHinten > 25 and distanceLinks > 5:
               test2.set_angle(150)
               MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
-              if distanceHinten > 20 and distanceHinten < 25:
-                test2.set_angle(120)
-              if distanceHinten < 20 and distanceHinten > 15:
-                test2.set_angle(90)
-              if distanceHinten == 15:
-                MotorAnsteuerung.Motor_Fahren(0)
-                RouteCorrection = False
             #--------- Rückwärts wenn links nicht genug Platz ist ---------#
             while distanceHinten > 15 and distanceLinks < 5:
               test2.set_angle(90)
