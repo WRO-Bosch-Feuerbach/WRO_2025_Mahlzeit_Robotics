@@ -18,7 +18,7 @@ sensor3 = DistanceSensor(echo=Ec3, trigger=Tr3, max_distance=2)
 
 Tr4 = 22
 Ec4 = 6
-sensor4 = DistanceSensor(echo=Ec3, trigger=Tr3, max_distance=2)
+sensor4 = DistanceSensor(echo=Ec4, trigger=Tr4, max_distance=2)
 
 
 def checkdistGerade():
