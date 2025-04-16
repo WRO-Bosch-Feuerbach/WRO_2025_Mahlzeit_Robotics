@@ -84,11 +84,15 @@ def fahren():
 
       if LineBeginOrange == True and BackgroundColor == True:   # Wenn vorher eine Linie erkannt wurde und der Boden wieder weiß ist -> Linie komplett überfahren
         CrossedLinesOrange = CrossedLinesOrange + 1             # Liniencounter wirdhochgezählt
+        if CrossedLinesOrange == 2:
+            CrossedLinesOrange = 1
         LineBeginOrange = False                                       # LineBegin wieder auf False für die nächste Linie
         Buzzer.DebugSound(0.5)
       
       if LineBeginBlue == True and BackgroundColor == True:     # Wenn vorher eine Linie erkannt wurde und der Boden wieder weiß ist -> Linie komplett überfahren
         CrossedLinesBlue = CrossedLinesBlue + 1                 # Liniencounter wirdhochgezählt
+        if CrossedLinesBlue == 2:
+            CrossedLinesBlue = 1
         LineBeginBlue = False                                   # LineBegin wieder auf False für die nächste Linie
         Buzzer.DebugSound(0.5)
 
@@ -180,11 +184,15 @@ def fahren():
 
       if LineBeginOrange == True and BackgroundColor == True:   # Wenn vorher eine Linie erkannt wurde und der Boden wieder weiß ist -> Linie komplett überfahren
         CrossedLinesOrange = CrossedLinesOrange + 1             # Liniencounter wirdhochgezählt
+        if CrossedLinesOrange == 2:
+            CrossedLinesOrange = 1
         LineBeginOrange = False                                       # LineBegin wieder auf False für die nächste Linie
         Buzzer.DebugSound(0.5)
       
       if LineBeginBlue == True and BackgroundColor == True:     # Wenn vorher eine Linie erkannt wurde und der Boden wieder weiß ist -> Linie komplett überfahren
         CrossedLinesBlue = CrossedLinesBlue + 1                 # Liniencounter wirdhochgezählt
+        if CrossedLinesBlue == 2:
+            CrossedLinesBlue = 1
         LineBeginBlue = False                                   # LineBegin wieder auf False für die nächste Linie
         Buzzer.DebugSound(0.5)
 
@@ -299,11 +307,15 @@ def fahren():
 
       if LineBeginOrange == True and BackgroundColor == True:   # Wenn vorher eine Linie erkannt wurde und der Boden wieder weiß ist -> Linie komplett überfahren
         CrossedLinesOrange = CrossedLinesOrange + 1             # Liniencounter wirdhochgezählt
+        if CrossedLinesOrange == 2:
+            CrossedLinesOrange = 1
         LineBeginOrange = False                                       # LineBegin wieder auf False für die nächste Linie
         Buzzer.DebugSound(0.5)
       
       if LineBeginBlue == True and BackgroundColor == True:     # Wenn vorher eine Linie erkannt wurde und der Boden wieder weiß ist -> Linie komplett überfahren
         CrossedLinesBlue = CrossedLinesBlue + 1                 # Liniencounter wirdhochgezählt
+        if CrossedLinesBlue == 2:
+            CrossedLinesBlue = 1
         LineBeginBlue = False                                   # LineBegin wieder auf False für die nächste Linie
         Buzzer.DebugSound(0.5)
 
