@@ -18,9 +18,11 @@ def fahren():
   Line1 = False
   Line2 = False
   CrossedOrangeLines = 0
-  CrossedLines = 0
+  CrossedLinesOrange = 0
+  CrossedLinesBlue = 0
   LineDetected = False
-  LineBegin = False
+  LineBeginOrange = False
+  LineBeginBlue = False
   BackgroundColor = False
   distanceGerade = Ultraschallsensor.checkdistGerade()
   distanceLinks = Ultraschallsensor.checkdistLinks()
@@ -32,6 +34,8 @@ def fahren():
   VelocityBegin = 0.4
   VelocityNormal = 0.35
   VelocityObstacle = 0.35
+  VelocityBackwards = -0.2
+  RouteCorrection = False
 
   #-------------------------------------------------------------------- Start Sequenz + Linienerkennung --------------------------------------------------------------------#
 
@@ -66,27 +70,32 @@ def fahren():
         LineDetected = True                                     # Erste Linie wird erkannt
         if LineDetected == True:                                #
           LineDetected = False                                  # Wird direkt wieder auf False gesetzt um die Zweite Linie wieder zu erkennen
-          LineBegin = True                                      # Wird auf True gesetzt damit Linie erst wieder erkannt werden kann nach dem man darüber gefahren ist
+          LineBeginOrange = True                                # Wird auf True gesetzt damit Linie erst wieder erkannt werden kann nach dem man darüber gefahren ist
           BackgroundColor = False                               # Background ist die weiße Bahn fläche
       elif DetectedColor == "BLUE":                             # Das gleiche wie bei orange für Farbe Blau
         LineDetected = True                                     #
         if LineDetected == True:                                #
           LineDetected = False                                  #
-          LineBegin = True                                      #
+          LineBeginBlue = True                                  #
           BackgroundColor = False                               #
-
       else:                                                     # Default ist das der Boden weiß ist und keine Linie erkannt wurde
         BackgroundColor = True                                  #
         LineDetected = False                                    #
 
-      if LineBegin == True and BackgroundColor == True:         # Wenn vorher eine Linie erkannt wurde und der Boden wieder weiß ist -> Linie komplett überfahren
-        CrossedLines = CrossedLines + 1                         # Liniencounter wirdhochgezählt
-        LineBegin = False                                       # LineBegin wieder auf False für die nächste Linie
+      if LineBeginOrange == True and BackgroundColor == True:   # Wenn vorher eine Linie erkannt wurde und der Boden wieder weiß ist -> Linie komplett überfahren
+        CrossedLinesOrange = CrossedLinesOrange + 1             # Liniencounter wirdhochgezählt
+        LineBeginOrange = False                                       # LineBegin wieder auf False für die nächste Linie
+        Buzzer.DebugSound(0.5)
+      
+      if LineBeginBlue == True and BackgroundColor == True:     # Wenn vorher eine Linie erkannt wurde und der Boden wieder weiß ist -> Linie komplett überfahren
+        CrossedLinesBlue = CrossedLinesBlue + 1                 # Liniencounter wirdhochgezählt
+        LineBeginBlue = False                                   # LineBegin wieder auf False für die nächste Linie
         Buzzer.DebugSound(0.5)
 
-      if CrossedLines == 2:                                     # 2 Linien sind eine Ecke bzw. 1/4
+      if CrossedLinesOrange + CrossedLinesBlue == 2:            # 2 Linien sind eine Ecke bzw. 1/4
         CrossedSection = CrossedSection + 1                     # 1/4 ist 1 Sektion
-        CrossedLines = 0                                        # Überquerte Linien wieder auf 0 um die nächste Sektion zu prüfen
+        CrossedLinesBlue = 0                                    # Überquerte Linien wieder auf 0 um die nächste Sektion zu prüfen
+        CorssedLinesOrange = 0
         Buzzer.DebugSound(1)
 
       print(f'\rHindernis Farbe: {Farbe};     Linien überquert: {CrossedLines};     Sektionen durchfahren: {CrossedSection}', end='')
@@ -95,9 +104,9 @@ def fahren():
 
     #----------------------------------------------------------------------------------------------------------------------------------------------------------------------#
 
-    #---------------------------------------------------------- Fahren Links + Linienerkennung + Hindernisserkennung ------------------------------------------------------#
+    #----------------------------------------------------- Fahren Links + Linienerkennung + Hindernisserkennung + Kursanpassung -------------------------------------------------#
 
-    #---------- FahrenLinks-Schleife ----------#
+    #---------------------------------------- FahrenLinks-Schleife --------------------------------------------#
 
     while FahrenLinks == True:
       distanceGerade = Ultraschallsensor.checkdistGerade()
@@ -157,36 +166,63 @@ def fahren():
         LineDetected = True                                     # Erste Linie wird erkannt
         if LineDetected == True:                                #
           LineDetected = False                                  # Wird direkt wieder auf False gesetzt um die Zweite Linie wieder zu erkennen
-          LineBegin = True                                      # Wird auf True gesetzt damit Linie erst wieder erkannt werden kann nach dem man darüber gefahren ist
+          LineBeginOrange = True                                # Wird auf True gesetzt damit Linie erst wieder erkannt werden kann nach dem man darüber gefahren ist
           BackgroundColor = False                               # Background ist die weiße Bahn fläche
       elif DetectedColor == "BLUE":                             # Das gleiche wie bei orange für Farbe Blau
         LineDetected = True                                     #
         if LineDetected == True:                                #
           LineDetected = False                                  #
-          LineBegin = True                                      #
+          LineBeginBlue = True                                  #
           BackgroundColor = False                               #
-
       else:                                                     # Default ist das der Boden weiß ist und keine Linie erkannt wurde
         BackgroundColor = True                                  #
         LineDetected = False                                    #
 
-      if LineBegin == True and BackgroundColor == True:         # Wenn vorher eine Linie erkannt wurde und der Boden wieder weiß ist -> Linie komplett überfahren
-        CrossedLines = CrossedLines + 1                         # Liniencounter wirdhochgezählt
-        LineBegin = False                                       # LineBegin wieder auf False für die nächste Linie
+      if LineBeginOrange == True and BackgroundColor == True:   # Wenn vorher eine Linie erkannt wurde und der Boden wieder weiß ist -> Linie komplett überfahren
+        CrossedLinesOrange = CrossedLinesOrange + 1             # Liniencounter wirdhochgezählt
+        LineBeginOrange = False                                       # LineBegin wieder auf False für die nächste Linie
+        Buzzer.DebugSound(0.5)
+      
+      if LineBeginBlue == True and BackgroundColor == True:     # Wenn vorher eine Linie erkannt wurde und der Boden wieder weiß ist -> Linie komplett überfahren
+        CrossedLinesBlue = CrossedLinesBlue + 1                 # Liniencounter wirdhochgezählt
+        LineBeginBlue = False                                   # LineBegin wieder auf False für die nächste Linie
         Buzzer.DebugSound(0.5)
 
-      if CrossedLines == 2:                                     # 2 Linien sind eine Ecke bzw. 1/4
+      if CrossedLinesOrange + CrossedLinesBlue == 2:            # 2 Linien sind eine Ecke bzw. 1/4
         CrossedSection = CrossedSection + 1                     # 1/4 ist 1 Sektion
-        CrossedLines = 0                                        # Überquerte Linien wieder auf 0 um die nächste Sektion zu prüfen
+        CrossedLinesBlue = 0                                    # Überquerte Linien wieder auf 0 um die nächste Sektion zu prüfen
+        CorssedLinesOrange = 0
         Buzzer.DebugSound(1)
 
       print(f'\rHindernis Farbe: {Farbe};     Linien überquert: {CrossedLines};     Sektionen durchfahren: {CrossedSection}', end='')
       if CrossedSection == 12:                                  # Bei 12 überquerten Sektionen sind 3 Runden durchfahren
         break                                                   # Aus der Schleife springen bzw. Programm ist danach Ende
+      
+      #---------- Kurs anpassen ----------#
+
+      while RouteCorrection:
+        if CrossedLines == 1:
+            distanceHinten = Ultraschallsensor.checkdistHinten()
+            MotorAnsteuerung.Motor_Fahren(0)
+            #--------- Rückwärts wenn rechts genug Platz ist ---------#
+            while distanceHinten > 15 and distanceRechts > 5:
+              test2.set_angle(30)
+              MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
+              if distanceHinten > 20 and distanceHinten < 25:
+                test2.set_angle(60)
+              if distanceHinten < 20 and distanceHinten > 15:
+                test2.set_angle(90)
+              if distanceHinten == 15:
+                MotorAnsteuerung.Motor_Fahren(0)
+                RouteCorrection = False
+            #--------- Rückwärts wenn rechts nicht genug Platz ist ---------#
+            while distanceHinten > 15 and distanceRechts < 5:
+              test2.set_angle(90)
+              MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
 
     #-----------------------------------------------------------------------------------------------------------------------------------------------------------------------#
 
-    #---------------------------------------------------------- Fahren Rechts + Linienerkennung + Hindernisserkennung ------------------------------------------------------#
+    #----------------------------------------------------- Fahren Rechts + Linienerkennung + Hindernisserkennung + Kursanpassung -------------------------------------------------#
 
     #---------- FahrenRechts-Schleife ----------#
 
@@ -245,39 +281,65 @@ def fahren():
 
       DetectedColor = CameraColorDetection2.ColorDetection2_0()
 
-      if DetectedColor == "ORANGE":
-        LineDetected = True
-        if LineDetected == True:
-          LineDetected = False
-          LineBegin = True
-          BackgroundColor = False
-      elif DetectedColor == "BLUE":
-        LineDetected = True
-        if LineDetected == True:
-          LineDetected = False
-          LineBegin = True
-          BackgroundColor = False
-      else:
-        BackgroundColor = True
-        LineDetected = False
+      if DetectedColor == "ORANGE":                             # Checkt ob Farbe orange ist
+        LineDetected = True                                     # Erste Linie wird erkannt
+        if LineDetected == True:                                #
+          LineDetected = False                                  # Wird direkt wieder auf False gesetzt um die Zweite Linie wieder zu erkennen
+          LineBeginOrange = True                                # Wird auf True gesetzt damit Linie erst wieder erkannt werden kann nach dem man darüber gefahren ist
+          BackgroundColor = False                               # Background ist die weiße Bahn fläche
+      elif DetectedColor == "BLUE":                             # Das gleiche wie bei orange für Farbe Blau
+        LineDetected = True                                     #
+        if LineDetected == True:                                #
+          LineDetected = False                                  #
+          LineBeginBlue = True                                  #
+          BackgroundColor = False                               #
+      else:                                                     # Default ist das der Boden weiß ist und keine Linie erkannt wurde
+        BackgroundColor = True                                  #
+        LineDetected = False                                    #
 
-      if LineBegin == True and BackgroundColor == True:
-        CrossedLines = CrossedLines + 1
-        LineBegin = False
+      if LineBeginOrange == True and BackgroundColor == True:   # Wenn vorher eine Linie erkannt wurde und der Boden wieder weiß ist -> Linie komplett überfahren
+        CrossedLinesOrange = CrossedLinesOrange + 1             # Liniencounter wirdhochgezählt
+        LineBeginOrange = False                                       # LineBegin wieder auf False für die nächste Linie
+        Buzzer.DebugSound(0.5)
+      
+      if LineBeginBlue == True and BackgroundColor == True:     # Wenn vorher eine Linie erkannt wurde und der Boden wieder weiß ist -> Linie komplett überfahren
+        CrossedLinesBlue = CrossedLinesBlue + 1                 # Liniencounter wirdhochgezählt
+        LineBeginBlue = False                                   # LineBegin wieder auf False für die nächste Linie
         Buzzer.DebugSound(0.5)
 
-      if CrossedLines == 2:
-        CrossedSection = CrossedSection + 1
-        CrossedLines = 0
+      if CrossedLinesOrange + CrossedLinesBlue == 2:            # 2 Linien sind eine Ecke bzw. 1/4
+        CrossedSection = CrossedSection + 1                     # 1/4 ist 1 Sektion
+        CrossedLinesBlue = 0                                    # Überquerte Linien wieder auf 0 um die nächste Sektion zu prüfen
+        CorssedLinesOrange = 0
         Buzzer.DebugSound(1)
-      print(f'\rHindernis Farbe: {Farbe};     Linien überquert: {CrossedLines};     Sektionen durchfahren: {CrossedSection}', end='')
 
-      if CrossedSection == 12:
+      print(f'\rHindernis Farbe: {Farbe};     Linien überquert: {CrossedLines};     Sektionen durchfahren: {CrossedSection}', end='')
+      if CrossedSection == 12:                                  # Bei 12 überquerten Sektionen sind 3 Runden durchfahren
         break
 
+      #---------- Kurs anpassen ----------#
+
+      while RouteCorrection:
+        if CrossedLines == 1:
+            distanceHinten = Ultraschallsensor.checkdistHinten()
+            MotorAnsteuerung.Motor_Fahren(0)
+            #--------- Rückwärts wenn links genug Platz ist ---------#
+            while distanceHinten > 15 and distanceLinks > 5:
+              test2.set_angle(150)
+              MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
+              if distanceHinten > 20 and distanceHinten < 25:
+                test2.set_angle(120)
+              if distanceHinten < 20 and distanceHinten > 15:
+                test2.set_angle(90)
+              if distanceHinten == 15:
+                MotorAnsteuerung.Motor_Fahren(0)
+                RouteCorrection = False
+            #--------- Rückwärts wenn links nicht genug Platz ist ---------#
+            while distanceHinten > 15 and distanceLinks < 5:
+              test2.set_angle(90)
+              MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
+
     MotorAnsteuerung.Motor_Fahren(0)
-
-
 
   except KeyboardInterrupt:
     MotorAnsteuerung.Motor_Fahren(0)
