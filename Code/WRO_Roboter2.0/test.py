@@ -27,6 +27,7 @@ def fahren():
   distanceGerade = Ultraschallsensor.checkdistGerade()
   distanceLinks = Ultraschallsensor.checkdistLinks()
   distanceRechts = Ultraschallsensor.checkdistRechts()
+  distanceHinten = Ultraschallsensor.checkdistHinten()
   DetectedColor = CameraColorDetection2.ColorDetection2_0()
   Farbe = ''
   CrossedSection = 0
