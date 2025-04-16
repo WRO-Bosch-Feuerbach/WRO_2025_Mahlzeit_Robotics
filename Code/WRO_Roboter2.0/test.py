@@ -102,7 +102,7 @@ def fahren():
         CorssedLinesOrange = 0
         Buzzer.DebugSound(1)
 
-      print(f'\rHindernis Farbe: {Farbe};     Linien überquert: {CrossedLines};     Sektionen durchfahren: {CrossedSection}', end='')
+      print(f'\rHindernis Farbe: {Farbe};     Linien überquert: {CrossedLinesOrange + CrossedLinesBlue};     Sektionen durchfahren: {CrossedSection}', end='')
       if CrossedSection == 12:                                  # Bei 12 überquerten Sektionen sind 3 Runden durchfahren
         break                                                   # Aus der Schleife springen bzw. Programm ist danach Ende
 
@@ -143,7 +143,7 @@ def fahren():
           test2.set_angle(1,180)                                # lenkt nach links
 
         BlockColorDetection.Blockfarbe()                        # Checkt nochmal nach der Farbe um nicht in der Schleife gefangen zu bleiben
-        print(f'\rHindernis Farbe: {Farbe};     Linien überquert: {CrossedLines};     Sektionen durchfahren: {CrossedSection}', end='')
+        print(f'\rHindernis Farbe: {Farbe};     Linien überquert: {CrossedLinesOrange + CrossedLinesBlue};     Sektionen durchfahren: {CrossedSection}', end='')
 
       while BlockColorDetection.Blockfarbe() == 'GRUEN' and distanceGerade < 100:        # Checkt ob Farbe grün ist
         distanceGerade = Ultraschallsensor.checkdistGerade()
@@ -160,7 +160,7 @@ def fahren():
           test2.set_angle(1,180)                                # lenkt nach links
 
         BlockColorDetection.Blockfarbe()                        # Checkt nochmal nach der Farbe um nicht in der Schleife gefangen zu bleiben
-        print(f'\rHindernis Farbe: {Farbe};     Linien überquert: {CrossedLines};     Sektionen durchfahren: {CrossedSection}', end='')
+        print(f'\rHindernis Farbe: {Farbe};     Linien überquert: {CrossedLinesOrange + CrossedLinesBlue};     Sektionen durchfahren: {CrossedSection}', end='')
 
      #---------- Farberkennung Bodenlinien ----------#
 
@@ -202,14 +202,14 @@ def fahren():
         CorssedLinesOrange = 0
         Buzzer.DebugSound(1)
 
-      print(f'\rHindernis Farbe: {Farbe};     Linien überquert: {CrossedLines};     Sektionen durchfahren: {CrossedSection}', end='')
+      print(f'\rHindernis Farbe: {Farbe};     Linien überquert: {CrossedLinesOrange + CrossedLinesBlue};     Sektionen durchfahren: {CrossedSection}', end='')
       if CrossedSection == 12:                                  # Bei 12 überquerten Sektionen sind 3 Runden durchfahren
         break                                                   # Aus der Schleife springen bzw. Programm ist danach Ende
       
       #---------- Kurs anpassen ----------#
 
       while RouteCorrection:
-        if CrossedLines == 1:
+        if CrossedLinesBlue == 1:
             distanceHinten = Ultraschallsensor.checkdistHinten()
             MotorAnsteuerung.Motor_Fahren(0)
             #--------- Rückwärts wenn rechts genug Platz ist ---------#
@@ -265,7 +265,7 @@ def fahren():
           test2.set_angle(1,180)
 
         BlockColorDetection.Blockfarbe()
-        print(f'\rHindernis Farbe: {Farbe};     Linien überquert: {CrossedLines};     Sektionen durchfahren: {CrossedSection}', end='')
+        print(f'\rHindernis Farbe: {Farbe};     Linien überquert: {CrossedLinesOrange + CrossedLinesBlue};     Sektionen durchfahren: {CrossedSection}', end='')
 
 
 
@@ -283,7 +283,7 @@ def fahren():
           test2.set_angle(1,180)
 
         BlockColorDetection.Blockfarbe()
-        print(f'\rHindernis Farbe: {Farbe};     Linien überquert: {CrossedLines};     Sektionen durchfahren: {CrossedSection}', end='')
+        print(f'\rHindernis Farbe: {Farbe};     Linien überquert: {CrossedLinesOrange + CrossedLinesBlue};     Sektionen durchfahren: {CrossedSection}', end='')
 
       #---------- Farberkennung Bodenlinien ----------#   Siehe Erklärung FahrenLinks-Schleife
 
@@ -325,14 +325,14 @@ def fahren():
         CorssedLinesOrange = 0
         Buzzer.DebugSound(1)
 
-      print(f'\rHindernis Farbe: {Farbe};     Linien überquert: {CrossedLines};     Sektionen durchfahren: {CrossedSection}', end='')
+      print(f'\rHindernis Farbe: {Farbe};     Linien überquert: {CrossedLinesOrange + CrossedLinesBlue};     Sektionen durchfahren: {CrossedSection}', end='')
       if CrossedSection == 12:                                  # Bei 12 überquerten Sektionen sind 3 Runden durchfahren
         break
 
       #---------- Kurs anpassen ----------#
 
       while RouteCorrection:
-        if CrossedLines == 1:
+        if CrossedLinesOrange == 1:
             distanceHinten = Ultraschallsensor.checkdistHinten()
             MotorAnsteuerung.Motor_Fahren(0)
             #--------- Rückwärts wenn links genug Platz ist ---------#
