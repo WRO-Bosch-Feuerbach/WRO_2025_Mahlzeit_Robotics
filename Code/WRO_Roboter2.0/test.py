@@ -41,6 +41,7 @@ def fahren():
   #-------------------------------------------------------------------- Start Sequenz + Linienerkennung --------------------------------------------------------------------#
 
   try:
+
     #----------Startsequenz um zu schauen in welche Richtung der Roboter fahren muss----------#
 
     while True:
@@ -84,11 +85,11 @@ def fahren():
 
       if LineBeginOrange == True and BackgroundColor == True:   # Wenn vorher eine Linie erkannt wurde und der Boden wieder weiß ist -> Linie komplett überfahren
         CrossedLinesOrange = CrossedLinesOrange + 1             # Liniencounter wirdhochgezählt
-        if CrossedLinesOrange == 2:
-            CrossedLinesOrange = 1
         LineBeginOrange = False                                 # LineBegin wieder auf False für die nächste Linie
         RouteCorrection = True
-        Buzzer.DebugSound(0.5)
+        Buzzer.DebugSound(0.2)
+        if CrossedLinesOrange == 2:
+            CrossedLinesOrange = 1
       
       if LineBeginBlue == True and BackgroundColor == True:     # Wenn vorher eine Linie erkannt wurde und der Boden wieder weiß ist -> Linie komplett überfahren
         CrossedLinesBlue = CrossedLinesBlue + 1                 # Liniencounter wirdhochgezählt
@@ -96,13 +97,13 @@ def fahren():
             CrossedLinesBlue = 1
         LineBeginBlue = False                                   # LineBegin wieder auf False für die nächste Linie
         RouteCorrection = True
-        Buzzer.DebugSound(0.5)
+        Buzzer.DebugSound(0.2)
 
       if CrossedLinesOrange + CrossedLinesBlue == 2:            # 2 Linien sind eine Ecke bzw. 1/4
         CrossedSection = CrossedSection + 1                     # 1/4 ist 1 Sektion
         CrossedLinesBlue = 0                                    # Überquerte Linien wieder auf 0 um die nächste Sektion zu prüfen
         CrossedLinesOrange = 0
-        Buzzer.DebugSound(1)
+        Buzzer.DebugSound(0.3)
 
       print(f'\rHindernis Farbe: {Farbe};     Linien überquert: {CrossedLinesOrange + CrossedLinesBlue};     Sektionen durchfahren: {CrossedSection}', end='')
       if CrossedSection == 12:                                  # Bei 12 überquerten Sektionen sind 3 Runden durchfahren
@@ -186,24 +187,24 @@ def fahren():
 
       if LineBeginOrange == True and BackgroundColor == True:   # Wenn vorher eine Linie erkannt wurde und der Boden wieder weiß ist -> Linie komplett überfahren
         CrossedLinesOrange = CrossedLinesOrange + 1             # Liniencounter wirdhochgezählt
+        LineBeginOrange = False                                 # LineBegin wieder auf False für die nächste Linie
+        Buzzer.DebugSound(0.2)
         if CrossedLinesOrange == 2:
           CrossedLinesOrange = 1
-        LineBeginOrange = False                                 # LineBegin wieder auf False für die nächste Linie
-        Buzzer.DebugSound(0.5)
       
       if LineBeginBlue == True and BackgroundColor == True:     # Wenn vorher eine Linie erkannt wurde und der Boden wieder weiß ist -> Linie komplett überfahren
         CrossedLinesBlue = CrossedLinesBlue + 1                 # Liniencounter wirdhochgezählt
-        if CrossedLinesBlue == 2:
-          CrossedLinesBlue = 1
         LineBeginBlue = False                                   # LineBegin wieder auf False für die nächste Linie
         RouteCorrection = True
-        Buzzer.DebugSound(0.5)
+        Buzzer.DebugSound(0.2)
+        if CrossedLinesBlue == 2:
+          CrossedLinesBlue = 1
 
       if CrossedLinesOrange + CrossedLinesBlue == 2:            # 2 Linien sind eine Ecke bzw. 1/4
         CrossedSection = CrossedSection + 1                     # 1/4 ist 1 Sektion
         CrossedLinesBlue = 0                                    # Überquerte Linien wieder auf 0 um die nächste Sektion zu prüfen
         CrossedLinesOrange = 0
-        Buzzer.DebugSound(1)
+        Buzzer.DebugSound(0.3)
 
       print(f'\rHindernis Farbe: {Farbe};     Linien überquert: {CrossedLinesOrange + CrossedLinesBlue};     Sektionen durchfahren: {CrossedSection}', end='')
       if CrossedSection == 12:                                  # Bei 12 überquerten Sektionen sind 3 Runden durchfahren
@@ -310,24 +311,24 @@ def fahren():
 
       if LineBeginOrange == True and BackgroundColor == True:   # Wenn vorher eine Linie erkannt wurde und der Boden wieder weiß ist -> Linie komplett überfahren
         CrossedLinesOrange = CrossedLinesOrange + 1             # Liniencounter wirdhochgezählt
-        if CrossedLinesOrange == 2:
-          CrossedLinesOrange = 1
         LineBeginOrange = False                                 # LineBegin wieder auf False für die nächste Linie
         RouteCorrection = True
-        Buzzer.DebugSound(0.5)
+        Buzzer.DebugSound(0.2)
+        if CrossedLinesOrange == 2:
+          CrossedLinesOrange = 1
       
       if LineBeginBlue == True and BackgroundColor == True:     # Wenn vorher eine Linie erkannt wurde und der Boden wieder weiß ist -> Linie komplett überfahren
         CrossedLinesBlue = CrossedLinesBlue + 1                 # Liniencounter wirdhochgezählt
+        LineBeginBlue = False                                   # LineBegin wieder auf False für die nächste Linie
+        Buzzer.DebugSound(0.2)
         if CrossedLinesBlue == 2:
           CrossedLinesBlue = 1
-        LineBeginBlue = False                                   # LineBegin wieder auf False für die nächste Linie
-        Buzzer.DebugSound(0.5)
 
       if CrossedLinesOrange + CrossedLinesBlue == 2:            # 2 Linien sind eine Ecke bzw. 1/4
         CrossedSection = CrossedSection + 1                     # 1/4 ist 1 Sektion
         CrossedLinesBlue = 0                                    # Überquerte Linien wieder auf 0 um die nächste Sektion zu prüfen
         CrossedLinesOrange = 0
-        Buzzer.DebugSound(1)
+        Buzzer.DebugSound(0.3)
 
       print(f'\rHindernis Farbe: {Farbe};     Linien überquert: {CrossedLinesOrange + CrossedLinesBlue};     Sektionen durchfahren: {CrossedSection}', end='')
       if CrossedSection == 12:                                  # Bei 12 überquerten Sektionen sind 3 Runden durchfahren

@@ -50,7 +50,6 @@ def fahren():
         MotorAnsteuerung.Motor_Fahren(0.5)
         print('fertig2')
 
-
       #DetectedColor = CameraColorDetection.ColorDetection()
 
 #      if DetectedColor == "ORANGE":
