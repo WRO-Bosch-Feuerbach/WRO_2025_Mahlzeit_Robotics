@@ -90,12 +90,46 @@ def fahren():
         LineBeginOrange = False                                 # LineBegin wieder auf False für die nächste Linie
         #RouteCorrection = True
         Buzzer.DebugSound(0.2)
+
+        #---------- Kurs anpassen ----------#
+        while distanceHinten != 15:
+          MotorAnsteuerung.Motor_Fahren(0)
+          if distanceHinten < 20 and distanceHinten > 15 and distanceRechts > 5:
+            test2.set_angle(1, 90)
+            MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
+          if distanceHinten > 20 and distanceHinten < 25 and distanceRechts > 5:
+            test2.set_angle(1, 60)
+            MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
+          if distanceHinten > 25 and distanceRechts > 5:
+            test2.set_angle(1, 30)
+            MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
+          #--------- Rückwärts wenn links nicht genug Platz ist ---------#
+          while distanceHinten > 15 and distanceRechts < 5:
+            test2.set_angle(1, 90)
+            MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
       
       if LineBeginBlue == True and BackgroundColor == True:     # Wenn vorher eine Linie erkannt wurde und der Boden wieder weiß ist -> Linie komplett überfahren
         CrossedLinesBlue = CrossedLinesBlue + 1                 # Liniencounter wirdhochgezählt
         LineBeginBlue = False                                   # LineBegin wieder auf False für die nächste Linie
         #RouteCorrection = True
         Buzzer.DebugSound(0.2)
+
+        #---------- Kurs anpassen ----------#
+        while distanceHinten != 15:
+          MotorAnsteuerung.Motor_Fahren(0)
+          if distanceHinten < 20 and distanceHinten > 15 and distanceRechts > 5:
+            test2.set_angle(1, 90)
+            MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
+          if distanceHinten > 20 and distanceHinten < 25 and distanceRechts > 5:
+            test2.set_angle(1, 60)
+            MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
+          if distanceHinten > 25 and distanceRechts > 5:
+            test2.set_angle(1, 30)
+            MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
+          #--------- Rückwärts wenn links nicht genug Platz ist ---------#
+          while distanceHinten > 15 and distanceRechts < 5:
+            test2.set_angle(1, 90)
+            MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
 
       if CrossedLinesOrange + CrossedLinesBlue == 2:            # 2 Linien sind eine Ecke bzw. 1/4
         CrossedSection = CrossedSection + 1                     # 1/4 ist 1 Sektion
@@ -176,7 +210,7 @@ def fahren():
       elif DetectedColor == "BLUE":                             # Das gleiche wie bei orange für Farbe Blau
         LineDetected = True                                     #
         if LineDetected == True:                                #
-          RouteCorrection = True
+          #RouteCorrection = True
           LineDetected = False                                  #
           LineBeginBlue = True                                  #
           BackgroundColor = False                               #
@@ -190,14 +224,50 @@ def fahren():
         Buzzer.DebugSound(0.2)
         if CrossedLinesOrange == 2:
           CrossedLinesOrange = 1
+
+        #---------- Kurs anpassen ----------#
+        while distanceHinten != 15:
+          MotorAnsteuerung.Motor_Fahren(0)
+          if distanceHinten < 20 and distanceHinten > 15 and distanceRechts > 5:
+            test2.set_angle(1, 90)
+            MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
+          if distanceHinten > 20 and distanceHinten < 25 and distanceRechts > 5:
+            test2.set_angle(1, 60)
+            MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
+          if distanceHinten > 25 and distanceRechts > 5:
+            test2.set_angle(1, 30)
+            MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
+          #--------- Rückwärts wenn links nicht genug Platz ist ---------#
+          while distanceHinten > 15 and distanceRechts < 5:
+            test2.set_angle(1, 90)
+            MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
       
       if LineBeginBlue == True and BackgroundColor == True:     # Wenn vorher eine Linie erkannt wurde und der Boden wieder weiß ist -> Linie komplett überfahren
         CrossedLinesBlue = CrossedLinesBlue + 1                 # Liniencounter wirdhochgezählt
         LineBeginBlue = False                                   # LineBegin wieder auf False für die nächste Linie
         #RouteCorrection = True
         Buzzer.DebugSound(0.2)
+        distanceHinten = Ultraschallsensor.checkdistHinten()
+        MotorAnsteuerung.Motor_Fahren(0)
 
-      if CrossedLinesOrange + CrossedLinesBlue == 3:            # 2 Linien sind eine Ecke bzw. 1/4
+        #---------- Kurs anpassen ----------#
+        while distanceHinten != 15:
+          MotorAnsteuerung.Motor_Fahren(0)
+          if distanceHinten < 20 and distanceHinten > 15 and distanceRechts > 5:
+            test2.set_angle(1, 90)
+            MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
+          if distanceHinten > 20 and distanceHinten < 25 and distanceRechts > 5:
+            test2.set_angle(1, 60)
+            MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
+          if distanceHinten > 25 and distanceRechts > 5:
+            test2.set_angle(1, 30)
+            MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
+          #--------- Rückwärts wenn links nicht genug Platz ist ---------#
+          while distanceHinten > 15 and distanceRechts < 5:
+            test2.set_angle(1, 90)
+            MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
+
+      if CrossedLinesOrange + CrossedLinesBlue == 2:            # 2 Linien sind eine Ecke bzw. 1/4
         CrossedSection = CrossedSection + 1                     # 1/4 ist 1 Sektion
         CrossedLinesBlue = 0                                    # Überquerte Linien wieder auf 0 um die nächste Sektion zu prüfen
         CrossedLinesOrange = 0
@@ -207,6 +277,7 @@ def fahren():
       if CrossedSection == 12:                                  # Bei 12 überquerten Sektionen sind 3 Runden durchfahren
         break                                                   # Aus der Schleife springen bzw. Programm ist danach Ende
       
+      '''
       #---------- Kurs anpassen ----------#
 
       while (RouteCorrection == True and CrossedLinesBlue == 1) or (RouteCorrection == True and CrossedLinesBlue == 2):
@@ -230,7 +301,7 @@ def fahren():
           while distanceHinten > 15 and distanceRechts < 5:
             test2.set_angle(1, 90)
             MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
-
+      '''
     #-----------------------------------------------------------------------------------------------------------------------------------------------------------------------#
 
     #----------------------------------------------------- Fahren Rechts + Linienerkennung + Hindernisserkennung + Kursanpassung -------------------------------------------------#
@@ -314,6 +385,23 @@ def fahren():
         LineBeginOrange = False                                 # LineBegin wieder auf False für die nächste Linie
         #RouteCorrection = True
         Buzzer.DebugSound(0.2)
+
+        #---------- Kurs anpassen ----------#
+        while distanceHinten != 15:
+          MotorAnsteuerung.Motor_Fahren(0)
+          if distanceHinten < 20 and distanceHinten > 15 and distanceRechts > 5:
+            test2.set_angle(1, 90)
+            MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
+          if distanceHinten > 20 and distanceHinten < 25 and distanceRechts > 5:
+            test2.set_angle(1, 60)
+            MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
+          if distanceHinten > 25 and distanceRechts > 5:
+            test2.set_angle(1, 30)
+            MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
+          #--------- Rückwärts wenn links nicht genug Platz ist ---------#
+          while distanceHinten > 15 and distanceRechts < 5:
+            test2.set_angle(1, 90)
+            MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
       
       if LineBeginBlue == True and BackgroundColor == True:     # Wenn vorher eine Linie erkannt wurde und der Boden wieder weiß ist -> Linie komplett überfahren
         CrossedLinesBlue = CrossedLinesBlue + 1                 # Liniencounter wirdhochgezählt
@@ -322,7 +410,24 @@ def fahren():
         if CrossedLinesBlue == 2:
           CrossedLinesBlue = 1
 
-      if CrossedLinesOrange + CrossedLinesBlue == 3:            # 2 Linien sind eine Ecke bzw. 1/4
+        #---------- Kurs anpassen ----------#
+        while distanceHinten != 15:
+          MotorAnsteuerung.Motor_Fahren(0)
+          if distanceHinten < 20 and distanceHinten > 15 and distanceRechts > 5:
+            test2.set_angle(1, 90)
+            MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
+          if distanceHinten > 20 and distanceHinten < 25 and distanceRechts > 5:
+            test2.set_angle(1, 60)
+            MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
+          if distanceHinten > 25 and distanceRechts > 5:
+            test2.set_angle(1, 30)
+            MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
+          #--------- Rückwärts wenn links nicht genug Platz ist ---------#
+          while distanceHinten > 15 and distanceRechts < 5:
+            test2.set_angle(1, 90)
+            MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
+
+      if CrossedLinesOrange + CrossedLinesBlue == 2:            # 2 Linien sind eine Ecke bzw. 1/4
         CrossedSection = CrossedSection + 1                     # 1/4 ist 1 Sektion
         CrossedLinesBlue = 0                                    # Überquerte Linien wieder auf 0 um die nächste Sektion zu prüfen
         CrossedLinesOrange = 0
@@ -332,6 +437,7 @@ def fahren():
       if CrossedSection == 12:                                  # Bei 12 überquerten Sektionen sind 3 Runden durchfahren
         break
 
+      '''
       #---------- Kurs anpassen ----------#
 
       while (RouteCorrection == True and CrossedLinesOrange == 1) or (RouteCorrection == True and CrossedLinesOrange == 2):
@@ -355,7 +461,7 @@ def fahren():
           while distanceHinten > 15 and distanceLinks < 5:
             test2.set_angle(1, 90)
             MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
-
+      '''
     MotorAnsteuerung.Motor_Fahren(0)
 
   except KeyboardInterrupt:
