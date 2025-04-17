@@ -35,7 +35,7 @@ def fahren():
   VelocityBegin = 0.4
   VelocityNormal = 0.35
   VelocityObstacle = 0.35
-  VelocityBackwards = -0.2
+  VelocityBackwards = -0.5
   RouteCorrection = False
 
   #-------------------------------------------------------------------- Start Sequenz + Linienerkennung --------------------------------------------------------------------#
