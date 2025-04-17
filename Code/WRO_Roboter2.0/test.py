@@ -130,9 +130,9 @@ def fahren():
       test2.set_angle(1, winkel_gerundet)                       # setzt den Winkel von dem Servo für die Lenkung
       MotorAnsteuerung.Motor_Fahren(VelocityNormal)             # fährt bisschen langsamer weiter als davor
 
-      if distanceLinks < 30:                                    # Wenn die Entfernung links zu klein wird lenkt er nach rechts
+      if distanceLinks < 25:                                    # Wenn die Entfernung links zu klein wird lenkt er nach rechts
         test2.set_angle(1,20)
-      if distanceRechts < 30:                                   # Wenn die Entfernung rechts zu klein wird lenkt er nach links
+      if distanceRechts < 35:                                   # Wenn die Entfernung rechts zu klein wird lenkt er nach links
         test2.set_angle(1,170)
 
       #-------- Farberkennung für Hindernisse ----------#
@@ -306,9 +306,9 @@ def fahren():
       test2.set_angle(1, winkel_gerundet)                      # Winkel von dem Servo für die Lenkung wird gesetzt
       MotorAnsteuerung.Motor_Fahren(VelocityNormal)                      # fährt bisschen langsamer weiter
 
-      if distanceLinks < 30:                                   # Checkt die Enternung Links und Rechts
+      if distanceLinks < 25:                                   # Checkt die Enternung Links und Rechts
         test2.set_angle(1,20)                                  # Lenkt rechts wenn links die Entfernung zu klein wird
-      if distanceRechts < 30:                                  #
+      if distanceRechts < 35:                                  #
         test2.set_angle(1,170)                                 # Lenkt links wenn rechts die Entfernung zu klein wird
 
 
