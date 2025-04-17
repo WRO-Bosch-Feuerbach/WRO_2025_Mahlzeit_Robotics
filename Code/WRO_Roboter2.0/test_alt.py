@@ -121,7 +121,7 @@ def fahren():
         distanceRechts = Ultraschallsensor.checkdistRechts()
         Farbe = 'Rot'
         Buzzer.DebugSound(0.1)
-        MotorAnsteuerung.Motor_Fahren(VelocityObstacle)                      # Wird langsamer
+        MotorAnsteuerung.Motor_Fahren(VelocityObstacle)         # Wird langsamer
         test2.set_angle(1,10)                                   # lenkt nach rechts
 
         if distanceLinks < 18:                                  # Checkt noch die Entfernung an den Seiten
@@ -147,6 +147,7 @@ def fahren():
           test2.set_angle(1,180)                                # lenkt nach links
 
         BlockColorDetection.Blockfarbe()                        # Checkt nochmal nach der Farbe um nicht in der Schleife gefangen zu bleiben
+
         print(f'\rHindernis Farbe: {Farbe};     Linien überquert: {CrossedLines};     Sektionen durchfahren: {CrossedSection}', end='')
 
      #---------- Farberkennung Bodenlinien ----------#
@@ -181,6 +182,7 @@ def fahren():
         Buzzer.DebugSound(1)
 
       print(f'\rHindernis Farbe: {Farbe};     Linien überquert: {CrossedLines};     Sektionen durchfahren: {CrossedSection}', end='')
+
       if CrossedSection == 12:                                  # Bei 12 überquerten Sektionen sind 3 Runden durchfahren
         break                                                   # Aus der Schleife springen bzw. Programm ist danach Ende
 
@@ -222,8 +224,6 @@ def fahren():
 
         BlockColorDetection.Blockfarbe()
         print(f'\rHindernis Farbe: {Farbe};     Linien überquert: {CrossedLines};     Sektionen durchfahren: {CrossedSection}', end='')
-
-
 
       while BlockColorDetection.Blockfarbe() == 'GRUEN' and distanceGerade < 100:
         distanceGerade = Ultraschallsensor.checkdistGerade()
@@ -276,7 +276,6 @@ def fahren():
         break
 
     MotorAnsteuerung.Motor_Fahren(0)
-
 
 
   except KeyboardInterrupt:
