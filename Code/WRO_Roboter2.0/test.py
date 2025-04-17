@@ -131,7 +131,7 @@ def fahren():
             test2.set_angle(1, 90)
             MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
 
-      if CrossedLinesOrange + CrossedLinesBlue == 2:            # 2 Linien sind eine Ecke bzw. 1/4
+      if CrossedLinesOrange + CrossedLinesBlue == 3:            # 2 Linien sind eine Ecke bzw. 1/4
         CrossedSection = CrossedSection + 1                     # 1/4 ist 1 Sektion
         CrossedLinesBlue = 0                                    # Überquerte Linien wieder auf 0 um die nächste Sektion zu prüfen
         CrossedLinesOrange = 0
@@ -267,7 +267,7 @@ def fahren():
             test2.set_angle(1, 90)
             MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
 
-      if CrossedLinesOrange + CrossedLinesBlue == 2:            # 2 Linien sind eine Ecke bzw. 1/4
+      if CrossedLinesOrange + CrossedLinesBlue == 3:            # 2 Linien sind eine Ecke bzw. 1/4
         CrossedSection = CrossedSection + 1                     # 1/4 ist 1 Sektion
         CrossedLinesBlue = 0                                    # Überquerte Linien wieder auf 0 um die nächste Sektion zu prüfen
         CrossedLinesOrange = 0
@@ -427,7 +427,7 @@ def fahren():
             test2.set_angle(1, 90)
             MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
 
-      if CrossedLinesOrange + CrossedLinesBlue == 2:            # 2 Linien sind eine Ecke bzw. 1/4
+      if CrossedLinesOrange + CrossedLinesBlue == 3:            # 2 Linien sind eine Ecke bzw. 1/4
         CrossedSection = CrossedSection + 1                     # 1/4 ist 1 Sektion
         CrossedLinesBlue = 0                                    # Überquerte Linien wieder auf 0 um die nächste Sektion zu prüfen
         CrossedLinesOrange = 0
