@@ -70,12 +70,14 @@ def fahren():
       if DetectedColor == "ORANGE":                             # Checkt ob Farbe orange ist
         LineDetected = True                                     # Erste Linie wird erkannt
         if LineDetected == True:                                #
+          RouteCorrection = True
           LineDetected = False                                  # Wird direkt wieder auf False gesetzt um die Zweite Linie wieder zu erkennen
           LineBeginOrange = True                                # Wird auf True gesetzt damit Linie erst wieder erkannt werden kann nach dem man darüber gefahren ist
           BackgroundColor = False                               # Background ist die weiße Bahn fläche
       elif DetectedColor == "BLUE":                             # Das gleiche wie bei orange für Farbe Blau
         LineDetected = True                                     #
         if LineDetected == True:                                #
+          RouteCorrection = True
           LineDetected = False                                  #
           LineBeginBlue = True                                  #
           BackgroundColor = False                               #
@@ -86,13 +88,13 @@ def fahren():
       if LineBeginOrange == True and BackgroundColor == True:   # Wenn vorher eine Linie erkannt wurde und der Boden wieder weiß ist -> Linie komplett überfahren
         CrossedLinesOrange = CrossedLinesOrange + 1             # Liniencounter wirdhochgezählt
         LineBeginOrange = False                                 # LineBegin wieder auf False für die nächste Linie
-        RouteCorrection = True
+        #RouteCorrection = True
         Buzzer.DebugSound(0.2)
       
       if LineBeginBlue == True and BackgroundColor == True:     # Wenn vorher eine Linie erkannt wurde und der Boden wieder weiß ist -> Linie komplett überfahren
         CrossedLinesBlue = CrossedLinesBlue + 1                 # Liniencounter wirdhochgezählt
         LineBeginBlue = False                                   # LineBegin wieder auf False für die nächste Linie
-        RouteCorrection = True
+        #RouteCorrection = True
         Buzzer.DebugSound(0.2)
 
       if CrossedLinesOrange + CrossedLinesBlue == 2:            # 2 Linien sind eine Ecke bzw. 1/4
@@ -150,7 +152,7 @@ def fahren():
         distanceRechts = Ultraschallsensor.checkdistRechts()
         Farbe = 'Grün'
         Buzzer.DebugSound(0.1)
-        MotorAnsteuerung.Motor_Fahren(VelocityObstacle)                      # Wird langsamer
+        MotorAnsteuerung.Motor_Fahren(VelocityObstacle)         # Wird langsamer
         test2.set_angle(1,170)                                  # lenkt nach links
 
         if distanceLinks < 18:                                  # Checkt noch die Entfernung an den Seiten
@@ -174,6 +176,7 @@ def fahren():
       elif DetectedColor == "BLUE":                             # Das gleiche wie bei orange für Farbe Blau
         LineDetected = True                                     #
         if LineDetected == True:                                #
+          RouteCorrection = True
           LineDetected = False                                  #
           LineBeginBlue = True                                  #
           BackgroundColor = False                               #
@@ -191,7 +194,7 @@ def fahren():
       if LineBeginBlue == True and BackgroundColor == True:     # Wenn vorher eine Linie erkannt wurde und der Boden wieder weiß ist -> Linie komplett überfahren
         CrossedLinesBlue = CrossedLinesBlue + 1                 # Liniencounter wirdhochgezählt
         LineBeginBlue = False                                   # LineBegin wieder auf False für die nächste Linie
-        RouteCorrection = True
+        #RouteCorrection = True
         Buzzer.DebugSound(0.2)
 
       if CrossedLinesOrange + CrossedLinesBlue == 3:            # 2 Linien sind eine Ecke bzw. 1/4
@@ -292,6 +295,7 @@ def fahren():
       if DetectedColor == "ORANGE":                             # Checkt ob Farbe orange ist
         LineDetected = True                                     # Erste Linie wird erkannt
         if LineDetected == True:                                #
+          RouteCorrection = True
           LineDetected = False                                  # Wird direkt wieder auf False gesetzt um die Zweite Linie wieder zu erkennen
           LineBeginOrange = True                                # Wird auf True gesetzt damit Linie erst wieder erkannt werden kann nach dem man darüber gefahren ist
           BackgroundColor = False                               # Background ist die weiße Bahn fläche
@@ -308,7 +312,7 @@ def fahren():
       if LineBeginOrange == True and BackgroundColor == True:   # Wenn vorher eine Linie erkannt wurde und der Boden wieder weiß ist -> Linie komplett überfahren
         CrossedLinesOrange = CrossedLinesOrange + 1             # Liniencounter wirdhochgezählt
         LineBeginOrange = False                                 # LineBegin wieder auf False für die nächste Linie
-        RouteCorrection = True
+        #RouteCorrection = True
         Buzzer.DebugSound(0.2)
       
       if LineBeginBlue == True and BackgroundColor == True:     # Wenn vorher eine Linie erkannt wurde und der Boden wieder weiß ist -> Linie komplett überfahren
