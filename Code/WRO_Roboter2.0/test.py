@@ -90,46 +90,12 @@ def fahren():
         LineBeginOrange = False                                 # LineBegin wieder auf False für die nächste Linie
         #RouteCorrection = True
         Buzzer.DebugSound(0.2)
-
-        #---------- Kurs anpassen ----------#
-        while distanceHinten != 15:
-          MotorAnsteuerung.Motor_Fahren(0)
-          if distanceHinten < 20 and distanceHinten > 15 and distanceRechts > 5:
-            test2.set_angle(1, 90)
-            MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
-          if distanceHinten > 20 and distanceHinten < 25 and distanceRechts > 5:
-            test2.set_angle(1, 60)
-            MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
-          if distanceHinten > 25 and distanceRechts > 5:
-            test2.set_angle(1, 30)
-            MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
-          #--------- Rückwärts wenn links nicht genug Platz ist ---------#
-          while distanceHinten > 15 and distanceRechts < 5:
-            test2.set_angle(1, 90)
-            MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
       
       if LineBeginBlue == True and BackgroundColor == True:     # Wenn vorher eine Linie erkannt wurde und der Boden wieder weiß ist -> Linie komplett überfahren
         CrossedLinesBlue = CrossedLinesBlue + 1                 # Liniencounter wirdhochgezählt
         LineBeginBlue = False                                   # LineBegin wieder auf False für die nächste Linie
         #RouteCorrection = True
         Buzzer.DebugSound(0.2)
-
-        #---------- Kurs anpassen ----------#
-        while distanceHinten != 15:
-          MotorAnsteuerung.Motor_Fahren(0)
-          if distanceHinten < 20 and distanceHinten > 15 and distanceRechts > 5:
-            test2.set_angle(1, 90)
-            MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
-          if distanceHinten > 20 and distanceHinten < 25 and distanceRechts > 5:
-            test2.set_angle(1, 60)
-            MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
-          if distanceHinten > 25 and distanceRechts > 5:
-            test2.set_angle(1, 30)
-            MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
-          #--------- Rückwärts wenn links nicht genug Platz ist ---------#
-          while distanceHinten > 15 and distanceRechts < 5:
-            test2.set_angle(1, 90)
-            MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
 
       if CrossedLinesOrange + CrossedLinesBlue == 3:            # 2 Linien sind eine Ecke bzw. 1/4
         CrossedSection = CrossedSection + 1                     # 1/4 ist 1 Sektion
@@ -228,6 +194,7 @@ def fahren():
         #---------- Kurs anpassen ----------#
         while distanceHinten != 15:
           MotorAnsteuerung.Motor_Fahren(0)
+          distanceHinten = Ultraschallsensor.checkdistHinten()
           if distanceHinten < 20 and distanceHinten > 15 and distanceRechts > 5:
             test2.set_angle(1, 90)
             MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
@@ -253,6 +220,7 @@ def fahren():
         #---------- Kurs anpassen ----------#
         while distanceHinten != 15:
           MotorAnsteuerung.Motor_Fahren(0)
+          distanceHinten = Ultraschallsensor.checkdistHinten()
           if distanceHinten < 20 and distanceHinten > 15 and distanceRechts > 5:
             test2.set_angle(1, 90)
             MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
@@ -389,14 +357,15 @@ def fahren():
         #---------- Kurs anpassen ----------#
         while distanceHinten != 15:
           MotorAnsteuerung.Motor_Fahren(0)
+          distanceHinten = Ultraschallsensor.checkdistHinten()
           if distanceHinten < 20 and distanceHinten > 15 and distanceRechts > 5:
             test2.set_angle(1, 90)
             MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
           if distanceHinten > 20 and distanceHinten < 25 and distanceRechts > 5:
-            test2.set_angle(1, 60)
+            test2.set_angle(1, 120)
             MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
           if distanceHinten > 25 and distanceRechts > 5:
-            test2.set_angle(1, 30)
+            test2.set_angle(1, 150)
             MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
           #--------- Rückwärts wenn links nicht genug Platz ist ---------#
           while distanceHinten > 15 and distanceRechts < 5:
@@ -413,14 +382,15 @@ def fahren():
         #---------- Kurs anpassen ----------#
         while distanceHinten != 15:
           MotorAnsteuerung.Motor_Fahren(0)
+          distanceHinten = Ultraschallsensor.checkdistHinten()
           if distanceHinten < 20 and distanceHinten > 15 and distanceRechts > 5:
             test2.set_angle(1, 90)
             MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
           if distanceHinten > 20 and distanceHinten < 25 and distanceRechts > 5:
-            test2.set_angle(1, 60)
+            test2.set_angle(1, 120)
             MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
           if distanceHinten > 25 and distanceRechts > 5:
-            test2.set_angle(1, 30)
+            test2.set_angle(1, 150)
             MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
           #--------- Rückwärts wenn links nicht genug Platz ist ---------#
           while distanceHinten > 15 and distanceRechts < 5:
