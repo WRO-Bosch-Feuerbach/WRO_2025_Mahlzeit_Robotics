@@ -97,7 +97,7 @@ def fahren():
         #RouteCorrection = True
         Buzzer.DebugSound(0.2)
 
-      if CrossedLinesOrange + CrossedLinesBlue == 3:            # 2 Linien sind eine Ecke bzw. 1/4
+      if CrossedLinesOrange + CrossedLinesBlue == 2:            # 2 Linien sind eine Ecke bzw. 1/4
         CrossedSection = CrossedSection + 1                     # 1/4 ist 1 Sektion
         CrossedLinesBlue = 0                                    # Überquerte Linien wieder auf 0 um die nächste Sektion zu prüfen
         CrossedLinesOrange = 0
@@ -190,9 +190,9 @@ def fahren():
         Buzzer.DebugSound(0.2)
         if CrossedLinesOrange == 2:
           CrossedLinesOrange = 1
-
+        '''
         #---------- Kurs anpassen ----------#
-        while distanceHinten != 15:
+        while distanceHinten > 15:
           MotorAnsteuerung.Motor_Fahren(0)
           distanceHinten = Ultraschallsensor.checkdistHinten()
           if distanceHinten < 20 and distanceHinten > 15 and distanceRechts > 5:
@@ -208,7 +208,7 @@ def fahren():
           while distanceHinten > 15 and distanceRechts < 5:
             test2.set_angle(1, 90)
             MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
-      
+        '''
       if LineBeginBlue == True and BackgroundColor == True:     # Wenn vorher eine Linie erkannt wurde und der Boden wieder weiß ist -> Linie komplett überfahren
         CrossedLinesBlue = CrossedLinesBlue + 1                 # Liniencounter wirdhochgezählt
         LineBeginBlue = False                                   # LineBegin wieder auf False für die nächste Linie
@@ -216,9 +216,9 @@ def fahren():
         Buzzer.DebugSound(0.2)
         distanceHinten = Ultraschallsensor.checkdistHinten()
         MotorAnsteuerung.Motor_Fahren(0)
-
+        '''
         #---------- Kurs anpassen ----------#
-        while distanceHinten != 15:
+        while distanceHinten > 15:
           MotorAnsteuerung.Motor_Fahren(0)
           distanceHinten = Ultraschallsensor.checkdistHinten()
           if distanceHinten < 20 and distanceHinten > 15 and distanceRechts > 5:
@@ -234,8 +234,8 @@ def fahren():
           while distanceHinten > 15 and distanceRechts < 5:
             test2.set_angle(1, 90)
             MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
-
-      if CrossedLinesOrange + CrossedLinesBlue == 3:            # 2 Linien sind eine Ecke bzw. 1/4
+        '''
+      if CrossedLinesOrange + CrossedLinesBlue == 2:            # 2 Linien sind eine Ecke bzw. 1/4
         CrossedSection = CrossedSection + 1                     # 1/4 ist 1 Sektion
         CrossedLinesBlue = 0                                    # Überquerte Linien wieder auf 0 um die nächste Sektion zu prüfen
         CrossedLinesOrange = 0
@@ -353,9 +353,10 @@ def fahren():
         LineBeginOrange = False                                 # LineBegin wieder auf False für die nächste Linie
         #RouteCorrection = True
         Buzzer.DebugSound(0.2)
-
+        
+        '''
         #---------- Kurs anpassen ----------#
-        while distanceHinten != 15:
+        while distanceHinten > 15:
           MotorAnsteuerung.Motor_Fahren(0)
           distanceHinten = Ultraschallsensor.checkdistHinten()
           if distanceHinten < 20 and distanceHinten > 15 and distanceRechts > 5:
@@ -371,7 +372,7 @@ def fahren():
           while distanceHinten > 15 and distanceRechts < 5:
             test2.set_angle(1, 90)
             MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
-      
+        '''
       if LineBeginBlue == True and BackgroundColor == True:     # Wenn vorher eine Linie erkannt wurde und der Boden wieder weiß ist -> Linie komplett überfahren
         CrossedLinesBlue = CrossedLinesBlue + 1                 # Liniencounter wirdhochgezählt
         LineBeginBlue = False                                   # LineBegin wieder auf False für die nächste Linie
@@ -379,8 +380,9 @@ def fahren():
         if CrossedLinesBlue == 2:
           CrossedLinesBlue = 1
 
+        '''
         #---------- Kurs anpassen ----------#
-        while distanceHinten != 15:
+        while distanceHinten > 15:
           MotorAnsteuerung.Motor_Fahren(0)
           distanceHinten = Ultraschallsensor.checkdistHinten()
           if distanceHinten < 20 and distanceHinten > 15 and distanceRechts > 5:
@@ -396,8 +398,8 @@ def fahren():
           while distanceHinten > 15 and distanceRechts < 5:
             test2.set_angle(1, 90)
             MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
-
-      if CrossedLinesOrange + CrossedLinesBlue == 3:            # 2 Linien sind eine Ecke bzw. 1/4
+        '''
+      if CrossedLinesOrange + CrossedLinesBlue == 2:            # 2 Linien sind eine Ecke bzw. 1/4
         CrossedSection = CrossedSection + 1                     # 1/4 ist 1 Sektion
         CrossedLinesBlue = 0                                    # Überquerte Linien wieder auf 0 um die nächste Sektion zu prüfen
         CrossedLinesOrange = 0
