@@ -8,7 +8,7 @@ from adafruit_pca9685  import PCA9685
 from adafruit_motor import motor
 import Ultraschallsensor
 import MotorAnsteuerung
-import test2
+import ServoLenkung
 import CameraColorDetection2
 import BlockColorDetection
 
@@ -48,7 +48,7 @@ def fahren():
       distanceGerade = Ultraschallsensor.checkdistGerade()
       distanceLinks = Ultraschallsensor.checkdistLinks()
       distanceRechts = Ultraschallsensor.checkdistRechts()
-      test2.set_angle(1,100)                                    # Servo gerade stellen
+      ServoLenkung.set_angle(1,100)                                    # Servo gerade stellen
       MotorAnsteuerung.Motor_Fahren(VelocityBegin)              # losfahren
 
       if distanceGerade < 40:                                   # Hält an um zu prüfen ob links oder rechts mehr platz ist
@@ -63,57 +63,7 @@ def fahren():
         
         MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
         time.sleep(2)
-        CrossedLinesOrange = 0
-        CrossedLinesBlue = 0
         break                                                   # Bricht aus erster Schleife aus
-
-      #---------- Farberkennung Bodenlinien ----------#
-
-      DetectedColor = CameraColorDetection2.ColorDetection2_0()
-
-      if DetectedColor == "ORANGE":                             # Checkt ob Farbe orange ist
-        LineDetected = True                                     # Erste Linie wird erkannt
-        if LineDetected == True:                                #
-          RouteCorrection = True
-          LineDetected = False                                  # Wird direkt wieder auf False gesetzt um die Zweite Linie wieder zu erkennen
-          LineBeginOrange = True                                # Wird auf True gesetzt damit Linie erst wieder erkannt werden kann nach dem man darüber gefahren ist
-          BackgroundColor = False                               # Background ist die weiße Bahn fläche
-      elif DetectedColor == "BLUE":                             # Das gleiche wie bei orange für Farbe Blau
-        LineDetected = True                                     #
-        if LineDetected == True:                                #
-          RouteCorrection = True
-          LineDetected = False                                  #
-          LineBeginBlue = True                                  #
-          BackgroundColor = False                               #
-      else:                                                     # Default ist das der Boden weiß ist und keine Linie erkannt wurde
-        BackgroundColor = True                                  #
-        LineDetected = False                                    #
-
-      if LineBeginOrange == True and BackgroundColor == True:   # Wenn vorher eine Linie erkannt wurde und der Boden wieder weiß ist -> Linie komplett überfahren
-        CrossedLinesOrange = CrossedLinesOrange + 1             # Liniencounter wirdhochgezählt
-        LineBeginOrange = False                                 # LineBegin wieder auf False für die nächste Linie
-        #RouteCorrection = True
-        Buzzer.DebugSound(0.2)
-        if CrossedLinesOrange == 2:
-            CrossedLinesOrange = 1
-      
-      if LineBeginBlue == True and BackgroundColor == True:     # Wenn vorher eine Linie erkannt wurde und der Boden wieder weiß ist -> Linie komplett überfahren
-        CrossedLinesBlue = CrossedLinesBlue + 1                 # Liniencounter wirdhochgezählt
-        LineBeginBlue = False                                   # LineBegin wieder auf False für die nächste Linie
-        #RouteCorrection = True
-        Buzzer.DebugSound(0.2)
-        if CrossedLinesBlue == 2:
-            CrossedLinesBlue = 1
-
-      if CrossedLinesOrange + CrossedLinesBlue == 2:            # 2 Linien sind eine Ecke bzw. 1/4
-        CrossedSection = CrossedSection + 1                     # 1/4 ist 1 Sektion
-        CrossedLinesBlue = 0                                    # Überquerte Linien wieder auf 0 um die nächste Sektion zu prüfen
-        CrossedLinesOrange = 0
-        Buzzer.DebugSound(0.3)
-
-      print(f'\rHindernis Farbe: {Farbe};     Linien überquert: {CrossedLinesOrange + CrossedLinesBlue};     Sektionen durchfahren: {CrossedSection}', end='')
-      if CrossedSection == 12:                                  # Bei 12 überquerten Sektionen sind 3 Runden durchfahren
-        break                                                   # Aus der Schleife springen bzw. Programm ist danach Ende
 
     #----------------------------------------------------------------------------------------------------------------------------------------------------------------------#
 
@@ -125,14 +75,14 @@ def fahren():
       distanceGerade = Ultraschallsensor.checkdistGerade()
       distanceLinks = Ultraschallsensor.checkdistLinks()
       distanceRechts = Ultraschallsensor.checkdistRechts()
-      if distanceLinks < 25:                                    # Wenn die Entfernung links zu klein wird lenkt er nach rechts
-        test2.set_angle(1,20)
-      if distanceRechts < 35:                                   # Wenn die Entfernung rechts zu klein wird lenkt er nach links
-        test2.set_angle(1,170)
       winkel = 90 + ((200 - distanceGerade) / (200 - 5)) * 90   # Berechnet Winkel zum links fahen
       winkel_gerundet = round(winkel) + 25                      # Rundet winkel hoch
-      test2.set_angle(1, winkel_gerundet)                       # setzt den Winkel von dem Servo für die Lenkung
+      ServoLenkung.set_angle(1, winkel_gerundet)                       # setzt den Winkel von dem Servo für die Lenkung
       MotorAnsteuerung.Motor_Fahren(VelocityNormal)             # fährt bisschen langsamer weiter als davor
+      if distanceLinks < 25:                                    # Wenn die Entfernung links zu klein wird lenkt er nach rechts
+        ServoLenkung.set_angle(1,0)
+      if distanceRechts < 35:                                   # Wenn die Entfernung rechts zu klein wird lenkt er nach links
+        ServoLenkung.set_angle(1,180)
 
       
 
@@ -145,12 +95,11 @@ def fahren():
         Farbe = 'Rot'
         Buzzer.DebugSound(0.1)
         MotorAnsteuerung.Motor_Fahren(VelocityObstacle)                      # Wird langsamer
-        test2.set_angle(1,10)                                   # lenkt nach rechts
-
-        if distanceLinks < 18:                                  # Checkt noch die Entfernung an den Seiten
-          test2.set_angle(1,0)                                  # lenkt nach rechts
-        if distanceRechts < 18:                                 #
-          test2.set_angle(1,180)                                # lenkt nach links
+        ServoLenkung.set_angle(1,10)                                   # lenkt nach rechts
+        if distanceLinks < 25:                                  # Checkt noch die Entfernung an den Seiten
+          ServoLenkung.set_angle(1,0)                                  # lenkt nach rechts
+        if distanceRechts < 25:                                 #
+          ServoLenkung.set_angle(1,180)                                # lenkt nach links
 
         BlockColorDetection.Blockfarbe()                        # Checkt nochmal nach der Farbe um nicht in der Schleife gefangen zu bleiben
         print(f'\rHindernis Farbe: {Farbe};     Linien überquert: {CrossedLinesOrange + CrossedLinesBlue};     Sektionen durchfahren: {CrossedSection}', end='')
@@ -162,12 +111,12 @@ def fahren():
         Farbe = 'Grün'
         Buzzer.DebugSound(0.1)
         MotorAnsteuerung.Motor_Fahren(VelocityObstacle)         # Wird langsamer
-        test2.set_angle(1,170)                                  # lenkt nach links
+        ServoLenkung.set_angle(1,170)                                  # lenkt nach links
 
-        if distanceLinks < 18:                                  # Checkt noch die Entfernung an den Seiten
-          test2.set_angle(1,0)                                  # lenkt nach rechts
-        if distanceRechts < 18:                                 #
-          test2.set_angle(1,180)                                # lenkt nach links
+        if distanceLinks < 25:                                  # Checkt noch die Entfernung an den Seiten
+          ServoLenkung.set_angle(1,0)                                  # lenkt nach rechts
+        if distanceRechts < 25:                                 #
+          ServoLenkung.set_angle(1,180)                                # lenkt nach links
 
         BlockColorDetection.Blockfarbe()                        # Checkt nochmal nach der Farbe um nicht in der Schleife gefangen zu bleiben
         print(f'\rHindernis Farbe: {Farbe};     Linien überquert: {CrossedLinesOrange + CrossedLinesBlue};     Sektionen durchfahren: {CrossedSection}', end='')
@@ -200,48 +149,28 @@ def fahren():
         if CrossedLinesOrange == 2:
           CrossedLinesOrange = 1
         
-        '''
-        #---------- Kurs anpassen ----------#
-        while distanceHinten > 15:
-          MotorAnsteuerung.Motor_Fahren(0)
-          distanceHinten = Ultraschallsensor.checkdistHinten()
-          if distanceHinten < 20 and distanceHinten > 15 and distanceRechts > 5:
-            test2.set_angle(1, 90)
-            MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
-          if distanceHinten > 20 and distanceHinten < 25 and distanceRechts > 5:
-            test2.set_angle(1, 60)
-            MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
-          if distanceHinten > 25 and distanceRechts > 5:
-            test2.set_angle(1, 30)
-            MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
-          #--------- Rückwärts wenn links nicht genug Platz ist ---------#
-          while distanceHinten > 15 and distanceRechts < 5:
-            test2.set_angle(1, 90)
-            MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
-        '''
       if LineBeginBlue == True and BackgroundColor == True:     # Wenn vorher eine Linie erkannt wurde und der Boden wieder weiß ist -> Linie komplett überfahren
         CrossedLinesBlue = CrossedLinesBlue + 1                 # Liniencounter wirdhochgezählt
         LineBeginBlue = False                                   # LineBegin wieder auf False für die nächste Linie
         #RouteCorrection = True
         Buzzer.DebugSound(0.2)
 
-        
         #---------- Kurs anpassen ----------#
         while distanceHinten > 15:
           MotorAnsteuerung.Motor_Fahren(0)
           distanceHinten = Ultraschallsensor.checkdistHinten()
           if distanceHinten < 20 and distanceHinten > 15 and distanceRechts > 5:
-            test2.set_angle(1, 90)
+            ServoLenkung.set_angle(1, 90)
             MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
           if distanceHinten > 20 and distanceHinten < 25 and distanceRechts > 5:
-            test2.set_angle(1, 60)
+            ServoLenkung.set_angle(1, 60)
             MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
           if distanceHinten > 25 and distanceRechts > 5:
-            test2.set_angle(1, 30)
+            ServoLenkung.set_angle(1, 30)
             MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
           #--------- Rückwärts wenn links nicht genug Platz ist ---------#
           while distanceHinten > 15 and distanceRechts < 5:
-            test2.set_angle(1, 90)
+            ServoLenkung.set_angle(1, 90)
             MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
         
       if CrossedLinesOrange + CrossedLinesBlue == 2:            # 2 Linien sind eine Ecke bzw. 1/4
@@ -257,43 +186,17 @@ def fahren():
           distanceLinks = Ultraschallsensor.checkdistLinks()
           distanceRechts = Ultraschallsensor.checkdistRechts()
           if distanceLinks < 30:                                    # Wenn die Entfernung links zu klein wird lenkt er nach rechts
-            test2.set_angle(1,20)
+            ServoLenkung.set_angle(1,20)
           if distanceRechts < 30:                                   # Wenn die Entfernung rechts zu klein wird lenkt er nach links
-            test2.set_angle(1,170)
+            ServoLenkung.set_angle(1,170)
           winkel = 90 + ((200 - distanceGerade) / (200 - 5)) * 90   # Berechnet Winkel zum links fahen
           winkel_gerundet = round(winkel) + 25                      # Rundet winkel hoch
-          test2.set_angle(1, winkel_gerundet)                       # setzt den Winkel von dem Servo für die Lenkung
+          ServoLenkung.set_angle(1, winkel_gerundet)                       # setzt den Winkel von dem Servo für die Lenkung
           MotorAnsteuerung.Motor_Fahren(VelocityNormal)             # fährt bisschen langsamer weiter als davor
 
           
         break                                                       # Aus der Schleife springen bzw. Programm ist danach Ende 
 
-    
-      '''
-      #---------- Kurs anpassen ----------#
-
-      while (RouteCorrection == True and CrossedLinesBlue == 1) or (RouteCorrection == True and CrossedLinesBlue == 2):
-        if CrossedLinesBlue == 1:
-          distanceHinten = Ultraschallsensor.checkdistHinten()
-          MotorAnsteuerung.Motor_Fahren(0)
-          #--------- Rückwärts wenn links genug Platz ist ---------#
-          if distanceHinten == 15:
-            MotorAnsteuerung.Motor_Fahren(0)
-            RouteCorrection = False
-          if distanceHinten < 20 and distanceHinten > 15 and distanceRechts > 5:
-            test2.set_angle(1, 90)
-            MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
-          if distanceHinten > 20 and distanceHinten < 25 and distanceRechts > 5:
-            test2.set_angle(1, 60)
-            MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
-          if distanceHinten > 25 and distanceRechts > 5:
-            test2.set_angle(1, 30)
-            MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
-          #--------- Rückwärts wenn links nicht genug Platz ist ---------#
-          while distanceHinten > 15 and distanceRechts < 5:
-            test2.set_angle(1, 90)
-            MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
-      '''
     #-----------------------------------------------------------------------------------------------------------------------------------------------------------------------#
 
     #----------------------------------------------------- Fahren Rechts + Linienerkennung + Hindernisserkennung + Kursanpassung -------------------------------------------------#
@@ -304,14 +207,13 @@ def fahren():
       distanceGerade = Ultraschallsensor.checkdistGerade()
       distanceLinks = Ultraschallsensor.checkdistLinks()
       distanceRechts = Ultraschallsensor.checkdistRechts()
-      if distanceLinks < 25:                                   # Checkt die Enternung Links und Rechts
-        test2.set_angle(1,20)                                  # Lenkt rechts wenn links die Entfernung zu klein wird
-      if distanceRechts < 35:                                  #
-        test2.set_angle(1,170) 
-      winkel = 90 - ((200 - distanceGerade) / (200 - 5)) * 90  # Winkel zum rechts fahren wird berechnet
       winkel_gerundet = round(winkel) + 30                     # Winkel wird gerundet
-      test2.set_angle(1, winkel_gerundet)                      # Winkel von dem Servo für die Lenkung wird gesetzt
+      ServoLenkung.set_angle(1, winkel_gerundet)                      # Winkel von dem Servo für die Lenkung wird gesetzt
       MotorAnsteuerung.Motor_Fahren(VelocityNormal)            # fährt bisschen langsamer weiter
+      if distanceLinks < 25:                                   # Checkt die Enternung Links und Rechts
+        ServoLenkung.set_angle(1,0)                                  # Lenkt rechts wenn links die Entfernung zu klein wird
+      if distanceRechts < 35:                                  #
+        ServoLenkung.set_angle(1,180)
 
       #----------- Farberkennung Hindernisse ----------#       Siehe Erklärung FahrenLinks-Schleife
 
@@ -322,11 +224,11 @@ def fahren():
         Farbe = 'Rot'
         Buzzer.DebugSound(0.1)
         MotorAnsteuerung.Motor_Fahren(VelocityObstacle)
-        test2.set_angle(1,10)
-        if distanceLinks < 18:
-          test2.set_angle(1,0)
-        if distanceRechts < 18:
-          test2.set_angle(1,180)
+        ServoLenkung.set_angle(1,10)
+        if distanceLinks < 25:
+          ServoLenkung.set_angle(1,0)
+        if distanceRechts < 25:
+          ServoLenkung.set_angle(1,180)
 
         BlockColorDetection.Blockfarbe()
         print(f'\rHindernis Farbe: {Farbe};     Linien überquert: {CrossedLinesOrange + CrossedLinesBlue};     Sektionen durchfahren: {CrossedSection}', end='')
@@ -340,11 +242,11 @@ def fahren():
         Farbe ='Grün'
         Buzzer.DebugSound(0.1)
         MotorAnsteuerung.Motor_Fahren(VelocityObstacle)
-        test2.set_angle(1,170)
-        if distanceLinks < 18:
-          test2.set_angle(1,0)
-        if distanceRechts < 18:
-          test2.set_angle(1,180)
+        ServoLenkung.set_angle(1,170)
+        if distanceLinks < 25:
+          ServoLenkung.set_angle(1,0)
+        if distanceRechts < 25:
+          ServoLenkung.set_angle(1,180)
 
         BlockColorDetection.Blockfarbe()
         print(f'\rHindernis Farbe: {Farbe};     Linien überquert: {CrossedLinesOrange + CrossedLinesBlue};     Sektionen durchfahren: {CrossedSection}', end='')
@@ -382,17 +284,17 @@ def fahren():
           MotorAnsteuerung.Motor_Fahren(0)
           distanceHinten = Ultraschallsensor.checkdistHinten()
           if distanceHinten < 20 and distanceHinten > 15 and distanceRechts > 5:
-            test2.set_angle(1, 90)
+            ServoLenkung.set_angle(1, 90)
             MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
           if distanceHinten > 20 and distanceHinten < 25 and distanceRechts > 5:
-            test2.set_angle(1, 120)
+            ServoLenkung.set_angle(1, 120)
             MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
           if distanceHinten > 25 and distanceRechts > 5:
-            test2.set_angle(1, 150)
+            ServoLenkung.set_angle(1, 150)
             MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
           #--------- Rückwärts wenn links nicht genug Platz ist ---------#
           while distanceHinten > 15 and distanceRechts < 5:
-            test2.set_angle(1, 90)
+            ServoLenkung.set_angle(1, 90)
             MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
         
 
@@ -402,25 +304,6 @@ def fahren():
         Buzzer.DebugSound(0.2)
         if CrossedLinesBlue == 2:
           CrossedLinesBlue = 1
-        '''
-        #---------- Kurs anpassen ----------#
-        while distanceHinten > 15:
-          MotorAnsteuerung.Motor_Fahren(0)
-          distanceHinten = Ultraschallsensor.checkdistHinten()
-          if distanceHinten < 20 and distanceHinten > 15 and distanceRechts > 5:
-            test2.set_angle(1, 90)
-            MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
-          if distanceHinten > 20 and distanceHinten < 25 and distanceRechts > 5:
-            test2.set_angle(1, 120)
-            MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
-          if distanceHinten > 25 and distanceRechts > 5:
-            test2.set_angle(1, 150)
-            MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
-          #--------- Rückwärts wenn links nicht genug Platz ist ---------#
-          while distanceHinten > 15 and distanceRechts < 5:
-            test2.set_angle(1, 90)
-            MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
-        '''
 
       if CrossedLinesOrange + CrossedLinesBlue == 2:            # 2 Linien sind eine Ecke bzw. 1/4
         CrossedSection = CrossedSection + 1                     # 1/4 ist 1 Sektion
@@ -435,47 +318,21 @@ def fahren():
           distanceLinks = Ultraschallsensor.checkdistLinks()
           distanceRechts = Ultraschallsensor.checkdistRechts()
           if distanceLinks < 30:                                   # Checkt die Enternung Links und Rechts
-            test2.set_angle(1,20)                                  # Lenkt rechts wenn links die Entfernung zu klein wird
+            ServoLenkung.set_angle(1,20)                                  # Lenkt rechts wenn links die Entfernung zu klein wird
           if distanceRechts < 30:                                  #
-            test2.set_angle(1,170) 
+            ServoLenkung.set_angle(1,170) 
           winkel = 90 - ((200 - distanceGerade) / (200 - 5)) * 90  # Winkel zum rechts fahren wird berechnet
           winkel_gerundet = round(winkel) + 30                     # Winkel wird gerundet
-          test2.set_angle(1, winkel_gerundet)                      # Winkel von dem Servo für die Lenkung wird gesetzt
+          ServoLenkung.set_angle(1, winkel_gerundet)                      # Winkel von dem Servo für die Lenkung wird gesetzt
           MotorAnsteuerung.Motor_Fahren(VelocityNormal)                      # fährt bisschen langsamer weiter
 
         break
-
-      '''
-      #---------- Kurs anpassen ----------#
-
-      while (RouteCorrection == True and CrossedLinesOrange == 1) or (RouteCorrection == True and CrossedLinesOrange == 2):
-        if CrossedLinesOrange == 1:
-          distanceHinten = Ultraschallsensor.checkdistHinten()
-          MotorAnsteuerung.Motor_Fahren(0)
-          #--------- Rückwärts wenn links genug Platz ist ---------#
-          if distanceHinten == 15:
-            MotorAnsteuerung.Motor_Fahren(0)
-            RouteCorrection = False
-          if distanceHinten < 20 and distanceHinten > 15 and distanceLinks > 5:
-            test2.set_angle(1, 90)
-            MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
-          if distanceHinten > 20 and distanceHinten < 25 and distanceLinks > 5:
-            test2.set_angle(1, 120)
-            MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
-          if distanceHinten > 25 and distanceLinks > 5:
-            test2.set_angle(1, 150)
-            MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
-          #--------- Rückwärts wenn links nicht genug Platz ist ---------#
-          while distanceHinten > 15 and distanceLinks < 5:
-            test2.set_angle(1, 90)
-            MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
-      '''
 
     MotorAnsteuerung.Motor_Fahren(0)
 
   except KeyboardInterrupt:
     MotorAnsteuerung.Motor_Fahren(0)
-    test2.set_angle(1,90)
+    ServoLenkung.set_angle(1,90)
 
   #----------------------------------------------------------------------------------------------------------------------------------------------------------------------#
 
@@ -486,4 +343,4 @@ if __name__ == "__main__":
     fahren()
   except KeyboardInterrupt:
     MotorAnsteuerung.Motor_Fahren(0)
-    test2.set_angle(1,90)
+    ServoLenkung.set_angle(1,90)
