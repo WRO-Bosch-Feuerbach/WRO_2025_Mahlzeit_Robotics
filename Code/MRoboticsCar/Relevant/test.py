@@ -102,13 +102,13 @@ try:
             ServoLenkung.set_angle(1,180)                                
 
         BlockColorDetection.Blockfarbe()                        
-        print(f'\rHindernis Farbe: {Farbe};     Linien überquert: {CrossedLinesOrange + CrossedLinesBlue};     Sektionen durchfahren: {CrossedSection}', end='')
+        print(f'\rHindernis Farbe: {Farbe};     Linien ueberquert: {CrossedLinesOrange + CrossedLinesBlue};     Sektionen durchfahren: {CrossedSection}', end='')
 
         while BlockColorDetection.Blockfarbe() == 'GRUEN' and distanceGerade < 100:      
             distanceGerade = Ultraschallsensor.checkdistGerade()
             distanceLinks = Ultraschallsensor.checkdistLinks()
             distanceRechts = Ultraschallsensor.checkdistRechts()
-            Farbe = 'Grün'
+            Farbe = 'Gruen'
             Buzzer.DebugSound(0.1)
             MotorAnsteuerung.Motor_Fahren(VelocityObstacle)        
             ServoLenkung.set_angle(1,170)                                  
@@ -119,7 +119,7 @@ try:
             ServoLenkung.set_angle(1,180)                               
 
         BlockColorDetection.Blockfarbe()                        
-        print(f'\rHindernis Farbe: {Farbe};     Linien überquert: {CrossedLinesOrange + CrossedLinesBlue};     Sektionen durchfahren: {CrossedSection}', end='')
+        print(f'\rHindernis Farbe: {Farbe};     Linien ueberquert: {CrossedLinesOrange + CrossedLinesBlue};     Sektionen durchfahren: {CrossedSection}', end='')
 
         #---------- Farberkennung Bodenlinien ----------#
 
@@ -165,7 +165,7 @@ try:
             CrossedLinesOrange = 0
             Buzzer.DebugSound(0.3)
 
-        print(f'\rHindernis Farbe: {Farbe};     Linien überquert: {CrossedLinesOrange + CrossedLinesBlue};     Sektionen durchfahren: {CrossedSection}', end='')
+        print(f'\rHindernis Farbe: {Farbe};     Linien ueberquert: {CrossedLinesOrange + CrossedLinesBlue};     Sektionen durchfahren: {CrossedSection}', end='')
         if CrossedSection == 12:                                  
             while distanceGerade < 100 and distanceGerade > 150:
                 distanceGerade = Ultraschallsensor.checkdistGerade()
@@ -217,7 +217,7 @@ try:
                 ServoLenkung.set_angle(1,180)
 
         BlockColorDetection.Blockfarbe()
-        print(f'\rHindernis Farbe: {Farbe};     Linien überquert: {CrossedLinesOrange + CrossedLinesBlue};     Sektionen durchfahren: {CrossedSection}', end='')
+        print(f'\rHindernis Farbe: {Farbe};     Linien ueberquert: {CrossedLinesOrange + CrossedLinesBlue};     Sektionen durchfahren: {CrossedSection}', end='')
 
 
 
@@ -225,7 +225,7 @@ try:
             distanceGerade = Ultraschallsensor.checkdistGerade()
             distanceLinks = Ultraschallsensor.checkdistLinks()
             distanceRechts = Ultraschallsensor.checkdistRechts()
-            Farbe ='Grün'
+            Farbe ='Gruen'
             Buzzer.DebugSound(0.1)
             MotorAnsteuerung.Motor_Fahren(VelocityObstacle)
             ServoLenkung.set_angle(1,170)
@@ -235,7 +235,7 @@ try:
                 ServoLenkung.set_angle(1,180)
 
         BlockColorDetection.Blockfarbe()
-        print(f'\rHindernis Farbe: {Farbe};     Linien überquert: {CrossedLinesOrange + CrossedLinesBlue};     Sektionen durchfahren: {CrossedSection}', end='')
+        print(f'\rHindernis Farbe: {Farbe};     Linien ueberquert: {CrossedLinesOrange + CrossedLinesBlue};     Sektionen durchfahren: {CrossedSection}', end='')
 
         #---------- Farberkennung Bodenlinien ----------#   
 
@@ -280,7 +280,7 @@ try:
             CrossedLinesOrange = 0
             Buzzer.DebugSound(0.3)
 
-        print(f'\rHindernis Farbe: {Farbe};     Linien überquert: {CrossedLinesOrange + CrossedLinesBlue};     Sektionen durchfahren: {CrossedSection}', end='')
+        print(f'\rHindernis Farbe: {Farbe};     Linien ueberquert: {CrossedLinesOrange + CrossedLinesBlue};     Sektionen durchfahren: {CrossedSection}', end='')
         if CrossedSection == 12:                                  
             while distanceGerade < 100 and distanceGerade > 150:
                 distanceGerade = Ultraschallsensor.checkdistGerade()
