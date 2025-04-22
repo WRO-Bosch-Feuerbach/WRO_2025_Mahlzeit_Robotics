@@ -19,7 +19,7 @@ def Startsequenz():
         distanceGerade = Ultraschallsensor.checkdistGerade()
         distanceLinks = Ultraschallsensor.checkdistLinks()
         distanceRechts = Ultraschallsensor.checkdistRechts()
-        test2.set_angle(1,100)                                    # Servo gerade stellen
+        ServoLenkung.set_angle(1,100)                                    # Servo gerade stellen
         MotorAnsteuerung.Motor_Fahren(VelocityBegin)              # losfahren
 
         if distanceGerade < 40:                                   # Hält an um zu prüfen ob links oder rechts mehr platz ist
