@@ -122,13 +122,13 @@ def BlackWhiteDetection():
 	for Color in picked_color.flatten():
 		if Color == 255:
 			IsWhite = IsWhite + 1
-			#print("Weiß erkannt")
+			#print("Weiss erkannt")
 		elif Color == 0:
 			IsBlack = IsBlack + 1
 			#print("Schwarz erkannt")
 	if IsBlack >= 4:
 		color = "BLACK"
-		print("Schwarz wird übergeben")
+		print("Schwarz wird uebergeben")
 		return color
 	else:
 		color = "WHITE"
