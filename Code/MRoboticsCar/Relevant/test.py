@@ -237,7 +237,7 @@ try:
         BlockColorDetection.Blockfarbe()
         print(f'\rHindernis Farbe: {Farbe};     Linien überquert: {CrossedLinesOrange + CrossedLinesBlue};     Sektionen durchfahren: {CrossedSection}', end='')
 
-        #---------- Farberkennung Bodenlinien ----------#   Siehe Erklarrung FahrenLinks-Schleife
+        #---------- Farberkennung Bodenlinien ----------#   
 
         DetectedColor = CameraColorDetection2.ColorDetection2_0()
 
