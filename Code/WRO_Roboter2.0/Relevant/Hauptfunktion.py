@@ -8,7 +8,7 @@ from adafruit_pca9685  import PCA9685
 from adafruit_motor import motor
 import Ultraschallsensor
 import MotorAnsteuerung
-import test2
+import ServoLenkung
 import CameraColorDetection2
 import BlockColorDetection
 import Startsequenz
