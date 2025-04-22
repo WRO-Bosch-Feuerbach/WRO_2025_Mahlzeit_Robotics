@@ -86,7 +86,7 @@ try:
 
       
 
-        #-------- Farberkennung für Hindernisse ----------#
+        #-------- Farberkennung Hindernisse ----------#
 
         while BlockColorDetection.Blockfarbe() == 'ROT' and distanceGerade < 100:         
             distanceGerade = Ultraschallsensor.checkdistGerade()
