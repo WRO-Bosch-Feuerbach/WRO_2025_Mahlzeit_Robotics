@@ -52,7 +52,7 @@ try:
         ServoLenkung.set_angle(1,100)                             # Servo gerade stellen
         MotorAnsteuerung.Motor_Fahren(VelocityBegin)              # losfahren
 
-        if distanceGerade < 40:                                   # Hält an um zu prüfen ob links oder rechts mehr platz ist
+        if distanceGerade < 40:                                   # Haelt an um zu prüfen ob links oder rechts mehr platz ist
             MotorAnsteuerung.Motor_Fahren(0)
             time.sleep(2)
         if distanceLinks > distanceRechts:                      # Wenn links mehr platz ist wird das Programm in die FahrenLinks-Schleife springen
@@ -75,10 +75,10 @@ try:
         distanceGerade = Ultraschallsensor.checkdistGerade()
         distanceLinks = Ultraschallsensor.checkdistLinks()
         distanceRechts = Ultraschallsensor.checkdistRechts()
-        winkel = 90 + ((200 - distanceGerade) / (200 - 5)) * 90   # Berechnet Winkel zum links fahen
+        winkel = 90 + ((200 - distanceGerade) / (200 - 5)) * 90   # Berechnet Winkel zum links fahren
         winkel_gerundet = round(winkel) + 25                      # Rundet winkel hoch
-        ServoLenkung.set_angle(1, winkel_gerundet)                       # setzt den Winkel von dem Servo für die Lenkung
-        MotorAnsteuerung.Motor_Fahren(VelocityNormal)             # fährt bisschen langsamer weiter als davor
+        ServoLenkung.set_angle(1, winkel_gerundet)                # setzt den Winkel von dem Servo für die Lenkung
+        MotorAnsteuerung.Motor_Fahren(VelocityNormal)             # faehrt bisschen langsamer weiter als davor
         if distanceLinks < 35:                                    # Wenn die Entfernung links zu klein wird lenkt er nach rechts
             ServoLenkung.set_angle(1,0)
         if distanceRechts < 25:                                   # Wenn die Entfernung rechts zu klein wird lenkt er nach links
@@ -95,16 +95,16 @@ try:
             Farbe = 'Rot'
             Buzzer.DebugSound(0.1)
             MotorAnsteuerung.Motor_Fahren(VelocityObstacle)                      # Wird langsamer
-            ServoLenkung.set_angle(1,10)                                   # lenkt nach rechts
-        if distanceLinks < 25:                                  # Checkt noch die Entfernung an den Seiten
+            ServoLenkung.set_angle(1,10)                                 # lenkt nach rechts
+        if distanceLinks < 25:                                           # Checkt noch die Entfernung an den Seiten
             ServoLenkung.set_angle(1,0)                                  # lenkt nach rechts
-        if distanceRechts < 25:                                 #
+        if distanceRechts < 25:                                          #
             ServoLenkung.set_angle(1,180)                                # lenkt nach links
 
         BlockColorDetection.Blockfarbe()                        # Checkt nochmal nach der Farbe um nicht in der Schleife gefangen zu bleiben
         print(f'\rHindernis Farbe: {Farbe};     Linien überquert: {CrossedLinesOrange + CrossedLinesBlue};     Sektionen durchfahren: {CrossedSection}', end='')
 
-        while BlockColorDetection.Blockfarbe() == 'GRUEN' and distanceGerade < 100:        # Checkt ob Farbe grün ist
+        while BlockColorDetection.Blockfarbe() == 'GRUEN' and distanceGerade < 100:        # Checkt ob Farbe gruen ist
             distanceGerade = Ultraschallsensor.checkdistGerade()
             distanceLinks = Ultraschallsensor.checkdistLinks()
             distanceRechts = Ultraschallsensor.checkdistRechts()
@@ -129,8 +129,8 @@ try:
             LineDetected = True                                     # Erste Linie wird erkannt
         if LineDetected == True:                                #
             LineDetected = False                                  # Wird direkt wieder auf False gesetzt um die Zweite Linie wieder zu erkennen
-            LineBeginOrange = True                                # Wird auf True gesetzt damit Linie erst wieder erkannt werden kann nach dem man darüber gefahren ist
-            BackgroundColor = False                               # Background ist die weiße Bahn fläche
+            LineBeginOrange = True                                # Wird auf True gesetzt damit Linie erst wieder erkannt werden kann nach dem man darueber gefahren ist
+            BackgroundColor = False                               # Background ist die weiße Bahn flaeche
         elif DetectedColor == "BLUE":                             # Das gleiche wie bei orange für Farbe Blau
             LineDetected = True                                     #
         if LineDetected == True:                                #
@@ -142,7 +142,7 @@ try:
             BackgroundColor = True                                  #
             LineDetected = False                                    #
 
-        if LineBeginOrange == True and BackgroundColor == True:   # Wenn vorher eine Linie erkannt wurde und der Boden wieder weiß ist -> Linie komplett überfahren
+        if LineBeginOrange == True and BackgroundColor == True:   # Wenn vorher eine Linie erkannt wurde und der Boden wieder weiß ist -> Linie komplett ueberfahren
             CrossedLinesOrange = CrossedLinesOrange + 1             # Liniencounter wirdhochgezählt
             LineBeginOrange = False                                 # LineBegin wieder auf False für die nächste Linie
             Buzzer.DebugSound(0.2)
@@ -151,7 +151,7 @@ try:
         
 
         if LineBeginBlue == True and BackgroundColor == True:     # Wenn vorher eine Linie erkannt wurde und der Boden wieder weiß ist -> Linie komplett überfahren
-            CrossedLinesBlue = CrossedLinesBlue + 1                 # Liniencounter wirdhochgezählt
+            CrossedLinesBlue = CrossedLinesBlue + 1                 # Liniencounter wirdhochgezaehlt
             LineBeginBlue = False                                   # LineBegin wieder auf False für die nächste Linie
         #RouteCorrection = True
         Buzzer.DebugSound(0.2)
@@ -161,12 +161,12 @@ try:
 
         if CrossedLinesOrange + CrossedLinesBlue == 2:            # 2 Linien sind eine Ecke bzw. 1/4
             CrossedSection = CrossedSection + 1                     # 1/4 ist 1 Sektion
-            CrossedLinesBlue = 0                                    # Überquerte Linien wieder auf 0 um die nächste Sektion zu prüfen
+            CrossedLinesBlue = 0                                    # Ueberquerte Linien wieder auf 0 um die naechste Sektion zu prüfen
             CrossedLinesOrange = 0
             Buzzer.DebugSound(0.3)
 
         print(f'\rHindernis Farbe: {Farbe};     Linien überquert: {CrossedLinesOrange + CrossedLinesBlue};     Sektionen durchfahren: {CrossedSection}', end='')
-        if CrossedSection == 12:                                  # Bei 12 überquerten Sektionen sind 3 Runden durchfahren
+        if CrossedSection == 12:                                  # Bei 12 ueberquerten Sektionen sind 3 Runden durchfahren
             while distanceGerade < 100 and distanceGerade > 150:
                 distanceGerade = Ultraschallsensor.checkdistGerade()
                 distanceLinks = Ultraschallsensor.checkdistLinks()
@@ -174,7 +174,7 @@ try:
             winkel = 90 + ((200 - distanceGerade) / (200 - 5)) * 90   # Berechnet Winkel zum links fahen
             winkel_gerundet = round(winkel) + 25                      # Rundet winkel hoch
             ServoLenkung.set_angle(1, winkel_gerundet)                       # setzt den Winkel von dem Servo für die Lenkung
-            MotorAnsteuerung.Motor_Fahren(VelocityNormal)             # fährt bisschen langsamer weiter als davor
+            MotorAnsteuerung.Motor_Fahren(VelocityNormal)             # faehrt bisschen langsamer weiter als davor
             if distanceLinks < 30:                                    # Wenn die Entfernung links zu klein wird lenkt er nach rechts
                 ServoLenkung.set_angle(1,20)
             if distanceRechts < 30:                                   # Wenn die Entfernung rechts zu klein wird lenkt er nach links
@@ -195,13 +195,13 @@ try:
         winkel = 90 - ((200 - distanceGerade) / (200 - 5)) * 90  # Winkel zum rechts fahren wird berechnet
         winkel_gerundet = round(winkel) + 30                     # Winkel wird gerundet
         ServoLenkung.set_angle(1, winkel_gerundet)                      # Winkel von dem Servo für die Lenkung wird gesetzt
-        MotorAnsteuerung.Motor_Fahren(VelocityNormal)            # fährt bisschen langsamer weiter
+        MotorAnsteuerung.Motor_Fahren(VelocityNormal)            # faehrt bisschen langsamer weiter
         if distanceLinks < 25:                                   # Checkt die Enternung Links und Rechts
            ServoLenkung.set_angle(1,0)                                  # Lenkt rechts wenn links die Entfernung zu klein wird
         if distanceRechts < 35:                                  #
             ServoLenkung.set_angle(1,180)
 
-        #----------- Farberkennung Hindernisse ----------#       Siehe Erklärung FahrenLinks-Schleife
+        #----------- Farberkennung Hindernisse ----------#       Siehe Erklaerung FahrenLinks-Schleife
 
         while BlockColorDetection.Blockfarbe() == 'ROT' and distanceGerade < 100:
             distanceGerade = Ultraschallsensor.checkdistGerade()
@@ -237,7 +237,7 @@ try:
         BlockColorDetection.Blockfarbe()
         print(f'\rHindernis Farbe: {Farbe};     Linien überquert: {CrossedLinesOrange + CrossedLinesBlue};     Sektionen durchfahren: {CrossedSection}', end='')
 
-        #---------- Farberkennung Bodenlinien ----------#   Siehe Erklärung FahrenLinks-Schleife
+        #---------- Farberkennung Bodenlinien ----------#   Siehe Erklarrung FahrenLinks-Schleife
 
         DetectedColor = CameraColorDetection2.ColorDetection2_0()
 
@@ -246,7 +246,7 @@ try:
         if LineDetected == True:                                #
             RouteCorrection = True
             LineDetected = False                                  # Wird direkt wieder auf False gesetzt um die Zweite Linie wieder zu erkennen
-            LineBeginOrange = True                                # Wird auf True gesetzt damit Linie erst wieder erkannt werden kann nach dem man darüber gefahren ist
+            LineBeginOrange = True                                # Wird auf True gesetzt damit Linie erst wieder erkannt werden kann nach dem man darueber gefahren ist
             BackgroundColor = False                               # Background ist die weiße Bahn fläche
         elif DetectedColor == "BLUE":                             # Das gleiche wie bei orange für Farbe Blau
             LineDetected = True                                     #
@@ -258,30 +258,30 @@ try:
             BackgroundColor = True                                  #
             LineDetected = False                                    #
 
-        if LineBeginOrange == True and BackgroundColor == True:   # Wenn vorher eine Linie erkannt wurde und der Boden wieder weiß ist -> Linie komplett überfahren
-            CrossedLinesOrange = CrossedLinesOrange + 1             # Liniencounter wirdhochgezählt
-            LineBeginOrange = False                                 # LineBegin wieder auf False für die nächste Linie
+        if LineBeginOrange == True and BackgroundColor == True:   # Wenn vorher eine Linie erkannt wurde und der Boden wieder weiss ist -> Linie komplett überfahren
+            CrossedLinesOrange = CrossedLinesOrange + 1             # Liniencounter wirdhochgezaehlt
+            LineBeginOrange = False                                 # LineBegin wieder auf False für die naechste Linie
             #RouteCorrection = True
             Buzzer.DebugSound(0.2)
         
         #-------------- Kursanpassen ---------------#
         #Kursanpassung.Kursanp_RechtsFahren()
 
-        if LineBeginBlue == True and BackgroundColor == True:     # Wenn vorher eine Linie erkannt wurde und der Boden wieder weiß ist -> Linie komplett überfahren
-            CrossedLinesBlue = CrossedLinesBlue + 1                 # Liniencounter wirdhochgezählt
-            LineBeginBlue = False                                   # LineBegin wieder auf False für die nächste Linie
+        if LineBeginBlue == True and BackgroundColor == True:     # Wenn vorher eine Linie erkannt wurde und der Boden wieder weiss ist -> Linie komplett ueberfahren
+            CrossedLinesBlue = CrossedLinesBlue + 1                 # Liniencounter wirdhochgezaehlt
+            LineBeginBlue = False                                   # LineBegin wieder auf False für die naechste Linie
             Buzzer.DebugSound(0.2)
         if CrossedLinesBlue == 2:
             CrossedLinesBlue = 1
 
         if CrossedLinesOrange + CrossedLinesBlue == 2:            # 2 Linien sind eine Ecke bzw. 1/4
             CrossedSection = CrossedSection + 1                     # 1/4 ist 1 Sektion
-            CrossedLinesBlue = 0                                    # Überquerte Linien wieder auf 0 um die nächste Sektion zu prüfen
+            CrossedLinesBlue = 0                                    # Ueberquerte Linien wieder auf 0 um die naechste Sektion zu prüfen
             CrossedLinesOrange = 0
             Buzzer.DebugSound(0.3)
 
         print(f'\rHindernis Farbe: {Farbe};     Linien überquert: {CrossedLinesOrange + CrossedLinesBlue};     Sektionen durchfahren: {CrossedSection}', end='')
-        if CrossedSection == 12:                                  # Bei 12 überquerten Sektionen sind 3 Runden durchfahren
+        if CrossedSection == 12:                                  # Bei 12 ueberquerten Sektionen sind 3 Runden durchfahren
             while distanceGerade < 100 and distanceGerade > 150:
                 distanceGerade = Ultraschallsensor.checkdistGerade()
                 distanceLinks = Ultraschallsensor.checkdistLinks()
@@ -289,7 +289,7 @@ try:
             winkel = 90 - ((200 - distanceGerade) / (200 - 5)) * 90  # Winkel zum rechts fahren wird berechnet
             winkel_gerundet = round(winkel) + 30                     # Winkel wird gerundet
             ServoLenkung.set_angle(1, winkel_gerundet)                      # Winkel von dem Servo für die Lenkung wird gesetzt
-            MotorAnsteuerung.Motor_Fahren(VelocityNormal)                      # fährt bisschen langsamer weiter
+            MotorAnsteuerung.Motor_Fahren(VelocityNormal)                      # faehrt bisschen langsamer weiter
             if distanceLinks < 30:                                   # Checkt die Enternung Links und Rechts
                 ServoLenkung.set_angle(1,20)                                  # Lenkt rechts wenn links die Entfernung zu klein wird
             if distanceRechts < 30:                                  #
