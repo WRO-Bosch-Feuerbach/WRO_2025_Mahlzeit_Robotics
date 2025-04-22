@@ -29,4 +29,4 @@ def set_angle(ID, angle):
 
 if __name__ == "__main__":
   while True:
-    set_angle(1, 180)
+    set_angle(1, 90)
