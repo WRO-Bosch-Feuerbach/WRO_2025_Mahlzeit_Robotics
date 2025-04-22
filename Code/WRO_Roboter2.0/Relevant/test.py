@@ -2,6 +2,7 @@ from encodings.punycode import T
 import math
 import time
 import Buzzer
+import Kursanpassung
 from board import SCL, SDA
 import busio
 from adafruit_pca9685  import PCA9685
@@ -154,25 +155,10 @@ def fahren():
         LineBeginBlue = False                                   # LineBegin wieder auf False für die nächste Linie
         #RouteCorrection = True
         Buzzer.DebugSound(0.2)
-
-        #---------- Kurs anpassen ----------#
-        while distanceHinten > 15:
-          MotorAnsteuerung.Motor_Fahren(0)
-          distanceHinten = Ultraschallsensor.checkdistHinten()
-          if distanceHinten < 20 and distanceHinten > 15 and distanceRechts > 5:
-            ServoLenkung.set_angle(1, 90)
-            MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
-          if distanceHinten > 20 and distanceHinten < 25 and distanceRechts > 5:
-            ServoLenkung.set_angle(1, 60)
-            MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
-          if distanceHinten > 25 and distanceRechts > 5:
-            ServoLenkung.set_angle(1, 30)
-            MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
-          #--------- Rückwärts wenn links nicht genug Platz ist ---------#
-          while distanceHinten > 15 and distanceRechts < 5:
-            ServoLenkung.set_angle(1, 90)
-            MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
         
+        #-------------- Kursanpassen ---------------#
+        #Kursanpassung.Kursanp_LinksFahren()
+
       if CrossedLinesOrange + CrossedLinesBlue == 2:            # 2 Linien sind eine Ecke bzw. 1/4
         CrossedSection = CrossedSection + 1                     # 1/4 ist 1 Sektion
         CrossedLinesBlue = 0                                    # Überquerte Linien wieder auf 0 um die nächste Sektion zu prüfen
@@ -278,25 +264,8 @@ def fahren():
         #RouteCorrection = True
         Buzzer.DebugSound(0.2)
         
-        
-        #---------- Kurs anpassen ----------#
-        while distanceHinten > 15:
-          MotorAnsteuerung.Motor_Fahren(0)
-          distanceHinten = Ultraschallsensor.checkdistHinten()
-          if distanceHinten < 20 and distanceHinten > 15 and distanceRechts > 5:
-            ServoLenkung.set_angle(1, 90)
-            MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
-          if distanceHinten > 20 and distanceHinten < 25 and distanceRechts > 5:
-            ServoLenkung.set_angle(1, 120)
-            MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
-          if distanceHinten > 25 and distanceRechts > 5:
-            ServoLenkung.set_angle(1, 150)
-            MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
-          #--------- Rückwärts wenn links nicht genug Platz ist ---------#
-          while distanceHinten > 15 and distanceRechts < 5:
-            ServoLenkung.set_angle(1, 90)
-            MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
-        
+        #-------------- Kursanpassen ---------------#
+        #Kursanpassung.Kursanp_RechtsFahren()
 
       if LineBeginBlue == True and BackgroundColor == True:     # Wenn vorher eine Linie erkannt wurde und der Boden wieder weiß ist -> Linie komplett überfahren
         CrossedLinesBlue = CrossedLinesBlue + 1                 # Liniencounter wirdhochgezählt
