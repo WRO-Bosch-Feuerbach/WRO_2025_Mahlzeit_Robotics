@@ -130,7 +130,7 @@ try:
         if LineDetected == True:                                #
             LineDetected = False                                  # Wird direkt wieder auf False gesetzt um die Zweite Linie wieder zu erkennen
             LineBeginOrange = True                                # Wird auf True gesetzt damit Linie erst wieder erkannt werden kann nach dem man darueber gefahren ist
-            BackgroundColor = False                               # Background ist die weiße Bahn flaeche
+            BackgroundColor = False                               # Background ist die weisse Bahn flaeche
         elif DetectedColor == "BLUE":                             # Das gleiche wie bei orange für Farbe Blau
             LineDetected = True                                     #
         if LineDetected == True:                                #
@@ -138,21 +138,21 @@ try:
             LineDetected = False                                  #
             LineBeginBlue = True                                  #
             BackgroundColor = False                               #
-        else:                                                     # Default ist das der Boden weiß ist und keine Linie erkannt wurde
+        else:                                                     # Default ist das der Boden weiss ist und keine Linie erkannt wurde
             BackgroundColor = True                                  #
             LineDetected = False                                    #
 
-        if LineBeginOrange == True and BackgroundColor == True:   # Wenn vorher eine Linie erkannt wurde und der Boden wieder weiß ist -> Linie komplett ueberfahren
-            CrossedLinesOrange = CrossedLinesOrange + 1             # Liniencounter wirdhochgezählt
-            LineBeginOrange = False                                 # LineBegin wieder auf False für die nächste Linie
+        if LineBeginOrange == True and BackgroundColor == True:   # Wenn vorher eine Linie erkannt wurde und der Boden wieder weiss ist -> Linie komplett ueberfahren
+            CrossedLinesOrange = CrossedLinesOrange + 1             # Liniencounter wirdhochgezaehlt
+            LineBeginOrange = False                                 # LineBegin wieder auf False für die naechste Linie
             Buzzer.DebugSound(0.2)
         if CrossedLinesOrange == 2:
             CrossedLinesOrange = 1
         
 
-        if LineBeginBlue == True and BackgroundColor == True:     # Wenn vorher eine Linie erkannt wurde und der Boden wieder weiß ist -> Linie komplett überfahren
+        if LineBeginBlue == True and BackgroundColor == True:     # Wenn vorher eine Linie erkannt wurde und der Boden wieder weiss ist -> Linie komplett ueberfahren
             CrossedLinesBlue = CrossedLinesBlue + 1                 # Liniencounter wirdhochgezaehlt
-            LineBeginBlue = False                                   # LineBegin wieder auf False für die nächste Linie
+            LineBeginBlue = False                                   # LineBegin wieder auf False für die naechste Linie
         #RouteCorrection = True
         Buzzer.DebugSound(0.2)
 
@@ -161,7 +161,7 @@ try:
 
         if CrossedLinesOrange + CrossedLinesBlue == 2:            # 2 Linien sind eine Ecke bzw. 1/4
             CrossedSection = CrossedSection + 1                     # 1/4 ist 1 Sektion
-            CrossedLinesBlue = 0                                    # Ueberquerte Linien wieder auf 0 um die naechste Sektion zu prüfen
+            CrossedLinesBlue = 0                                    # Ueberquerte Linien wieder auf 0 um die naechste Sektion zu pruefen
             CrossedLinesOrange = 0
             Buzzer.DebugSound(0.3)
 
@@ -247,18 +247,18 @@ try:
             RouteCorrection = True
             LineDetected = False                                  # Wird direkt wieder auf False gesetzt um die Zweite Linie wieder zu erkennen
             LineBeginOrange = True                                # Wird auf True gesetzt damit Linie erst wieder erkannt werden kann nach dem man darueber gefahren ist
-            BackgroundColor = False                               # Background ist die weiße Bahn fläche
+            BackgroundColor = False                               # Background ist die weisse Bahn flaeche
         elif DetectedColor == "BLUE":                             # Das gleiche wie bei orange für Farbe Blau
             LineDetected = True                                     #
         if LineDetected == True:                                #
             LineDetected = False                                  #
             LineBeginBlue = True                                  #
             BackgroundColor = False                               #
-        else:                                                     # Default ist das der Boden weiß ist und keine Linie erkannt wurde
+        else:                                                     # Default ist das der Boden weiss ist und keine Linie erkannt wurde
             BackgroundColor = True                                  #
             LineDetected = False                                    #
 
-        if LineBeginOrange == True and BackgroundColor == True:   # Wenn vorher eine Linie erkannt wurde und der Boden wieder weiss ist -> Linie komplett überfahren
+        if LineBeginOrange == True and BackgroundColor == True:   # Wenn vorher eine Linie erkannt wurde und der Boden wieder weiss ist -> Linie komplett ueberfahren
             CrossedLinesOrange = CrossedLinesOrange + 1             # Liniencounter wirdhochgezaehlt
             LineBeginOrange = False                                 # LineBegin wieder auf False für die naechste Linie
             #RouteCorrection = True
@@ -268,7 +268,7 @@ try:
         #Kursanpassung.Kursanp_RechtsFahren()
 
         if LineBeginBlue == True and BackgroundColor == True:     # Wenn vorher eine Linie erkannt wurde und der Boden wieder weiss ist -> Linie komplett ueberfahren
-            CrossedLinesBlue = CrossedLinesBlue + 1                 # Liniencounter wirdhochgezaehlt
+            CrossedLinesBlue = CrossedLinesBlue + 1                 # Liniencounter wird hochgezaehlt
             LineBeginBlue = False                                   # LineBegin wieder auf False für die naechste Linie
             Buzzer.DebugSound(0.2)
         if CrossedLinesBlue == 2:

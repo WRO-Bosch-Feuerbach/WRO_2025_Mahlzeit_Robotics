@@ -23,17 +23,17 @@ def Blockfarbe():
   # Maske erstellen
   red_mask = cv2.inRange(hsv, red_lower, red_upper)
   green_mask = cv2.inRange(hsv, green_lower, green_upper)
-  # Rote und grüne Pixel zählen
+  # Rote und gruene Pixel zaehlen
   red_count = cv2.countNonZero(red_mask)
   green_count = cv2.countNonZero(green_mask)
 
-  # Zum überprüfen von HSV Werten
+  # Zum ueberprüfen von HSV Werten
   '''
   hsv_pixel = hsv[0,0]
   print('HSV vom Pixel:', hsv_pixel)
   '''
 
-  # Schauen ob was rotes oder grünes im Bild ist
+  # Schauen ob was rotes oder gruenes im Bild ist
   if red_count > pixel_threshold:
     Farbe = 'ROT'
   elif green_count > pixel_threshold:
