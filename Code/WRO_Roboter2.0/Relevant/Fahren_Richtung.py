@@ -1,7 +1,7 @@
 import Ultraschallsensor
 import time 
 import MotorAnsteuerung
-import test2
+import ServoLenkung
 import Startsequenz
 
 #----------------------------- Variablen -----------------------------#
