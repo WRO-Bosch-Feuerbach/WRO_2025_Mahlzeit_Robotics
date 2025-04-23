@@ -10,6 +10,14 @@ import Ultraschallsensor
 def Bodenlinie():
 
     DetectedColor = CameraColorDetection2.ColorDetection2_0()
+    LineDetected = False
+    LineBeginOrange = False
+    LineBeginBlue = False
+    BackgroundColor = True
+    fertig = False
+    CrossedLinesOrange = 0
+    CrossedLinesBlue = 0
+    CrossedSection = 0
 
     if DetectedColor == "ORANGE":
         LineDetected = True
@@ -59,6 +67,10 @@ def Bodenlinie():
 
 #-------------------- Hindernisblockerkennung --------------------#
 def HindernisBlock(VelocityObstacle):
+    distanceGerade = Ultraschallsensor.checkdistGerade()
+    distanceLinks = Ultraschallsensor.checkdistLinks()
+    distanceRechts = Ultraschallsensor.checkdistRechts()
+
     if BlockColorDetection.Blockfarbe() == 'ROT' and distanceGerade < 80:
         distanceGerade = Ultraschallsensor.checkdistGerade()
         distanceLinks = Ultraschallsensor.checkdistLinks()
@@ -73,7 +85,7 @@ def HindernisBlock(VelocityObstacle):
             ServoLenkung.set_angle(1,180)                                
 
         BlockColorDetection.Blockfarbe()                        
-        
+
     if BlockColorDetection.Blockfarbe() == 'GRUEN' and distanceGerade < 80:      
         distanceGerade = Ultraschallsensor.checkdistGerade()
         distanceLinks = Ultraschallsensor.checkdistLinks()

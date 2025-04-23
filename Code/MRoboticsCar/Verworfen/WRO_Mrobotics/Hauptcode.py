@@ -12,17 +12,16 @@ import MotorAnsteuerung
 #-------------------- Variablen --------------------#
 
 Lenkung = ''
-VelocityBegin = 0,4
+VelocityBegin = 0.4
 VelocityNormal = 0.35
-VelocityObstacle = 0,3
-VelocityBackwards = -0,4
+VelocityObstacle = 0.3
+VelocityBackwards = -0.4
 
 #---------------------------------------------------#
 
 #-------------------- Losfahren --------------------#
 
-Startsequenz.Losfahren(VelocityBegin, VelocityBackwards)                                     
-Lenkung = Startsequenz.Losfahren()
+Lenkung = Startsequenz.Losfahren(VelocityBegin, VelocityBackwards)
 
 #---------------------------------------------------#
 #-------------------- Rundenfahren, Farberkennung Bodenlinie & Hindernis --------------------#
