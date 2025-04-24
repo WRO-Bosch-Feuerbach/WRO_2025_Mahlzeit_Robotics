@@ -33,13 +33,13 @@ distanceGerade = Ultraschallsensor.checkdistGerade()
 distanceLinks = Ultraschallsensor.checkdistLinks()
 distanceRechts = Ultraschallsensor.checkdistRechts()
 distanceHinten = Ultraschallsensor.checkdistHinten()
-DetectedColor = CameraColorDetection.ColorDetection2_0()
+#DetectedColor = CameraColorDetection.ColorDetection2_0()
 Farbe = ''
 #---------------- Velocity Variables ----------------#
-VelocityBegin = 0.4
-VelocityNormal = 0.35
-VelocityObstacle = 0.35
-VelocityBackwards = -0.5
+VelocityBegin = -0.4
+VelocityNormal = -0.35
+VelocityObstacle = -0.35
+VelocityBackwards = 0.5
 
 
 #-------------------------------------------------------------------- Start Sequenz + Linienerkennung --------------------------------------------------------------------#
@@ -52,22 +52,23 @@ try:
         distanceGerade = Ultraschallsensor.checkdistGerade()
         distanceLinks = Ultraschallsensor.checkdistLinks()
         distanceRechts = Ultraschallsensor.checkdistRechts()
-        ServoLenkung.set_angle(1,100)                            
-        MotorAnsteuerung.Motor_Fahren(VelocityBegin)              
-
-        if distanceGerade < 40:                                   
+        ServoLenkung.set_angle(1,100)
+        MotorAnsteuerung.Motor_Fahren(VelocityBegin)
+        print(f' Links: {distanceLinks}   Gerade: {distanceGerade}   Rechts: {distanceRechts}')
+        if distanceGerade < 40:
             MotorAnsteuerung.Motor_Fahren(0)
             time.sleep(2)
-        if distanceLinks > distanceRechts:                      
+        if distanceLinks > distanceRechts:
             FahrenLinks = True
             FahrenRechts = False
-        else:                                                   
+            break
+        else:
             FahrenRechts = True
             FahrenLinks = False
-        
+            break
         MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
         time.sleep(2)
-        break                                                   
+
     #----------------------------------------------------------------------------------------------------------------------------------------------------------------------#
 
     #----------------------------------------------------- Fahren Links + Linienerkennung + Hindernisserkennung + Kursanpassung -------------------------------------------------#

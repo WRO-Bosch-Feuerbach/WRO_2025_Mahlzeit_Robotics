@@ -38,6 +38,6 @@ if __name__ == "__main__":
 
   while True:
     time.sleep(0.1)
-    print(f'{checkdistLinks()}    {checkdistGerade()}    {checkdistRechts()}')
+    print(f'{checkdistRechts()}')
 
 #distance = checkdist()  #-> werte in distance speichern

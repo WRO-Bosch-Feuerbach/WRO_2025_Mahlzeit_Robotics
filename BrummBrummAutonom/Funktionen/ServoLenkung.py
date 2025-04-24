@@ -17,10 +17,15 @@ pca.frequency = 50  # Standartwert fuer Servos
 def set_angle(ID, angle):
     # min und max Winkel definieren
     angle = max(0, min(angle, 180))
+    
+    duty_cycle = (angle/180) * 5 + 5
 
+    pulse_value = int((duty_cycle/100) * 65535)
+
+    pca.channels[ID].duty_cycle = pulse_value
     # Servoinstanz wird erstellt
-    servo_angle = servo.Servo(pca.channels[ID], min_pulse=1000, max_pulse=2000, actuation_range=180)
-    servo_angle.angle = angle  # Winkel wird gesetzt
+    #servo_angle = servo.Servo(pca.channels[ID], min_pulse=1000, max_pulse=2000, actuation_range=180)
+    #servo_angle.angle = angle  # Winkel wird gesetzt
 
 #--------------------------------- zweite Methode zur Ansteuerung ---------------------------------#
 
