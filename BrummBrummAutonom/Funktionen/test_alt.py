@@ -9,8 +9,8 @@ from adafruit_motor import motor
 import Ultraschallsensor
 import MotorAnsteuerung
 import ServoLenkung
-import CameraColorDetection2
-import BlockColorDetection
+#import CameraColorDetection2
+#import BlockColorDetection
 
 def fahren():
   OrangeLine = False
@@ -25,13 +25,13 @@ def fahren():
   distanceGerade = Ultraschallsensor.checkdistGerade()
   distanceLinks = Ultraschallsensor.checkdistLinks()
   distanceRechts = Ultraschallsensor.checkdistRechts()
-  DetectedColor = CameraColorDetection2.ColorDetection2_0()
+  #DetectedColor = CameraColorDetection2.ColorDetection2_0()
   Farbe = ''
   CrossedSection = 0
   RoundCounter = 0
-  VelocityBegin = 0.4
-  VelocityNormal = 0.35
-  VelocityObstacle = 0.35
+  VelocityBegin = -0.4
+  VelocityNormal = -0.35
+  VelocityObstacle = -0.35
 
   #-------------------------------------------------------------------- Start Sequenz + Linienerkennung --------------------------------------------------------------------#
 
@@ -59,7 +59,7 @@ def fahren():
         break                                                   # Bricht aus erster Schleife aus
 
       #---------- Farberkennung Bodenlinien ----------#
-
+      '''
       DetectedColor = CameraColorDetection2.ColorDetection2_0()
 
       if DetectedColor == "ORANGE":                             # Checkt ob Farbe orange ist
@@ -113,7 +113,7 @@ def fahren():
       if distanceRechts < 30:                                   # Wenn die Entfernung rechts zu klein wird lenkt er nach links
         ServoLenkung.set_angle(1,170)
 
-      #-------- Farberkennung für Hindernisse ----------#
+      #-------- Farberkennung fuer Hindernisse ----------#
 
       while BlockColorDetection.Blockfarbe() == 'ROT' and distanceGerade < 100:          # Checkt ob die Farbe rot ist
         distanceGerade = Ultraschallsensor.checkdistGerade()
@@ -185,7 +185,7 @@ def fahren():
 
       if CrossedSection == 12:                                  # Bei 12 ueberquerten Sektionen sind 3 Runden durchfahren
         break                                                   # Aus der Schleife springen bzw. Programm ist danach Ende
-
+      '''
     #-----------------------------------------------------------------------------------------------------------------------------------------------------------------------#
 
     #---------------------------------------------------------- Fahren Rechts + Linienerkennung + Hindernisserkennung ------------------------------------------------------#
@@ -208,7 +208,7 @@ def fahren():
 
 
       #----------- Farberkennung Hindernisse ----------#       Siehe Erklaerung FahrenLinks-Schleife
-
+      '''
       while BlockColorDetection.Blockfarbe() == 'ROT' and distanceGerade < 100:
         distanceGerade = Ultraschallsensor.checkdistGerade()
         distanceLinks = Ultraschallsensor.checkdistLinks()
@@ -274,13 +274,13 @@ def fahren():
 
       if CrossedSection == 12:
         break
-
+      '''
     MotorAnsteuerung.Motor_Fahren(0)
 
 
   except KeyboardInterrupt:
     MotorAnsteuerung.Motor_Fahren(0)
-    test2.set_angle(1,90)
+    ServoLenkung.set_angle(1,90)
 
   #----------------------------------------------------------------------------------------------------------------------------------------------------------------------#
 
@@ -291,4 +291,4 @@ if __name__ == "__main__":
     fahren()
   except KeyboardInterrupt:
     MotorAnsteuerung.Motor_Fahren(0)
-    test2.set_angle(1,90)
+    ServoLenkung.set_angle(1,90)

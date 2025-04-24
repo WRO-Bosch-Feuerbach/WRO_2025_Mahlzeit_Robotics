@@ -11,7 +11,7 @@ i2c = busio.I2C(SCL, SDA)
 
 # PCA9685 Initialisieren
 pca = PCA9685(i2c, address=0x5f)
-pca.frequency = 50  # Standartwert für Servos
+pca.frequency = 50  # Standartwert fuer Servos
 
 # Funktion zum Setzen des Winkels
 def set_angle(ID, angle):
@@ -35,10 +35,10 @@ pwm = GPIO.PWM(servo_pin, 50) # PWM mit einer Frequenz von 50 Hz
 pwm.start(0)  # Initialisiere PWM mit 0% Duty Cycle (Servo wird nicht bewegt)
 
 def set_servo_angle(angle):
-    # Berechne die Pulsbreite für den gewünschten Winkel
+    # Berechne die Pulsbreite fuer den gewuenschten Winkel
     pulse_width = (angle / 18) + 2  # Dies entspricht der Pulsbreite in ms
     duty_cycle = (pulse_width / 20) * 100  # Berechne den Duty Cycle in %
-    pwm.ChangeDutyCycle(duty_cycle)  # Setze den Duty Cycle für den Servo
+    pwm.ChangeDutyCycle(duty_cycle)  # Setze den Duty Cycle fuer den Servo
 
 if __name__ == "__main__":
   while True:

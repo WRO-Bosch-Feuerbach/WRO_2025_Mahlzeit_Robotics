@@ -10,8 +10,8 @@ from adafruit_motor import motor
 import Ultraschallsensor
 import MotorAnsteuerung
 import ServoLenkung
-import CameraColorDetection
-import BlockColorDetection
+#import CameraColorDetection
+#import BlockColorDetection
 
 #--------------------------------------------------------------- Variabeln -----------------------------------------------------------------#
 #---------------- Line Detection Variables ----------------#
@@ -88,7 +88,7 @@ try:
             ServoLenkung.set_angle(1,180)
 
       
-
+        '''
         #-------- Farberkennung Hindernisse ----------#
 
         while BlockColorDetection.Blockfarbe() == 'ROT' and distanceGerade < 100:         
@@ -179,9 +179,9 @@ try:
                 ServoLenkung.set_angle(1,20)
             if distanceRechts < 30:                                 
                 ServoLenkung.set_angle(1,170)
-          
+        
         break                                                       
-
+        '''
     #-----------------------------------------------------------------------------------------------------------------------------------------------------------------------#
 
     #----------------------------------------------------- Fahren Rechts + Linienerkennung + Hindernisserkennung + Kursanpassung -------------------------------------------------#
@@ -200,7 +200,7 @@ try:
            ServoLenkung.set_angle(1,0)                                  
         if distanceRechts < 35:                                  
             ServoLenkung.set_angle(1,180)
-
+        '''
         #----------- Farberkennung Hindernisse ----------#      
 
         while BlockColorDetection.Blockfarbe() == 'ROT' and distanceGerade < 100:
@@ -294,7 +294,7 @@ try:
                 ServoLenkung.set_angle(1,170) 
 
         break
-
+        '''
     MotorAnsteuerung.Motor_Fahren(0)
 
 except KeyboardInterrupt:
