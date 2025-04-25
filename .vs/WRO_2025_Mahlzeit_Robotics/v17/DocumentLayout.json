@@ -1,0 +1,87 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\RQP1FE\\WRO_Roboter\\WRO_2025_Mahlzeit_Robotics\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\RQP1FE\\WRO_Roboter\\WRO_2025_Mahlzeit_Robotics\\BrummBrummAutonom\\Funktionen\\BrummBrummAutonom.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:BrummBrummAutonom\\Funktionen\\BrummBrummAutonom.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\RQP1FE\\WRO_Roboter\\WRO_2025_Mahlzeit_Robotics\\BrummBrummAutonom\\Funktionen\\test_alt.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:BrummBrummAutonom\\Funktionen\\test_alt.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\RQP1FE\\WRO_Roboter\\Backup\\WRO_2025_Mahlzeit_Robotics\\Code\\MRoboticsCar\\Relevant\\Hauptfunktion.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\RQP1FE\\WRO_Roboter\\WRO_2025_Mahlzeit_Robotics\\BrummBrummAutonom\\Funktionen\\ServoLenkung.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:BrummBrummAutonom\\Funktionen\\ServoLenkung.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Hauptfunktion.py",
+              "DocumentMoniker": "C:\\Users\\RQP1FE\\WRO_Roboter\\Backup\\WRO_2025_Mahlzeit_Robotics\\Code\\MRoboticsCar\\Relevant\\Hauptfunktion.py",
+              "RelativeDocumentMoniker": "..\\Backup\\WRO_2025_Mahlzeit_Robotics\\Code\\MRoboticsCar\\Relevant\\Hauptfunktion.py",
+              "ToolTip": "C:\\Users\\RQP1FE\\WRO_Roboter\\Backup\\WRO_2025_Mahlzeit_Robotics\\Code\\MRoboticsCar\\Relevant\\Hauptfunktion.py",
+              "RelativeToolTip": "..\\Backup\\WRO_2025_Mahlzeit_Robotics\\Code\\MRoboticsCar\\Relevant\\Hauptfunktion.py",
+              "ViewState": "AgIAACMAAAAAAAAAAAAAADQAAABNAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2025-04-24T12:42:18.564Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "BrummBrummAutonom.py",
+              "DocumentMoniker": "C:\\Users\\RQP1FE\\WRO_Roboter\\WRO_2025_Mahlzeit_Robotics\\BrummBrummAutonom\\Funktionen\\BrummBrummAutonom.py",
+              "RelativeDocumentMoniker": "BrummBrummAutonom\\Funktionen\\BrummBrummAutonom.py",
+              "ToolTip": "C:\\Users\\RQP1FE\\WRO_Roboter\\WRO_2025_Mahlzeit_Robotics\\BrummBrummAutonom\\Funktionen\\BrummBrummAutonom.py",
+              "RelativeToolTip": "BrummBrummAutonom\\Funktionen\\BrummBrummAutonom.py",
+              "ViewState": "AgIAAGQAAAAAAAAAAAAAAN0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2025-04-24T10:34:35.347Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ServoLenkung.py",
+              "DocumentMoniker": "C:\\Users\\RQP1FE\\WRO_Roboter\\WRO_2025_Mahlzeit_Robotics\\BrummBrummAutonom\\Funktionen\\ServoLenkung.py",
+              "RelativeDocumentMoniker": "BrummBrummAutonom\\Funktionen\\ServoLenkung.py",
+              "ToolTip": "C:\\Users\\RQP1FE\\WRO_Roboter\\WRO_2025_Mahlzeit_Robotics\\BrummBrummAutonom\\Funktionen\\ServoLenkung.py",
+              "RelativeToolTip": "BrummBrummAutonom\\Funktionen\\ServoLenkung.py",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2025-04-24T07:26:31.642Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "test_alt.py",
+              "DocumentMoniker": "C:\\Users\\RQP1FE\\WRO_Roboter\\WRO_2025_Mahlzeit_Robotics\\BrummBrummAutonom\\Funktionen\\test_alt.py",
+              "RelativeDocumentMoniker": "BrummBrummAutonom\\Funktionen\\test_alt.py",
+              "ToolTip": "C:\\Users\\RQP1FE\\WRO_Roboter\\WRO_2025_Mahlzeit_Robotics\\BrummBrummAutonom\\Funktionen\\test_alt.py",
+              "RelativeToolTip": "BrummBrummAutonom\\Funktionen\\test_alt.py",
+              "ViewState": "AgIAAFQAAAAAAAAAAAAAAGkAAAA9AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2025-04-24T07:23:43.82Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
