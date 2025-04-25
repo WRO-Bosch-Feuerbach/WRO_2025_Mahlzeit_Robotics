@@ -1,4 +1,5 @@
-#from encodings.punycode import T
+print('wdafa')
+from encodings.punycode import T
 import math
 import time
 import DebugBuzzer
@@ -47,16 +48,14 @@ print('4')
 FahrenLinks = False
 FahrenRechts = False
 
-
 #making sure the servo is set straight and motor is not driving
 ServoLenkung.set_angle(1, 90)
 MotorAnsteuerung.Motor_Fahren(VelocityBegin)
-print('5')
+print('hi')
 #Start-Sequence --> drive forward and check in which direction the robot has to drive, after that drive backwards, so the roboter can get the curve easily
 while True:
-    print('6')
     MotorAnsteuerung.Motor_Fahren(VelocityBegin)
-    if distanceGerade <= 80:
+    if distanceGerade == 80:
         MotorAnsteuerung.Motor_Fahren(0)
         distanceGerade = Ultraschallsensor.checkdistGerade()
         distanceHinten = Ultraschallsensor.checkdistHinten()
@@ -153,8 +152,3 @@ while Lenkung == True:
             ServoLenkung.set_angle(1, angle_rounded)
 
         break
-
-
-
-
-
