@@ -154,7 +154,7 @@ try:
                 ServoLenkung.set_angle(1, angle_rounded)
 
             break
-except keyboardInterrupt:
+except KeyboardInterrupt:
     MotorAnsteuerung.Motor_Fahren(0)
 
 
