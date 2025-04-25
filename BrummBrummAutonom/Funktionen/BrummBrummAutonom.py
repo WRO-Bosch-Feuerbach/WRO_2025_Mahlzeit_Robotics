@@ -12,7 +12,6 @@ import MotorAnsteuerung
 import ServoLenkung
 import CameraColorDetection
 import BlockColorDetection
-print("1")
 #--------------------------------------------------------------- Variabeln -----------------------------------------------------------------#
 #---------------- Line Detection Variables ----------------#
 OrangeLine = False
@@ -28,7 +27,6 @@ LineBeginBlue = False
 BackgroundColor = False
 CrossedSection = 0
 RoundCounter = 0
-print("2")
 #---------------- Distance from Sensor Variables ----------------#
 distanceGerade = Ultraschallsensor.checkdistGerade()
 distanceLinks = Ultraschallsensor.checkdistLinks()
@@ -36,13 +34,11 @@ distanceRechts = Ultraschallsensor.checkdistRechts()
 distanceHinten = Ultraschallsensor.checkdistHinten()
 DetectedColor = CameraColorDetection.ColorDetection2_0()
 Farbe = ''
-print('3')
 #---------------- Velocity Variables ----------------#
 VelocityBegin = 0.4
 VelocityNormal = 0.35
-VelocityObstacle = 0.35
+VelocityObstacle = 0.25
 VelocityBackwards = -0.5
-print('4')
 #---------------- Drive related Variables ----------------#
 FahrenLinks = False
 FahrenRechts = False
@@ -50,52 +46,60 @@ FahrenRechts = False
 try:
 
     #making sure the servo is set straight and motor is not driving
-    ServoLenkung.set_angle(1, 90)
+    ServoLenkung.set_angle(1, 100)
     MotorAnsteuerung.Motor_Fahren(VelocityBegin)
-    print('5')
     #Start-Sequence --> drive forward and check in which direction the robot has to drive, after that drive backwards, so the roboter can get the curve easily
     while True:
-        print('6')
+        print('Start-Sequenz eingeleitet')
         MotorAnsteuerung.Motor_Fahren(VelocityBegin)
-        if distanceGerade <= 80:
+        distanceGerade = Ultraschallsensor.checkdistGerade()
+        distanceHinten = Ultraschallsensor.checkdistHinten()
+        distanceLinks = Ultraschallsensor.checkdistLinks()
+        distanceRechts = Ultraschallsensor.checkdistRechts()
+        if distanceGerade <= 40:
             MotorAnsteuerung.Motor_Fahren(0)
-            distanceGerade = Ultraschallsensor.checkdistGerade()
-            distanceHinten = Ultraschallsensor.checkdistHinten()
             distanceLinks = Ultraschallsensor.checkdistLinks()
             distanceRechts = Ultraschallsensor.checkdistRechts()
-            time.sleep(1)
             if distanceLinks > distanceRechts:
                 FahrenLinks = True
                 FahrenRechts = False
+                print('Ich fahre Links')
             if distanceRechts > distanceLinks:
                 FahrenLinks = False
                 FahrenRechts = True
+                print('Ich fahre rechts')
 
             MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
             Lenkung = True
-            time.sleep(1.5)
+            time.sleep(2)
             break #Start-Sequence is done
 
     # <---- Driving Section
     while Lenkung == True:
+        ServoLenkung.set_angle(1, 90)
         MotorAnsteuerung.Motor_Fahren(VelocityNormal)
         distanceRechts = Ultraschallsensor.checkdistRechts()
         distanceLinks = Ultraschallsensor.checkdistLinks()
         distanceGerade = Ultraschallsensor.checkdistGerade()
-        if distanceRechts <= 20:
-            ServoLenkung.set_angle(1, 0) #
-        if distanceLinks <= 20:
-            ServoLenkung.set_angle(1, 180) #
 
-        if distanceGerade <= 90:
+        if distanceGerade <= 100:
             if FahrenLinks == True:
                 angle = 90 + ((200 - distanceGerade) / (200 - 5)) * 90
-                angle_rounded = round(angle) + 10
+                angle_rounded = round(angle) + 20
+                #print(angle_rounded)
+                ServoLenkung.set_angle(1,angle_rounded)
             elif FahrenRechts == True:
                 angle = 90 - ((200 - distanceGerade) / (200 - 5)) * 90
-                angle_rounded = round(angle) + 10
-            print(angle_rounded)
-            ServoLenkung.set_angle(1, angle_rounded)
+                angle_rounded = round(angle) + 20
+                #print(angle_rounded)
+                ServoLenkung.set_angle(1, angle_rounded)
+
+        if distanceRechts <= 30 and distanceLinks > distanceRechts:
+            MotorAnsteuerung.Motor_Fahren(VelocityNormal - 0.05)
+            ServoLenkung.set_angle(1, 155)
+        if distanceLinks <= 30 and distanceLinks < distanceRechts:
+            MotorAnsteuerung.Motor_Fahren(VelocityNormal - 0.05)
+            ServoLenkung.set_angle(1, 25)
 
         # Color-Line-Detection Sequence
         DetectedColor = CameraColorDetection.ColorDetection2_0()
@@ -133,17 +137,19 @@ try:
             CrossedSection = CrossedSection + 1
             CrossedLinesBlue = 0
             CrossedLinesOrange = 0
+            print(CrossedSection)
             DebugBuzzer.DebugSound(0.3)
 
         if CrossedSection == 12:
-            while not(100 < distanceGerade < 150):
+            while not (100 < distanceGerade < 150):
+                print('Debug 9')
                 distanceGerade = Ultraschallsensor.checkdistGerade()
                 distanceLinks = Ultraschallsensor.checkdistLinks()
                 distanceRechts = Ultraschallsensor.checkdistRechts()
-                if distanceLinks < 30:
-                    ServoLenkung.set_angle(1,20)
-                if distanceRechts < 30:
-                    ServoLenkung.set_angle(1,170)
+                if distanceLinks <= 35:
+                    ServoLenkung.set_angle(1,25)
+                if distanceRechts <= 35:
+                    ServoLenkung.set_angle(1,155)
                 if FahrenLinks == True:
                     angle = 90 + ((200 - distanceGerade) / (200 - 5)) * 90
                     angle_rounded = round(angle) + 10
@@ -154,6 +160,8 @@ try:
                 ServoLenkung.set_angle(1, angle_rounded)
 
             break
+    MotorAnsteuerung.Motor_Fahren(0)	
+
 except KeyboardInterrupt:
     MotorAnsteuerung.Motor_Fahren(0)
 

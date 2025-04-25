@@ -14,7 +14,7 @@ def button_callback(channel):
     global running_process
     if running_process is None:
         print("Programm gestartet")
-        running_process = subprocess.Popen(["python3", "test.py"])
+        running_process = subprocess.Popen(["python3", "BrummBrummAutonom.py"])
     else:
         print("Programm gestoppt")
         MotorAnsteuerung.Motor_Fahren(0)  # Motor anhalten
@@ -22,7 +22,7 @@ def button_callback(channel):
         running_process.terminate()
         running_process = None
 
-# Interrupt für den Button setzen
+# Interrupt fuer den Button setzen
 GPIO.add_event_detect(BUTTON_PIN, GPIO.FALLING, callback=button_callback, bouncetime=300)
 
 try:

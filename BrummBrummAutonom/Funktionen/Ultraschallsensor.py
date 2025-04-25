@@ -39,9 +39,9 @@ if __name__ == "__main__":
   while True:
     time.sleep(0.1)
     #print(f'{checkdistGerade()}')
-    #print(f'{checkdistRechts()}')
+    print(f'{checkdistRechts()}')
     #print(f'{checkdistLinks()}')
     #print(f'{checkdistHinten()}')
-    print(f'hinten: {checkdistHinten()} ;         vorne: {checkdistGerade()}  ;           links: {checkdistLinks()}  ;       rechts: {checkdistRechts()}')
+    #print(f'hinten: {checkdistHinten()} ;         vorne: {checkdistGerade()}  ;           links: {checkdistLinks()}  ;       rechts: {checkdistRechts()}')
 
 
