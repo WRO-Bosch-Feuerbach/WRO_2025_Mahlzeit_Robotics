@@ -1,3 +1,4 @@
+from Funktionen.BrummBrummAutonom import VelocityNormal
 import ServoLenkung
 import MotorAnsteuerung
 import Ultraschallsensor
@@ -19,6 +20,7 @@ def Kursanp_LinksFahren():
     distanceHinten = Ultraschallsensor.checkdistHinten()
     distanceLinks = Ultraschallsensor.checkdistLinks()
     distanceRechts = Ultraschallsensor.checkdistRechts()
+    distanceGerade = Ultraschallsensor.checkdistGerade()
     #---------- Kurs anpassen ----------#
     while distanceHinten > 15:
         MotorAnsteuerung.Motor_Fahren(0)
@@ -36,12 +38,18 @@ def Kursanp_LinksFahren():
         while distanceHinten > 75 and distanceRechts < 5:
             ServoLenkung.set_angle(1, 90)
             MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
+    if distanceGerade < 130 and distanceRechts > 65:
+        ServoLenkung.set_angle(1, 110)
+        MotorAnsteuerung.Motor_Fahren(VelocityNormal)
+        time.sleep(0.2)
+
 
 def Kursanp_RechtsFahren():
     VelocityBackwards = -0.5
     distanceHinten = Ultraschallsensor.checkdistHinten()
     distanceLinks = Ultraschallsensor.checkdistLinks()
     distanceRechts = Ultraschallsensor.checkdistRechts()
+    distanceGerade = Ultraschallsensor.checkdistGerade()
     #---------- Kurs anpassen ----------#
     while distanceHinten > 15:
         MotorAnsteuerung.Motor_Fahren(0)
@@ -59,3 +67,7 @@ def Kursanp_RechtsFahren():
         while distanceHinten > 75 and distanceRechts < 5:
             ServoLenkung.set_angle(1, 90)
             MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
+    if distanceGerade < 130 and distanceLinks > 65:
+        ServoLenkung.set_angle(1, 70)
+        MotorAnsteuerung.Motor_Fahren(VelocityNormal)
+        time.sleep(0.2)
