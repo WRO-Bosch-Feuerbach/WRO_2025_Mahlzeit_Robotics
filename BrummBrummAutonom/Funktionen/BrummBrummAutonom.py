@@ -126,12 +126,26 @@ try:
             if CrossedLinesOrange == 2:
                 CrossedLinesOrange = 1
 
+            if FahrenLinks == True:
+                Kursanpassung.Kursanp_LinksFahren()
+                print("Kursanpassung links")
+            elif FahrenRechts == True:
+                Kursanpassung.Kursanp_RechtsFahren()
+                print("Kursanpassung rechts")
+
         if LineBeginBlue == True and BackgroundColor == True:
             CrossedLinesBlue = CrossedLinesBlue + 1
             LineBeginBlue = False
             DebugBuzzer.DebugSound(0.2)
             if CrossedLinesBlue == 2:
                 CrossedLinesBlue = 1
+
+            if FahrenLinks == True:
+                Kursanpassung.Kursanp_LinksFahren()
+                print("Kursanpassung links")
+            elif FahrenRechts == True:
+                Kursanpassung.Kursanp_RechtsFahren()
+                print("Kursanpassung rechts")
 
         if CrossedLinesOrange + CrossedLinesBlue == 2:
             CrossedSection = CrossedSection + 1
@@ -146,10 +160,6 @@ try:
                 distanceGerade = Ultraschallsensor.checkdistGerade()
                 distanceLinks = Ultraschallsensor.checkdistLinks()
                 distanceRechts = Ultraschallsensor.checkdistRechts()
-                if distanceLinks <= 35:
-                    ServoLenkung.set_angle(1,25)
-                if distanceRechts <= 35:
-                    ServoLenkung.set_angle(1,155)
                 if FahrenLinks == True:
                     angle = 90 + ((200 - distanceGerade) / (200 - 5)) * 90
                     angle_rounded = round(angle) + 10
@@ -158,9 +168,13 @@ try:
                     angle_rounded = round(angle) + 10
                 print(angle_rounded)
                 ServoLenkung.set_angle(1, angle_rounded)
+                if distanceLinks <= 35:
+                    ServoLenkung.set_angle(1,25)
+                if distanceRechts <= 35:
+                    ServoLenkung.set_angle(1,155)
 
             break
-    MotorAnsteuerung.Motor_Fahren(0)	
+    MotorAnsteuerung.Motor_Fahren(0)
 
 except KeyboardInterrupt:
     MotorAnsteuerung.Motor_Fahren(0)
