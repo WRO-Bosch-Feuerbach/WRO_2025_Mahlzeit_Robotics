@@ -1,4 +1,3 @@
-from Funktionen.BrummBrummAutonom import VelocityNormal
 import ServoLenkung
 import MotorAnsteuerung
 import Ultraschallsensor
@@ -22,16 +21,16 @@ def Kursanp_LinksFahren():
     distanceRechts = Ultraschallsensor.checkdistRechts()
     distanceGerade = Ultraschallsensor.checkdistGerade()
     #---------- Kurs anpassen ----------#
-    while distanceHinten > 30:
+    while distanceHinten > 40:
         MotorAnsteuerung.Motor_Fahren(0)
         distanceHinten = Ultraschallsensor.checkdistHinten()
-        if 30 < distanceHinten < 40 and distanceRechts > 5:
+        if 40 < distanceHinten < 57 and distanceRechts > 5:
             ServoLenkung.set_angle(1, 90)
             MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
-        if 40 < distanceHinten < 75 and distanceRechts > 5:
+        if 57 < distanceHinten < 90 and distanceRechts > 5:
             ServoLenkung.set_angle(1, 60)
             MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
-        if distanceHinten > 75 and distanceRechts > 5:
+        if distanceHinten > 90 and distanceRechts > 5:
             ServoLenkung.set_angle(1, 30)
             MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
         #--------- Rückwaerts wenn links nicht genug Platz ist ---------#
@@ -39,9 +38,9 @@ def Kursanp_LinksFahren():
             ServoLenkung.set_angle(1, 90)
             MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
     if distanceGerade < 130:
-        ServoLenkung.set_angle(1, 110)
+        ServoLenkung.set_angle(1, 60)
         MotorAnsteuerung.Motor_Fahren(VelocityNormal)
-        time.sleep(0.2)
+        time.sleep(0.6)
 
 
 def Kursanp_RechtsFahren():
@@ -51,16 +50,16 @@ def Kursanp_RechtsFahren():
     distanceRechts = Ultraschallsensor.checkdistRechts()
     distanceGerade = Ultraschallsensor.checkdistGerade()
     #---------- Kurs anpassen ----------#
-    while distanceHinten > 30:
+    while distanceHinten > 40:
         MotorAnsteuerung.Motor_Fahren(0)
         distanceHinten = Ultraschallsensor.checkdistHinten()
-        if 30 < distanceHinten < 40 and distanceRechts > 5:
+        if 40 < distanceHinten < 57 and distanceRechts > 5:
             ServoLenkung.set_angle(1, 90)
             MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
-        if 40 < distanceHinten < 75 and distanceRechts > 5:
+        if 57 < distanceHinten < 90 and distanceRechts > 5:
             ServoLenkung.set_angle(1, 120)
             MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
-        if distanceHinten > 75 and distanceRechts > 5:
+        if distanceHinten > 90 and distanceRechts > 5:
             ServoLenkung.set_angle(1, 150)
             MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
         #--------- Rückwaerts wenn links nicht genug Platz ist ---------#
@@ -68,6 +67,6 @@ def Kursanp_RechtsFahren():
             ServoLenkung.set_angle(1, 90)
             MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
     if distanceGerade < 130:
-        ServoLenkung.set_angle(1, 70)
+        ServoLenkung.set_angle(1, 120)
         MotorAnsteuerung.Motor_Fahren(VelocityNormal)
-        time.sleep(0.2)
+        time.sleep(0.6)
