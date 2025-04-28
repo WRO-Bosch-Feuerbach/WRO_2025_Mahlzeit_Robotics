@@ -120,32 +120,30 @@ try:
             LineDetected = False
 
         if LineBeginOrange == True and BackgroundColor == True:
+            if FahrenLinks == True and CrossedLinesOrange == 0:
+                Kursanpassung.Kursanp_LinksFahren()
+                print("Kursanpassung links")
+            elif FahrenRechts == True and CrossedLinesOrange == 0:
+                Kursanpassung.Kursanp_RechtsFahren()
+                print("Kursanpassung rechts")
             CrossedLinesOrange = CrossedLinesOrange + 1
             LineBeginOrange = False
             DebugBuzzer.DebugSound(0.2)
             if CrossedLinesOrange == 2:
                 CrossedLinesOrange = 1
 
-            if FahrenLinks == True:
+        if LineBeginBlue == True and BackgroundColor == True:
+            if FahrenLinks == True and CrossedLinesBlue == 0:
                 Kursanpassung.Kursanp_LinksFahren()
                 print("Kursanpassung links")
-            elif FahrenRechts == True:
+            elif FahrenRechts == True and CrossedLinesBlue == 0:
                 Kursanpassung.Kursanp_RechtsFahren()
                 print("Kursanpassung rechts")
-
-        if LineBeginBlue == True and BackgroundColor == True:
             CrossedLinesBlue = CrossedLinesBlue + 1
             LineBeginBlue = False
             DebugBuzzer.DebugSound(0.2)
             if CrossedLinesBlue == 2:
                 CrossedLinesBlue = 1
-
-            if FahrenLinks == True:
-                Kursanpassung.Kursanp_LinksFahren()
-                print("Kursanpassung links")
-            elif FahrenRechts == True:
-                Kursanpassung.Kursanp_RechtsFahren()
-                print("Kursanpassung rechts")
 
         if CrossedLinesOrange + CrossedLinesBlue == 2:
             CrossedSection = CrossedSection + 1

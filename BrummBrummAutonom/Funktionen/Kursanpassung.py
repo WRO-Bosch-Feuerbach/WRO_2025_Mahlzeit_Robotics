@@ -5,17 +5,20 @@ import time
 
 #----------------------------- Variablen -----------------------------#
 
-VelocityBackwards = -0.5
-distanceHinten = Ultraschallsensor.checkdistHinten()
-distanceLinks = Ultraschallsensor.checkdistLinks()
-distanceRechts = Ultraschallsensor.checkdistRechts()
+#VelocityBackwards = -0.5
+#distanceHinten = Ultraschallsensor.checkdistHinten()
+#distanceLinks = Ultraschallsensor.checkdistLinks()
+#distanceRechts = Ultraschallsensor.checkdistRechts()
 
 #---------------------------------------------------------------------#
 
 
 
 def Kursanp_LinksFahren():
-
+    VelocityBackwards = -0.5
+    distanceHinten = Ultraschallsensor.checkdistHinten()
+    distanceLinks = Ultraschallsensor.checkdistLinks()
+    distanceRechts = Ultraschallsensor.checkdistRechts()
     #---------- Kurs anpassen ----------#
     while distanceHinten > 15:
         MotorAnsteuerung.Motor_Fahren(0)
@@ -35,7 +38,10 @@ def Kursanp_LinksFahren():
             MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
 
 def Kursanp_RechtsFahren():
-
+    VelocityBackwards = -0.5
+    distanceHinten = Ultraschallsensor.checkdistHinten()
+    distanceLinks = Ultraschallsensor.checkdistLinks()
+    distanceRechts = Ultraschallsensor.checkdistRechts()
     #---------- Kurs anpassen ----------#
     while distanceHinten > 15:
         MotorAnsteuerung.Motor_Fahren(0)
