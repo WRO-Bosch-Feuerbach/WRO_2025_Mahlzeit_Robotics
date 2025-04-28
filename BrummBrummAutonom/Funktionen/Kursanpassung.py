@@ -22,10 +22,10 @@ def Kursanp_LinksFahren():
     distanceRechts = Ultraschallsensor.checkdistRechts()
     distanceGerade = Ultraschallsensor.checkdistGerade()
     #---------- Kurs anpassen ----------#
-    while distanceHinten > 15:
+    while distanceHinten > 30:
         MotorAnsteuerung.Motor_Fahren(0)
         distanceHinten = Ultraschallsensor.checkdistHinten()
-        if 15 < distanceHinten < 40 and distanceRechts > 5:
+        if 30 < distanceHinten < 40 and distanceRechts > 5:
             ServoLenkung.set_angle(1, 90)
             MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
         if 40 < distanceHinten < 75 and distanceRechts > 5:
@@ -38,7 +38,7 @@ def Kursanp_LinksFahren():
         while distanceHinten > 75 and distanceRechts < 5:
             ServoLenkung.set_angle(1, 90)
             MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
-    if distanceGerade < 130 and distanceRechts > 65:
+    if distanceGerade < 130:
         ServoLenkung.set_angle(1, 110)
         MotorAnsteuerung.Motor_Fahren(VelocityNormal)
         time.sleep(0.2)
@@ -51,10 +51,10 @@ def Kursanp_RechtsFahren():
     distanceRechts = Ultraschallsensor.checkdistRechts()
     distanceGerade = Ultraschallsensor.checkdistGerade()
     #---------- Kurs anpassen ----------#
-    while distanceHinten > 15:
+    while distanceHinten > 30:
         MotorAnsteuerung.Motor_Fahren(0)
         distanceHinten = Ultraschallsensor.checkdistHinten()
-        if 15 < distanceHinten < 40 and distanceRechts > 5:
+        if 30 < distanceHinten < 40 and distanceRechts > 5:
             ServoLenkung.set_angle(1, 90)
             MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
         if 40 < distanceHinten < 75 and distanceRechts > 5:
@@ -67,7 +67,7 @@ def Kursanp_RechtsFahren():
         while distanceHinten > 75 and distanceRechts < 5:
             ServoLenkung.set_angle(1, 90)
             MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
-    if distanceGerade < 130 and distanceLinks > 65:
+    if distanceGerade < 130:
         ServoLenkung.set_angle(1, 70)
         MotorAnsteuerung.Motor_Fahren(VelocityNormal)
         time.sleep(0.2)
