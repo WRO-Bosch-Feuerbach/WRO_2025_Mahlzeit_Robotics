@@ -39,6 +39,7 @@ VelocityBegin = 0.4
 VelocityNormal = 0.35
 VelocityObstacle = 0.25
 VelocityBackwards = -0.5
+VelocitySlow = 0.2
 #---------------- Drive related Variables ----------------#
 FahrenLinks = False
 FahrenRechts = False
@@ -56,7 +57,7 @@ try:
         distanceHinten = Ultraschallsensor.checkdistHinten()
         distanceLinks = Ultraschallsensor.checkdistLinks()
         distanceRechts = Ultraschallsensor.checkdistRechts()
-        if distanceGerade <= 40:
+        if distanceGerade <= 60:
             MotorAnsteuerung.Motor_Fahren(0)
             distanceLinks = Ultraschallsensor.checkdistLinks()
             distanceRechts = Ultraschallsensor.checkdistRechts()
@@ -120,32 +121,32 @@ try:
             LineDetected = False
 
         if LineBeginOrange == True and BackgroundColor == True:
-            if FahrenRechts == True and CrossedLinesOrange == 0 and CrossedLinesBlue == 0:
-                Kursanpassung.Kursanp_RechtsFahren()
+            CrossedLinesOrange = CrossedLinesOrange + 1
+            if FahrenRechts == True and CrossedLinesOrange == 1:
+                Kursanpassung.Kursanp_RechtsFahren(VelocityNormal)
                 print("Kursanpassung rechts")
 
-            CrossedLinesOrange = CrossedLinesOrange + 1
             LineBeginOrange = False
             DebugBuzzer.DebugSound(0.2)
-            if CrossedLinesOrange == 2:
-                CrossedLinesOrange = 1
+        if CrossedLinesOrange == 2:
+            CrossedLinesOrange = 1
 
         if LineBeginBlue == True and BackgroundColor == True:
-            if FahrenLinks == True and CrossedLinesBlue == 0 and CrossedLinesOrange == 0:
-                Kursanpassung.Kursanp_LinksFahren()
-                print("Kursanpassung links")
-           
             CrossedLinesBlue = CrossedLinesBlue + 1
+            if FahrenLinks == True and CrossedLinesBlue == 1:
+                Kursanpassung.Kursanp_LinksFahren(VelocityNormal)
+                print("Kursanpassung links")
+
             LineBeginBlue = False
             DebugBuzzer.DebugSound(0.2)
-            if CrossedLinesBlue == 2:
-                CrossedLinesBlue = 1
+        if CrossedLinesBlue == 2:
+            CrossedLinesBlue = 1
 
         if CrossedLinesOrange + CrossedLinesBlue == 2:
             CrossedSection = CrossedSection + 1
             CrossedLinesBlue = 0
             CrossedLinesOrange = 0
-            print(CrossedSection)
+            print(f'Sections crossed: {CrossedSection}')
             DebugBuzzer.DebugSound(0.3)
 
         if CrossedSection == 12:
