@@ -34,6 +34,8 @@ distanceRechts = Ultraschallsensor.checkdistRechts()
 distanceHinten = Ultraschallsensor.checkdistHinten()
 DetectedColor = CameraColorDetection.ColorDetection2_0()
 Farbe = ''
+WallRight = 30
+WallLeft = 30
 #---------------- Velocity Variables ----------------#
 VelocityBegin = 0.4
 VelocityNormal = 0.35
@@ -43,12 +45,15 @@ VelocitySlow = 0.2
 #---------------- Drive related Variables ----------------#
 FahrenLinks = False
 FahrenRechts = False
+#---------------- Obstacle Variables ----------------#
+GreenDetected = False
+RedDetected = False
 
 try:
 
     #making sure the servo is set straight and motor is not driving
     ServoLenkung.set_angle(1, 100)
-    MotorAnsteuerung.Motor_Fahren(VelocityBegin)
+    MotorAnsteuerung.Motor_Fahren(0)
     #Start-Sequence --> drive forward and check in which direction the robot has to drive, after that drive backwards, so the roboter can get the curve easily
     while True:
         print('Start-Sequenz eingeleitet')
@@ -95,12 +100,36 @@ try:
                 #print(angle_rounded)
                 ServoLenkung.set_angle(1, angle_rounded)
 
-        if distanceRechts <= 30 and distanceLinks > distanceRechts:
+        if distanceRechts <= WallRight and distanceLinks > distanceRechts:
             MotorAnsteuerung.Motor_Fahren(VelocityNormal - 0.05)
             ServoLenkung.set_angle(1, 155)
-        if distanceLinks <= 30 and distanceLinks < distanceRechts:
+        if distanceLinks <= WallLeft and distanceLinks < distanceRechts:
             MotorAnsteuerung.Motor_Fahren(VelocityNormal - 0.05)
             ServoLenkung.set_angle(1, 25)
+
+        if BlockColorDetection == "GRUEN" and distanceGerade < 70 and RedDetected == False:
+            GreenDetected = True 
+        if BlockColorDetection == "ROT" and distanceGerade < 70 and GreenDetected == False:
+            RedDetected = True
+
+
+        if GreenDetected == True:
+            WallLeft = 15
+            WallRight = 50
+
+        if RedDetected == True:
+            WallRight = 15
+            WallLeft = 50
+
+        if LineDetected == True:
+            GreenDetected = False
+            RedDetected = False
+            WallLeft = 30
+            WallRight = 30
+
+
+
+
 
         # Color-Line-Detection Sequence
         DetectedColor = CameraColorDetection.ColorDetection2_0()
@@ -121,11 +150,16 @@ try:
             LineDetected = False
 
         if LineBeginOrange == True and BackgroundColor == True:
-            CrossedLinesOrange = CrossedLinesOrange + 1
+            CrossedLinesOrange = CrossedLinesOrange +1
             if FahrenRechts == True and CrossedLinesOrange == 1:
-                Kursanpassung.Kursanp_RechtsFahren(VelocityNormal)
+                #MotorAnsteuerung.Motor_Fahren(0)
+                #ServoLenkung.set_angle(1, 130)
+                #time.sleep(0.5)
+                #MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
+                #time.sleep(1)
+                #Kursanpassung.Kursanp_RechtsFahren(VelocitySlow)
                 print("Kursanpassung rechts")
-
+            print("Orange Line wurde erhoeht")
             LineBeginOrange = False
             DebugBuzzer.DebugSound(0.2)
         if CrossedLinesOrange == 2:
@@ -134,9 +168,14 @@ try:
         if LineBeginBlue == True and BackgroundColor == True:
             CrossedLinesBlue = CrossedLinesBlue + 1
             if FahrenLinks == True and CrossedLinesBlue == 1:
-                Kursanpassung.Kursanp_LinksFahren(VelocityNormal)
+                #MotorAnsteuerung.Motor_Fahren(0)
+                #ServoLenkung.set_angle(1, 50)
+                #time.sleep(0.5)
+                #MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
+                #time.sleep(1)
+                #Kursanpassung.Kursanp_LinksFahren(VelocitySlow)
                 print("Kursanpassung links")
-
+            print("Blue Line wurde erhoeht")
             LineBeginBlue = False
             DebugBuzzer.DebugSound(0.2)
         if CrossedLinesBlue == 2:
@@ -146,7 +185,7 @@ try:
             CrossedSection = CrossedSection + 1
             CrossedLinesBlue = 0
             CrossedLinesOrange = 0
-            print(f'Sections crossed: {CrossedSection}')
+            print(f'Ueberfahrene Sektionen bzw. Viertel: {CrossedSection}')
             DebugBuzzer.DebugSound(0.3)
 
         if CrossedSection == 12:
@@ -169,12 +208,8 @@ try:
                     ServoLenkung.set_angle(1,155)
 
             break
+
     MotorAnsteuerung.Motor_Fahren(0)
 
 except KeyboardInterrupt:
     MotorAnsteuerung.Motor_Fahren(0)
-
-
-
-
-
