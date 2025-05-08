@@ -1,4 +1,3 @@
-#from encodings.punycode import T
 import math
 import time
 import DebugBuzzer
@@ -34,11 +33,11 @@ distanceRechts = Ultraschallsensor.checkdistRechts()
 distanceHinten = Ultraschallsensor.checkdistHinten()
 DetectedColor = CameraColorDetection.ColorDetection2_0()
 Farbe = ''
-WallRight = 30
-WallLeft = 30
+WallRight = 45
+WallLeft = 45
 #---------------- Velocity Variables ----------------#
 VelocityBegin = 0.4
-VelocityNormal = 0.35
+VelocityNormal = 0.3
 VelocityObstacle = 0.25
 VelocityBackwards = -0.5
 VelocitySlow = 0.2
@@ -46,8 +45,9 @@ VelocitySlow = 0.2
 FahrenLinks = False
 FahrenRechts = False
 #---------------- Obstacle Variables ----------------#
-GreenDetected = False
-RedDetected = False
+pixel_count = 0
+
+
 
 try:
 
@@ -77,137 +77,132 @@ try:
 
             MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
             Lenkung = True
-            time.sleep(2)
+            time.sleep(1)
             break #Start-Sequence is done
 
     # <---- Driving Section
     while Lenkung == True:
+        
+      MotorAnsteuerung.Motor_Fahren(VelocityNormal)
+      distanceRechts = Ultraschallsensor.checkdistRechts()
+      distanceLinks = Ultraschallsensor.checkdistLinks()
+      distanceGerade = Ultraschallsensor.checkdistGerade()
+      BlockColor = BlockColorDetection.Blockfarbe()
+      pixel_count = BlockColorDetection.Blockfarbe2()
+
+      if distanceGerade <= 100:
+          if FahrenLinks == True and BlockColor != "GRUEN" and BlockColor != "ROT":
+              angle = 90 + ((200 - distanceGerade) / (200 - 5)) * 90
+              angle_rounded = round(angle) + 20
+              print(angle_rounded)
+              ServoLenkung.set_angle(1,angle_rounded)
+
+          elif FahrenRechts == True and BlockColor != "GRUEN" and BlockColor != "ROT":
+              angle = 90 - ((200 - distanceGerade) / (200 - 5)) * 90
+              angle_rounded = round(angle) + 20
+              print(angle_rounded)
+              ServoLenkung.set_angle(1, angle_rounded)
+      else:
         ServoLenkung.set_angle(1, 90)
-        MotorAnsteuerung.Motor_Fahren(VelocityNormal)
-        distanceRechts = Ultraschallsensor.checkdistRechts()
-        distanceLinks = Ultraschallsensor.checkdistLinks()
-        distanceGerade = Ultraschallsensor.checkdistGerade()
-
-        if distanceGerade <= 100:
-            if FahrenLinks == True:
-                angle = 90 + ((200 - distanceGerade) / (200 - 5)) * 90
-                angle_rounded = round(angle) + 20
-                #print(angle_rounded)
-                ServoLenkung.set_angle(1,angle_rounded)
-            elif FahrenRechts == True:
-                angle = 90 - ((200 - distanceGerade) / (200 - 5)) * 90
-                angle_rounded = round(angle) + 20
-                #print(angle_rounded)
-                ServoLenkung.set_angle(1, angle_rounded)
-
-        if distanceRechts <= WallRight and distanceLinks > distanceRechts:
-            MotorAnsteuerung.Motor_Fahren(VelocityNormal - 0.05)
-            ServoLenkung.set_angle(1, 155)
-        if distanceLinks <= WallLeft and distanceLinks < distanceRechts:
-            MotorAnsteuerung.Motor_Fahren(VelocityNormal - 0.05)
-            ServoLenkung.set_angle(1, 25)
-
-        if BlockColorDetection == "GRUEN" and distanceGerade < 70 and RedDetected == False:
-            GreenDetected = True 
-        if BlockColorDetection == "ROT" and distanceGerade < 70 and GreenDetected == False:
-            RedDetected = True
 
 
-        if GreenDetected == True:
-            WallLeft = 15
-            WallRight = 50
-
-        if RedDetected == True:
-            WallRight = 15
-            WallLeft = 50
-
-        if LineDetected == True:
-            GreenDetected = False
-            RedDetected = False
-            WallLeft = 30
-            WallRight = 30
+      if distanceRechts <= 30:
+          MotorAnsteuerung.Motor_Fahren(VelocityNormal - 0.05)
+          ServoLenkung.set_angle(1, 160)
+      if distanceLinks <= 30:
+          MotorAnsteuerung.Motor_Fahren(VelocityNormal - 0.05)
+          ServoLenkung.set_angle(1, 20)
 
 
+      if BlockColor == "ROT":
+        while distanceRechts > 20 and distanceGerade > 20:
+          distanceGerade = Ultraschallsensor.checkdistGerade()
+          distanceRechts = Ultraschallsensor.checkdistRechts()
+          ServoLenkung.set_angle(1, 30)
 
-
+      if BlockColor == "GRUEN":
+        while distanceLinks > 20 and distanceGerade > 20:
+          distanceGerade = Ultraschallsensor.checkdistGerade()
+          distanceLinks = Ultraschallsensor.checkdistLinks()
+          ServoLenkung.set_angle(1, 150)
 
         # Color-Line-Detection Sequence
-        DetectedColor = CameraColorDetection.ColorDetection2_0()
-        if DetectedColor == "ORANGE":
-            LineDetected = True
-            if LineDetected == True:
-                LineDetected = False
-                LineBeginOrange = True
-                BackgroundColor = False
-        elif DetectedColor == "BLUE":
-            LineDetected = True
-            if LineDetected == True:
-                LineDetected = False
-                LineBeginBlue = True
-                BackgroundColor = False
-        else:
-            BackgroundColor = True
-            LineDetected = False
+      DetectedColor = CameraColorDetection.ColorDetection2_0()
+      if DetectedColor == "ORANGE":
+          LineDetected = True
+          if LineDetected == True:
+              LineDetected = False
+              LineBeginOrange = True
+              BackgroundColor = False
+      elif DetectedColor == "BLUE":
+          LineDetected = True
+          if LineDetected == True:
+              LineDetected = False
+              LineBeginBlue = True
+              BackgroundColor = False
+      else:
+          BackgroundColor = True
+          LineDetected = False
 
-        if LineBeginOrange == True and BackgroundColor == True:
-            CrossedLinesOrange = CrossedLinesOrange +1
-            if FahrenRechts == True and CrossedLinesOrange == 1:
-                #MotorAnsteuerung.Motor_Fahren(0)
-                #ServoLenkung.set_angle(1, 130)
-                #time.sleep(0.5)
-                #MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
-                #time.sleep(1)
-                #Kursanpassung.Kursanp_RechtsFahren(VelocitySlow)
-                print("Kursanpassung rechts")
-            print("Orange Line wurde erhoeht")
-            LineBeginOrange = False
-            DebugBuzzer.DebugSound(0.2)
-        if CrossedLinesOrange == 2:
-            CrossedLinesOrange = 1
+      if LineBeginOrange == True and BackgroundColor == True:
+          CrossedLinesOrange = CrossedLinesOrange +1
+          if FahrenRechts == True and CrossedLinesOrange == 1:
+              #MotorAnsteuerung.Motor_Fahren(0)
+              #ServoLenkung.set_angle(1, 130)
+              #time.sleep(0.5)
+              #MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
+              #time.sleep(1)
+              #Kursanpassung.Kursanp_RechtsFahren(VelocitySlow)
+              print("Kursanpassung rechts")
+          print("Orange Line wurde erhoeht")
+          LineBeginOrange = False
+          DebugBuzzer.DebugSound(0.2)
+      if CrossedLinesOrange == 2:
+          CrossedLinesOrange = 1
 
-        if LineBeginBlue == True and BackgroundColor == True:
-            CrossedLinesBlue = CrossedLinesBlue + 1
-            if FahrenLinks == True and CrossedLinesBlue == 1:
-                #MotorAnsteuerung.Motor_Fahren(0)
-                #ServoLenkung.set_angle(1, 50)
-                #time.sleep(0.5)
-                #MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
-                #time.sleep(1)
-                #Kursanpassung.Kursanp_LinksFahren(VelocitySlow)
-                print("Kursanpassung links")
-            print("Blue Line wurde erhoeht")
-            LineBeginBlue = False
-            DebugBuzzer.DebugSound(0.2)
-        if CrossedLinesBlue == 2:
-            CrossedLinesBlue = 1
+      if LineBeginBlue == True and BackgroundColor == True:
+          CrossedLinesBlue = CrossedLinesBlue + 1
+          if FahrenLinks == True and CrossedLinesBlue == 1:
+              #MotorAnsteuerung.Motor_Fahren(0)
+              #ServoLenkung.set_angle(1, 50)
+              #time.sleep(0.5)
+              #MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
+              #time.sleep(1)
+              #Kursanpassung.Kursanp_LinksFahren(VelocitySlow)
+              print("Kursanpassung links")
+          print("Blue Line wurde erhoeht")
+          LineBeginBlue = False
+          DebugBuzzer.DebugSound(0.2)
+      if CrossedLinesBlue == 2:
+          CrossedLinesBlue = 1
 
-        if CrossedLinesOrange + CrossedLinesBlue == 2:
-            CrossedSection = CrossedSection + 1
-            CrossedLinesBlue = 0
-            CrossedLinesOrange = 0
-            print(f'Ueberfahrene Sektionen bzw. Viertel: {CrossedSection}')
-            DebugBuzzer.DebugSound(0.3)
+      if CrossedLinesOrange + CrossedLinesBlue == 2:
+          CrossedSection = CrossedSection + 1
+          CrossedLinesBlue = 0
+          CrossedLinesOrange = 0
+          print(f'Ueberfahrene Sektionen bzw. Viertel: {CrossedSection}')
+          DebugBuzzer.DebugSound(0.3)
 
-        if CrossedSection == 12:
-            while not (100 < distanceGerade < 150):
-                print('Debug 9')
-                distanceGerade = Ultraschallsensor.checkdistGerade()
-                distanceLinks = Ultraschallsensor.checkdistLinks()
-                distanceRechts = Ultraschallsensor.checkdistRechts()
-                if FahrenLinks == True:
-                    angle = 90 + ((200 - distanceGerade) / (200 - 5)) * 90
-                    angle_rounded = round(angle) + 10
-                elif FahrenRechts == True:
-                    angle = 90 - ((200 - distanceGerade) / (200 - 5)) * 90
-                    angle_rounded = round(angle) + 10
-                print(angle_rounded)
-                ServoLenkung.set_angle(1, angle_rounded)
-                if distanceLinks <= 35:
-                    ServoLenkung.set_angle(1,25)
-                if distanceRechts <= 35:
-                    ServoLenkung.set_angle(1,155)
+      if CrossedSection == 12:
+          while not (100 < distanceGerade < 150):
+              print('Debug 9')
+              distanceGerade = Ultraschallsensor.checkdistGerade()
+              distanceLinks = Ultraschallsensor.checkdistLinks()
+              distanceRechts = Ultraschallsensor.checkdistRechts()
+              if FahrenLinks == True:
+                  angle = 90 + ((200 - distanceGerade) / (200 - 5)) * 90
+                  angle_rounded = round(angle) + 10
+              elif FahrenRechts == True:
+                  angle = 90 - ((200 - distanceGerade) / (200 - 5)) * 90
+                  angle_rounded = round(angle) + 10
+              print(angle_rounded)
+              ServoLenkung.set_angle(1, angle_rounded)
+              if distanceLinks <= 35:
+                  ServoLenkung.set_angle(1,25)
+              if distanceRechts <= 35:
+                  ServoLenkung.set_angle(1,155)
 
-            break
+          break
 
     MotorAnsteuerung.Motor_Fahren(0)
 
