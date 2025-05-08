@@ -9,13 +9,13 @@ picam.start()
 time.sleep(1)
 
 # HSV bereiche einstellen
-red_upper = np.array([140, 255, 255])
-red_lower = np.array([125, 100, 100])
+red_upper = np.array([150, 255, 255])  #140
+red_lower = np.array([120, 100, 100])  #125
 
 green_upper = np.array([60, 255, 255])
 green_lower = np.array([30, 100, 100])
 
-pixel_threshold = 150
+pixel_threshold = 4000
 
 def Blockfarbe():
   frame = picam.capture_array()
@@ -36,10 +36,10 @@ def Blockfarbe():
   # Schauen ob was rotes oder gruenes im Bild ist
   if red_count > pixel_threshold:
     Farbe = 'ROT'
-    print(Farbe)
+    #print(Farbe)
   elif green_count > pixel_threshold:
     Farbe = 'GRUEN'
-    print(Farbe)
+    #print(Farbe)
   else:
     Farbe = 'TUNGTUNGTUNGSAHUR'
   return Farbe

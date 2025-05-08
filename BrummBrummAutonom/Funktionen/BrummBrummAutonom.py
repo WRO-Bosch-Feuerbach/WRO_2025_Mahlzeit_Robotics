@@ -82,13 +82,55 @@ try:
 
     # <---- Driving Section
     while Lenkung == True:
-        
+
       MotorAnsteuerung.Motor_Fahren(VelocityNormal)
       distanceRechts = Ultraschallsensor.checkdistRechts()
       distanceLinks = Ultraschallsensor.checkdistLinks()
       distanceGerade = Ultraschallsensor.checkdistGerade()
       BlockColor = BlockColorDetection.Blockfarbe()
       pixel_count = BlockColorDetection.PixelCount()
+
+      if BlockColor == "ROT" and pixel_count > 1000:
+        while distanceRechts > 15 and distanceGerade > 20:
+          pixel_count = BlockColorDetection.PixelCount()
+          distanceGerade = Ultraschallsensor.checkdistGerade()
+          distanceRechts = Ultraschallsensor.checkdistRechts()
+          distanceHinten = Ultraschallsensor.checkdistHinten()
+          if BlockColor == "ROT":
+            ServoLenkung.set_angle(1, 30)
+
+          if pixel_count > 9000 and distanceHinten > 40:
+              print("Bin drin in der Schleife")
+              MotorAnsteuerung.Motor_Fahren(0)
+              ServoLenkung.set_angle(1, 100)
+              time.sleep(0.5)
+              MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
+              time.sleep(0.7)
+              break
+      else:
+        ServoLenkung.set_angle(1,100)
+
+
+
+      if BlockColor == "GRUEN" and pixel_count > 1000:
+        while distanceLinks > 15 and distanceGerade > 20:
+          pixel_count = BlockColorDetection.PixelCount()
+          distanceGerade = Ultraschallsensor.checkdistGerade()
+          distanceLinks = Ultraschallsensor.checkdistLinks()
+          distanceHinten = Ultraschallsensor.checkdistHinten()
+          if BlockColor == "GRUEN":
+            ServoLenkung.set_angle(1, 150)
+
+          if pixel_count > 9000 and distanceHinten > 40:
+              print("Bin drin in das Schleife")
+              MotorAnsteuerung.Motor_Fahren(0)
+              ServoLenkung.set_angle(1, 100)
+              time.sleep(0.5)
+              MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
+              time.sleep(0.7)
+      else:
+        ServoLenkung.set_angle(1,90)
+
 
       if BlockColor != "GRUEN" and BlockColor != "ROT":
           if FahrenLinks == True and distanceGerade <= 100:
@@ -102,56 +144,28 @@ try:
               angle_rounded = round(angle) + 20
               print(angle_rounded)
               ServoLenkung.set_angle(1, angle_rounded)
-      else:
-        ServoLenkung.set_angle(1, 90)
 
-      if distanceRechts <= 40:
-          MotorAnsteuerung.Motor_Fahren(VelocityNormal - 0.05)
-          ServoLenkung.set_angle(1, 160)
-          time.sleep(0.1)
-      if distanceLinks <= 40:
-          MotorAnsteuerung.Motor_Fahren(VelocityNormal - 0.05)
-          ServoLenkung.set_angle(1, 20)
-          time.sleep(0.1)
+          else:
+              ServoLenkung.set_angle(1, 100)
 
-      if distanceGerade < 30 and BlockColor != "GRUEN" and BlockColor != "ROT" and distanceHinten >= 15:
+
+
+
+      if distanceGerade < 25 and BlockColor != "GRUEN" and BlockColor != "ROT" and distanceHinten >= 15:
         MotorAnsteuerung.Motor_Fahren(0)
         ServoLenkung.set_angle(1, 100)
         time.sleep(0.5)
         MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
         time.sleep(0.7)
 
-      if BlockColor == "ROT" and pixel_count > 1000:
-        while distanceRechts > 20 and distanceGerade > 20:
-          pixel_count = BlockColorDetection.PixelCount()
-          distanceGerade = Ultraschallsensor.checkdistGerade()
-          distanceRechts = Ultraschallsensor.checkdistRechts()
-          distanceHinten = Ultraschallsensor.checkdistHinten()
-          ServoLenkung.set_angle(1, 30)
-          if pixel_count > 9000 and distanceHinten > 20:
-              print("Bin drin in der Schleife")
-              MotorAnsteuerung.Motor_Fahren(0)
-              ServoLenkung.set_angle(1, 100)
-              time.sleep(0.5)
-              MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
-              time.sleep(0.7)
-              break
 
-      if BlockColor == "GRUEN" and pixel_count > 1000:
-        while distanceLinks > 20 and distanceGerade > 20:
-          pixel_count = BlockColorDetection.PixelCount()
-          distanceGerade = Ultraschallsensor.checkdistGerade()
-          distanceLinks = Ultraschallsensor.checkdistLinks()
-          distanceHinten = Ultraschallsensor.checkdistHinten()
-          ServoLenkung.set_angle(1, 150)
-          if pixel_count > 9000 and distanceHinten > 20:
-              print("Bin drin in das Schleife")
-              MotorAnsteuerung.Motor_Fahren(0)
-              ServoLenkung.set_angle(1, 100)
-              time.sleep(0.5)
-              MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
-              time.sleep(0.7)
-              break
+      if distanceRechts <= 25 and distanceLinks >= distanceRechts:
+          MotorAnsteuerung.Motor_Fahren(VelocityNormal - 0.05)
+          ServoLenkung.set_angle(1, 170)
+      if distanceLinks <= 25 and distanceRechts >= distanceLinks:
+          MotorAnsteuerung.Motor_Fahren(VelocityNormal - 0.05)
+          ServoLenkung.set_angle(1, 10)
+
 
         # Color-Line-Detection Sequence
       DetectedColor = CameraColorDetection.ColorDetection2_0()
@@ -175,12 +189,6 @@ try:
           CrossedLinesOrange = CrossedLinesOrange +1
           DebugBuzzer.DebugSound(0.2)
           if FahrenRechts == True and CrossedLinesOrange == 1:
-              #MotorAnsteuerung.Motor_Fahren(0)
-              #ServoLenkung.set_angle(1, 130)
-              #time.sleep(0.5)
-              #MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
-              #time.sleep(1)
-              #Kursanpassung.Kursanp_Fahren2_0(VelocitySlow)
               print("Kursanpassung rechts")
           print("Orange Line wurde erhoeht")
           LineBeginOrange = False
@@ -191,12 +199,6 @@ try:
           CrossedLinesBlue = CrossedLinesBlue + 1
           DebugBuzzer.DebugSound(0.2)
           if FahrenLinks == True and CrossedLinesBlue == 1:
-              #MotorAnsteuerung.Motor_Fahren(0)
-              #ServoLenkung.set_angle(1, 50)
-              #time.sleep(0.5)
-              #MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
-              #time.sleep(1)
-              #Kursanpassung.Kursanp_Fahren2_0(VelocitySlow)
               print("Kursanpassung links")
           print("Blue Line wurde erhoeht")
           LineBeginBlue = False
