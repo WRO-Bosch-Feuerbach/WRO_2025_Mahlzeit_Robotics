@@ -145,6 +145,7 @@ try:
 
       if LineBeginOrange == True and BackgroundColor == True:
           CrossedLinesOrange = CrossedLinesOrange +1
+          DebugBuzzer.DebugSound(0.2)
           if FahrenRechts == True and CrossedLinesOrange == 1:
               #MotorAnsteuerung.Motor_Fahren(0)
               #ServoLenkung.set_angle(1, 130)
@@ -155,12 +156,12 @@ try:
               print("Kursanpassung rechts")
           print("Orange Line wurde erhoeht")
           LineBeginOrange = False
-          DebugBuzzer.DebugSound(0.2)
       if CrossedLinesOrange == 2:
           CrossedLinesOrange = 1
 
       if LineBeginBlue == True and BackgroundColor == True:
           CrossedLinesBlue = CrossedLinesBlue + 1
+          DebugBuzzer.DebugSound(0.2)
           if FahrenLinks == True and CrossedLinesBlue == 1:
               #MotorAnsteuerung.Motor_Fahren(0)
               #ServoLenkung.set_angle(1, 50)
@@ -171,7 +172,6 @@ try:
               print("Kursanpassung links")
           print("Blue Line wurde erhoeht")
           LineBeginBlue = False
-          DebugBuzzer.DebugSound(0.2)
       if CrossedLinesBlue == 2:
           CrossedLinesBlue = 1
 
