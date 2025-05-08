@@ -36,8 +36,10 @@ def Blockfarbe():
   # Schauen ob was rotes oder gruenes im Bild ist
   if red_count > pixel_threshold:
     Farbe = 'ROT'
+    print(Farbe)
   elif green_count > pixel_threshold:
     Farbe = 'GRUEN'
+    print(Farbe)
   else:
     Farbe = 'TUNGTUNGTUNGSAHUR'
   return Farbe
@@ -202,3 +204,6 @@ def Blockfarbe2():
   if pixel_count is None:
       pixel_count = 0
   return pixel_count
+
+#while True:
+  #Blockfarbe()

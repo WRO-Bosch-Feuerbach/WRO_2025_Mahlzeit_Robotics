@@ -88,16 +88,16 @@ try:
       distanceLinks = Ultraschallsensor.checkdistLinks()
       distanceGerade = Ultraschallsensor.checkdistGerade()
       BlockColor = BlockColorDetection.Blockfarbe()
-      pixel_count = BlockColorDetection.Blockfarbe2()
+      pixel_count = BlockColorDetection.PixelCount()
 
-      if distanceGerade <= 100:
-          if FahrenLinks == True and BlockColor != "GRUEN" and BlockColor != "ROT":
+      if BlockColor != "GRUEN" and BlockColor != "ROT":
+          if FahrenLinks == True and distanceGerade <= 100:
               angle = 90 + ((200 - distanceGerade) / (200 - 5)) * 90
               angle_rounded = round(angle) + 20
               print(angle_rounded)
               ServoLenkung.set_angle(1,angle_rounded)
 
-          elif FahrenRechts == True and BlockColor != "GRUEN" and BlockColor != "ROT":
+          elif FahrenRechts == True and distanceGerade <= 100:
               angle = 90 - ((200 - distanceGerade) / (200 - 5)) * 90
               angle_rounded = round(angle) + 20
               print(angle_rounded)
@@ -105,38 +105,53 @@ try:
       else:
         ServoLenkung.set_angle(1, 90)
 
-      if distanceRechts <= 30:
+      if distanceRechts <= 40:
           MotorAnsteuerung.Motor_Fahren(VelocityNormal - 0.05)
           ServoLenkung.set_angle(1, 160)
-      if distanceLinks <= 30:
+          time.sleep(0.1)
+      if distanceLinks <= 40:
           MotorAnsteuerung.Motor_Fahren(VelocityNormal - 0.05)
           ServoLenkung.set_angle(1, 20)
+          time.sleep(0.1)
 
-      if BlockColor == "ROT":
+      if distanceGerade < 30 and BlockColor != "GRUEN" and BlockColor != "ROT" and distanceHinten >= 15:
+        MotorAnsteuerung.Motor_Fahren(0)
+        ServoLenkung.set_angle(1, 100)
+        time.sleep(0.5)
+        MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
+        time.sleep(0.7)
+
+      if BlockColor == "ROT" and pixel_count > 1000:
         while distanceRechts > 20 and distanceGerade > 20:
           pixel_count = BlockColorDetection.PixelCount()
           distanceGerade = Ultraschallsensor.checkdistGerade()
           distanceRechts = Ultraschallsensor.checkdistRechts()
+          distanceHinten = Ultraschallsensor.checkdistHinten()
           ServoLenkung.set_angle(1, 30)
-          if pixel_count > 15000:
+          if pixel_count > 9000 and distanceHinten > 20:
+              print("Bin drin in der Schleife")
               MotorAnsteuerung.Motor_Fahren(0)
-              ServoLenkung.set_angle(1, 90)
-              time.sleep(0.2)
-              MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
+              ServoLenkung.set_angle(1, 100)
               time.sleep(0.5)
+              MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
+              time.sleep(0.7)
+              break
 
-      if BlockColor == "GRUEN":
+      if BlockColor == "GRUEN" and pixel_count > 1000:
         while distanceLinks > 20 and distanceGerade > 20:
           pixel_count = BlockColorDetection.PixelCount()
           distanceGerade = Ultraschallsensor.checkdistGerade()
           distanceLinks = Ultraschallsensor.checkdistLinks()
+          distanceHinten = Ultraschallsensor.checkdistHinten()
           ServoLenkung.set_angle(1, 150)
-          if pixel_count > 15000:
+          if pixel_count > 9000 and distanceHinten > 20:
+              print("Bin drin in das Schleife")
               MotorAnsteuerung.Motor_Fahren(0)
-              ServoLenkung.set_angle(1, 90)
-              time.sleep(0.2)
-              MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
+              ServoLenkung.set_angle(1, 100)
               time.sleep(0.5)
+              MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
+              time.sleep(0.7)
+              break
 
         # Color-Line-Detection Sequence
       DetectedColor = CameraColorDetection.ColorDetection2_0()
