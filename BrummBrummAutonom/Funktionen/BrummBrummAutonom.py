@@ -113,7 +113,6 @@ try:
           MotorAnsteuerung.Motor_Fahren(VelocityNormal - 0.05)
           ServoLenkung.set_angle(1, 20)
 
-
       if BlockColor == "ROT":
         while distanceRechts > 20 and distanceGerade > 20:
           distanceGerade = Ultraschallsensor.checkdistGerade()
@@ -152,7 +151,7 @@ try:
               #time.sleep(0.5)
               #MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
               #time.sleep(1)
-              #Kursanpassung.Kursanp_RechtsFahren(VelocitySlow)
+              Kursanpassung.Kursanp_Fahren2_0(VelocitySlow)
               print("Kursanpassung rechts")
           print("Orange Line wurde erhoeht")
           LineBeginOrange = False
@@ -168,7 +167,7 @@ try:
               #time.sleep(0.5)
               #MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
               #time.sleep(1)
-              #Kursanpassung.Kursanp_LinksFahren(VelocitySlow)
+              Kursanpassung.Kursanp_Fahren2_0(VelocitySlow)
               print("Kursanpassung links")
           print("Blue Line wurde erhoeht")
           LineBeginBlue = False

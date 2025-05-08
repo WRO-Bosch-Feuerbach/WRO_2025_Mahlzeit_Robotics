@@ -5,13 +5,8 @@ import time
 
 # Kamera einstellen
 picam = Picamera2()
-
-pixel = picam.create_preview_configuration(main={"size": (256, 144)})
-picam.configure(pixel)
-
 picam.start()
 time.sleep(1)
-
 
 # HSV bereiche einstellen
 red_upper = np.array([140, 255, 255])
@@ -21,6 +16,7 @@ green_upper = np.array([60, 255, 255])
 green_lower = np.array([30, 100, 100])
 
 pixel_threshold = 150
+
 def Blockfarbe():
   frame = picam.capture_array()
   hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
@@ -31,7 +27,7 @@ def Blockfarbe():
   red_count = cv2.countNonZero(red_mask)
   green_count = cv2.countNonZero(green_mask)
 
-  # Zum ueberpruefen von HSV Werten
+  # Zum ueberpr�fen von HSV Werten
   '''
   hsv_pixel = hsv[0,0]
   print('HSV vom Pixel:', hsv_pixel)
@@ -46,14 +42,14 @@ def Blockfarbe():
     Farbe = 'TUNGTUNGTUNGSAHUR'
   return Farbe
 
-def Blockfarbe2():
+def KursanpassungFrameInnen():
   frame = picam.capture_array()
   hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
   height, width, _ = frame.shape
-  AreaStartPixelX = int(width/2) -18
-  AreaStartPixelY = int(height/2) - 18
-  AreaEndPixelX = int(width/2) + 18
-  AreaEndPixelY = int(height/2) + 18
+  AreaStartPixelX = int(width/2) -10
+  AreaStartPixelY = int(height/2) - 10
+  AreaEndPixelX = int(width/2) + 10
+  AreaEndPixelY = int(height/2) + 10
   red_count = 0
   green_count = 0
 
@@ -80,5 +76,70 @@ def Blockfarbe2():
       pixel_count = 0
   return pixel_count
 
-#while True:
-#  Blockfarbe2()
+def SplitscreenLeft():
+  frame = picam.capture_array()
+  hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+  height, width, _ = frame.shape
+  AreaStartPixelX = int(width/2) - 128
+  AreaStartPixelY = int(height/2) - 72
+  AreaEndPixelX = int(width/2) + 0
+  AreaEndPixelY = int(height/2) + 72
+  red_count = 0
+  green_count = 0
+
+  roi = hsv[AreaStartPixelY:AreaEndPixelY, AreaStartPixelX:AreaEndPixelX]
+
+  picked_values = roi[0, 0, 0]
+
+  # Maske erstellen
+  red_mask = cv2.inRange(roi, red_lower, red_upper)
+  green_mask = cv2.inRange(roi, green_lower, green_upper)
+  # Rote und gruene Pixel zaehlen
+  red_count = cv2.countNonZero(red_mask)
+  green_count = cv2.countNonZero(green_mask)
+
+  #print(f'Red pixel count: {red_count}')
+  #print(f'Green pixel count: {green_count}')
+  pixel_countLeft = 0
+  if red_count > green_count:
+    pixel_countLeft = red_count
+  if green_count > red_count:
+    pixel_countLeft = green_count
+
+  if pixel_countLeft is None:
+      pixel_countLeft = 0
+  return pixel_countLeft
+
+def SplitscreenRight():
+  frame = picam.capture_array()
+  hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+  height, width, _ = frame.shape
+  AreaStartPixelX = int(width/2) + 128
+  AreaStartPixelY = int(height/2) - 72
+  AreaEndPixelX = int(width/2) + 256
+  AreaEndPixelY = int(height/2) + 72
+  red_count = 0
+  green_count = 0
+
+  roi = hsv[AreaStartPixelY:AreaEndPixelY, AreaStartPixelX:AreaEndPixelX]
+
+  picked_values = roi[0, 0, 0]
+
+  # Maske erstellen
+  red_mask = cv2.inRange(roi, red_lower, red_upper)
+  green_mask = cv2.inRange(roi, green_lower, green_upper)
+  # Rote und gruene Pixel zaehlen
+  red_count = cv2.countNonZero(red_mask)
+  green_count = cv2.countNonZero(green_mask)
+
+  #print(f'Red pixel count: {red_count}')
+  #print(f'Green pixel count: {green_count}')
+  pixel_countRight = 0
+  if red_count > green_count:
+    pixel_countRight = red_count
+  if green_count > red_count:
+    pixel_countRight = green_count
+
+  if pixel_countRight is None:
+      pixel_countRight = 0
+  return pixel_countRight
