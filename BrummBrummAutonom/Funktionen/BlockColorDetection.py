@@ -143,3 +143,37 @@ def SplitscreenRight():
   if pixel_countRight is None:
       pixel_countRight = 0
   return pixel_countRight
+
+def Blockfarbe2():
+  frame = picam.capture_array()
+  hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+  height, width, _ = frame.shape
+  AreaStartPixelX = int(width/2) -10
+  AreaStartPixelY = int(height/2) - 10
+  AreaEndPixelX = int(width/2) + 10
+  AreaEndPixelY = int(height/2) + 10
+  red_count = 0
+  green_count = 0
+
+  roi = hsv[AreaStartPixelY:AreaEndPixelY, AreaStartPixelX:AreaEndPixelX]
+
+  picked_values = roi[0, 0, 0]
+
+  # Maske erstellen
+  red_mask = cv2.inRange(roi, red_lower, red_upper)
+  green_mask = cv2.inRange(roi, green_lower, green_upper)
+  # Rote und gruene Pixel zaehlen
+  red_count = cv2.countNonZero(red_mask)
+  green_count = cv2.countNonZero(green_mask)
+
+  #print(f'Red pixel count: {red_count}')
+  #print(f'Green pixel count: {green_count}')
+  pixel_count = 0
+  if red_count > green_count:
+    pixel_count = red_count
+  if green_count > red_count:
+    pixel_count = green_count
+
+  if pixel_count is None:
+      pixel_count = 0
+  return pixel_count

@@ -81,6 +81,7 @@ def Kursanp_Fahren2_0(VelocitySlow):
     distanceRechts = Ultraschallsensor.checkdistRechts()
     distanceGerade = Ultraschallsensor.checkdistGerade()
     #---------- Kurs anpassen ----------#
+    pixel_count = BlockColorDetection.KursanpassungFrameInnen()
     while pixel_count < 275:
         pixel_count = BlockColorDetection.KursanpassungFrameInnen()
         pixel_countLeft = BlockColorDetection.SplitscreenLeft()
