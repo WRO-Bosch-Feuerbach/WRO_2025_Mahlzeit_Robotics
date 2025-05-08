@@ -90,84 +90,7 @@ try:
       BlockColor = BlockColorDetection.Blockfarbe()
       pixel_count = BlockColorDetection.PixelCount()
 
-      if BlockColor == "ROT" and pixel_count > 1000:
-        while distanceRechts > 15 and distanceGerade > 20:
-          pixel_count = BlockColorDetection.PixelCount()
-          distanceGerade = Ultraschallsensor.checkdistGerade()
-          distanceRechts = Ultraschallsensor.checkdistRechts()
-          distanceHinten = Ultraschallsensor.checkdistHinten()
-          if BlockColor == "ROT":
-            ServoLenkung.set_angle(1, 30)
-
-          if pixel_count > 9000 and distanceHinten > 40:
-              print("Bin drin in der Schleife")
-              MotorAnsteuerung.Motor_Fahren(0)
-              ServoLenkung.set_angle(1, 100)
-              time.sleep(0.5)
-              MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
-              time.sleep(0.7)
-              break
-      else:
-        ServoLenkung.set_angle(1,100)
-
-
-
-      if BlockColor == "GRUEN" and pixel_count > 1000:
-        while distanceLinks > 15 and distanceGerade > 20:
-          pixel_count = BlockColorDetection.PixelCount()
-          distanceGerade = Ultraschallsensor.checkdistGerade()
-          distanceLinks = Ultraschallsensor.checkdistLinks()
-          distanceHinten = Ultraschallsensor.checkdistHinten()
-          if BlockColor == "GRUEN":
-            ServoLenkung.set_angle(1, 150)
-
-          if pixel_count > 9000 and distanceHinten > 40:
-              print("Bin drin in das Schleife")
-              MotorAnsteuerung.Motor_Fahren(0)
-              ServoLenkung.set_angle(1, 100)
-              time.sleep(0.5)
-              MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
-              time.sleep(0.7)
-      else:
-        ServoLenkung.set_angle(1,90)
-
-
-      if BlockColor != "GRUEN" and BlockColor != "ROT":
-          if FahrenLinks == True and distanceGerade <= 100:
-              angle = 90 + ((200 - distanceGerade) / (200 - 5)) * 90
-              angle_rounded = round(angle) + 20
-              print(angle_rounded)
-              ServoLenkung.set_angle(1,angle_rounded)
-
-          elif FahrenRechts == True and distanceGerade <= 100:
-              angle = 90 - ((200 - distanceGerade) / (200 - 5)) * 90
-              angle_rounded = round(angle) + 20
-              print(angle_rounded)
-              ServoLenkung.set_angle(1, angle_rounded)
-
-          else:
-              ServoLenkung.set_angle(1, 100)
-
-
-
-
-      if distanceGerade < 25 and BlockColor != "GRUEN" and BlockColor != "ROT" and distanceHinten >= 15:
-        MotorAnsteuerung.Motor_Fahren(0)
-        ServoLenkung.set_angle(1, 100)
-        time.sleep(0.5)
-        MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
-        time.sleep(0.7)
-
-
-      if distanceRechts <= 25 and distanceLinks >= distanceRechts:
-          MotorAnsteuerung.Motor_Fahren(VelocityNormal - 0.05)
-          ServoLenkung.set_angle(1, 170)
-      if distanceLinks <= 25 and distanceRechts >= distanceLinks:
-          MotorAnsteuerung.Motor_Fahren(VelocityNormal - 0.05)
-          ServoLenkung.set_angle(1, 10)
-
-
-        # Color-Line-Detection Sequence
+      # Color-Line-Detection Sequence
       DetectedColor = CameraColorDetection.ColorDetection2_0()
       if DetectedColor == "ORANGE":
           LineDetected = True
@@ -232,6 +155,51 @@ try:
                   ServoLenkung.set_angle(1,155)
 
           break
+
+      if BlockColor != "GRUEN" and BlockColor != "ROT":
+          if FahrenLinks == True and distanceGerade <= 100:
+              angle = 90 + ((200 - distanceGerade) / (200 - 5)) * 90
+              angle_rounded = round(angle) + 20
+              print(angle_rounded)
+              ServoLenkung.set_angle(1,angle_rounded)
+
+          elif FahrenRechts == True and distanceGerade <= 100:
+              angle = 90 - ((200 - distanceGerade) / (200 - 5)) * 90
+              angle_rounded = round(angle) + 20
+              print(angle_rounded)
+              ServoLenkung.set_angle(1, angle_rounded)
+          else:
+              ServoLenkung.set_angle(1, 100)
+              
+      if BlockColor == "GRUEN" and pixel_count > 1500:
+          ServoLenkung.set_angle(1, 160)
+
+      if BlockColor == "ROT" and pixel_count > 1500:
+          ServoLenkung.set_angle(1, 20)
+
+      if BlockColor == "GRUEN" and pixel_count >= 12000 and distanceHinten > 50:
+          MotorAnsteuerung.Motor_Fahren(0)
+          ServoLenkung.set_angle(1, 100)
+          MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
+          time.sleep(0.5)
+
+      if BlockColor == "ROT" and pixel_count >= 12000 and distanceHinten > 50:
+          MotorAnsteuerung.Motor_Fahren(0)
+          ServoLenkung.set_angle(1, 100)
+          MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
+          time.sleep(0.5)
+
+      if distanceRechts <= 25 and distanceLinks >= distanceRechts:
+          MotorAnsteuerung.Motor_Fahren(VelocityNormal - 0.05)
+          ServoLenkung.set_angle(1, 170)
+      if distanceLinks <= 25 and distanceRechts >= distanceLinks:
+          MotorAnsteuerung.Motor_Fahren(VelocityNormal - 0.05)
+          ServoLenkung.set_angle(1, 10)
+      if distanceGerade <= 15 and BlockColor != "GRUEN" and BlockColor != "ROT":
+          MotorAnsteuerung.Motor_Fahren(0)
+          ServoLenkung.set_angle(1, 100)
+          MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
+          time.sleep(0.5)
 
     MotorAnsteuerung.Motor_Fahren(0)
 
