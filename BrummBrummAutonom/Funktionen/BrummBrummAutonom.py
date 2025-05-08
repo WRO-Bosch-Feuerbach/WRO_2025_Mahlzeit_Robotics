@@ -105,7 +105,6 @@ try:
       else:
         ServoLenkung.set_angle(1, 90)
 
-
       if distanceRechts <= 30:
           MotorAnsteuerung.Motor_Fahren(VelocityNormal - 0.05)
           ServoLenkung.set_angle(1, 160)
@@ -115,15 +114,29 @@ try:
 
       if BlockColor == "ROT":
         while distanceRechts > 20 and distanceGerade > 20:
+          pixel_count = BlockColorDetection.PixelCount()
           distanceGerade = Ultraschallsensor.checkdistGerade()
           distanceRechts = Ultraschallsensor.checkdistRechts()
           ServoLenkung.set_angle(1, 30)
+          if pixel_count > 15000:
+              MotorAnsteuerung.Motor_Fahren(0)
+              ServoLenkung.set_angle(1, 90)
+              time.sleep(0.2)
+              MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
+              time.sleep(0.5)
 
       if BlockColor == "GRUEN":
         while distanceLinks > 20 and distanceGerade > 20:
+          pixel_count = BlockColorDetection.PixelCount()
           distanceGerade = Ultraschallsensor.checkdistGerade()
           distanceLinks = Ultraschallsensor.checkdistLinks()
           ServoLenkung.set_angle(1, 150)
+          if pixel_count > 15000:
+              MotorAnsteuerung.Motor_Fahren(0)
+              ServoLenkung.set_angle(1, 90)
+              time.sleep(0.2)
+              MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
+              time.sleep(0.5)
 
         # Color-Line-Detection Sequence
       DetectedColor = CameraColorDetection.ColorDetection2_0()
@@ -152,7 +165,7 @@ try:
               #time.sleep(0.5)
               #MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
               #time.sleep(1)
-              Kursanpassung.Kursanp_Fahren2_0(VelocitySlow)
+              #Kursanpassung.Kursanp_Fahren2_0(VelocitySlow)
               print("Kursanpassung rechts")
           print("Orange Line wurde erhoeht")
           LineBeginOrange = False
@@ -168,7 +181,7 @@ try:
               #time.sleep(0.5)
               #MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
               #time.sleep(1)
-              Kursanpassung.Kursanp_Fahren2_0(VelocitySlow)
+              #Kursanpassung.Kursanp_Fahren2_0(VelocitySlow)
               print("Kursanpassung links")
           print("Blue Line wurde erhoeht")
           LineBeginBlue = False

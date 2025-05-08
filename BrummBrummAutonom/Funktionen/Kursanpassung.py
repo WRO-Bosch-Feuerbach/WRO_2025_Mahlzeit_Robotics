@@ -34,7 +34,7 @@ def Kursanp_LinksFahren(VelocitySlow):
         if distanceHinten > 90 and distanceRechts > 5:
             ServoLenkung.set_angle(1, 20)
             MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
-        #--------- Rückwaerts wenn links nicht genug Platz ist ---------#
+        #--------- Rï¿½ckwaerts wenn links nicht genug Platz ist ---------#
         while distanceHinten > 75 and distanceRechts < 5:
             ServoLenkung.set_angle(1, 90)
             MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
@@ -64,7 +64,7 @@ def Kursanp_RechtsFahren(VelocitySlow):
         if distanceHinten > 90 and distanceRechts > 5:
             ServoLenkung.set_angle(1, 160)
             MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
-        #--------- Rückwaerts wenn links nicht genug Platz ist ---------#
+        #--------- Rï¿½ckwaerts wenn links nicht genug Platz ist ---------#
         while distanceHinten > 75 and distanceRechts < 5:
             ServoLenkung.set_angle(1, 90)
             MotorAnsteuerung.Motor_Fahren(VelocityBackwards)
